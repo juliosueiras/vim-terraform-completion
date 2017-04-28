@@ -1,0 +1,1 @@
+set omnifunc=terraformcomplete#Complete
