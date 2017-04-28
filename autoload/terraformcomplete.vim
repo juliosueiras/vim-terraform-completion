@@ -19,52 +19,56 @@ require 'open-uri'
 def terraform_complete(provider, resource)
 
 
-  page = Nokogiri::HTML(open("https://www.terraform.io/docs/providers/#{provider}"))
-  
-  url = page.css("a[href*='/#{resource}']")[0]['href']
+  begin
+    page = Nokogiri::HTML(open("https://www.terraform.io/docs/providers/#{provider}"))
 
-  page = Nokogiri::HTML(open("https://www.terraform.io#{url}"))
+    url = page.css("a[href*='/#{resource}']")[0]['href']
 
-  def collect_between(first, last)
-    first == last ? [first] : [first, *collect_between(first.next, last)]
-  end
+    page = Nokogiri::HTML(open("https://www.terraform.io#{url}"))
 
-  @start_element = "h2[@id='argument-reference']"
-  @end_element = "h2[@id='attributes-reference']"
-  @arguments = page.xpath("//*[preceding-sibling::#@start_element and
+    def collect_between(first, last)
+      first == last ? [first] : [first, *collect_between(first.next, last)]
+    end
+
+    @start_element = "h2[@id='argument-reference']"
+    @end_element = "h2[@id='attributes-reference']"
+    @arguments = page.xpath("//*[preceding-sibling::#@start_element and
                                following-sibling::#@end_element]
                          | //#@start_element | //#@end_element")
 
 
-  data = []
-  resource = []
-  @arguments.css('ul li a').each do |x|
-    if not x['name'].nil? then
-		data.push(x['njame'])
+    data = []
+    resource = []
+    @arguments.css('ul li a').each do |x|
+      if not x['name'].nil? then
+        data.push(x['njame'])
+      end
     end
-  end
 
-  page.css('ul li a').each do |x|
-    if not x['name'].nil? then
-		if not x['name'].include? "-1" then
-			resource.push({ 'word' => x['name']})
-		end
+    page.css('ul li a').each do |x|
+      if not x['name'].nil? then
+        if not x['name'].include? "-1" then
+          resource.push({ 'word' => x['name']})
+        end
+      end
     end
-  end
 
-  data.each do |x|
-    resource.delete(x)
-  end
+    data.each do |x|
+      resource.delete(x)
+    end
 
-  return JSON.generate(resource)
+    return JSON.generate(resource)
+  rescue
+    return JSON.generate([])
+  end
 end
 
 class TerraformComplete
-def initialize()
-	@buffer = Vim::Buffer.current
-		result = terraform_complete(VIM::evaluate('a:provider'), VIM::evaluate('a:resource'))
-		Vim::command("let a:res = #{result}")
-    end
+  def initialize()
+    @buffer = Vim::Buffer.current
+    result = terraform_complete(VIM::evaluate('a:provider'), VIM::evaluate('a:resource'))
+    Vim::command("let a:res = #{result}")
+  end
 end
 gem = TerraformComplete.new()
 EOF
@@ -82,7 +86,12 @@ fun! terraformcomplete#Complete(findstart, base)
         return start
     else
         let res = []
-		let a:result = terraformcomplete#GetProviderAndResource()
+		try
+			let a:result = terraformcomplete#GetProviderAndResource() 
+		catch
+			let a:result = ['', '']
+		endtry
+
         let a:provider = a:result[0]
         let a:resource = a:result[1]
         for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource)
