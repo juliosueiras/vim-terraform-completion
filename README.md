@@ -27,3 +27,5 @@
 
 ## Todo for HCL
 - [ ] Add Completion for hcl
+## Todo for Improvement
+- [ ] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
