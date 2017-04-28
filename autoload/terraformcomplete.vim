@@ -61,15 +61,9 @@ end
 
 class TerraformComplete
 def initialize()
-@buffer = Vim::Buffer.current
-result = terraform_complete(VIM::evaluate('a:provider'), VIM::evaluate('a:resource'))
-
-#if @buffer.line.empty?
-Vim::command("let a:res = #{result}")
-#else
-#    Vim::command("let a:res = #{`curl  -s http://localhost:9292/complete/argument --data 'model=emu8086&start_with=#{VIM::evaluate('a:ins')}&current=#{@buffer.line.split[0]}' `}")
-#  end
-#end
+	@buffer = Vim::Buffer.current
+		result = terraform_complete(VIM::evaluate('a:provider'), VIM::evaluate('a:resource'))
+		Vim::command("let a:res = #{result}")
     end
 end
 gem = TerraformComplete.new()
