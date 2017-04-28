@@ -13,6 +13,7 @@
 - [ ] Cleaner code
 - [ ] local/offline
 - [ ] Add completion tags, ingress, and other subblock
+- [ ] Further seperate data source from resource
 
 ## Todo for HCL
 - [ ] Add Completion for hcl
