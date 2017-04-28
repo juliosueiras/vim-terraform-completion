@@ -1,3 +1,7 @@
+if !has("ruby") && !has("ruby/dyn")
+    finish
+endif
+
 fun! terraformcomplete#GetProviderAndResource()
     let a:curr_pos = getcurpos()
     execute '?resource'
