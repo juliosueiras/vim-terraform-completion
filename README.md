@@ -2,6 +2,14 @@
 
 **A very early prototype**
 
+## Installation
+
+### NeoBundle
+`NeoBundle 'juliosueiras/vim-terraform-completion'`
+
+### Vim-Plug
+`Plug 'juliosueiras/vim-terraform-completion'`
+
 ## Demo
 
 [![asciicast](https://asciinema.org/a/118064.png)](https://asciinema.org/a/118064)
