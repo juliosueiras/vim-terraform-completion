@@ -4,6 +4,8 @@
 
 ## Installation
 
+**Require `+ruby` or `+ruby/dyn` for vim**
+
 ### NeoBundle
 `NeoBundle 'juliosueiras/vim-terraform-completion'`
 
