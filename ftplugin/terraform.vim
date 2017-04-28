@@ -1,1 +1,1 @@
-set omnifunc=terraformcomplete#Complete
+setlocal omnifunc=terraformcomplete#Complete
