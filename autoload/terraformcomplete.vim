@@ -11,7 +11,6 @@ endfun
 function! terraformcomplete#rubyComplete(ins, provider, resource)
     let a:res = []
   ruby << EOF
-require 'rubygems'
 require 'nokogiri'         
 require 'json'
 require 'open-uri'
@@ -21,12 +20,12 @@ def terraform_complete(provider, resource)
 
   begin
     if provider == "digitalocean" then
-		provider = "do"
-	end
+      provider = "do"
+    end
 
     page = Nokogiri::HTML(open("https://www.terraform.io/docs/providers/#{provider}"))
 
-    url = page.css("a[href*='/#{resource}']")[0]['href']
+    url = page.css("a[href*='/#{resource}.html']")[0]['href']
 
     page = Nokogiri::HTML(open("https://www.terraform.io#{url}"))
 
@@ -45,7 +44,7 @@ def terraform_complete(provider, resource)
     resource = []
     @arguments.css('ul li a').each do |x|
       if not x['name'].nil? then
-        data.push(x['njame'])
+        data.push(x['name'])
       end
     end
 
