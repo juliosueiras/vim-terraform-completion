@@ -16,6 +16,11 @@ endfun
 
 function! terraformcomplete#rubyComplete(ins, provider, resource)
     let a:res = []
+    if getline(".") =~ "resource"
+        let a:resource_line = 1 " true
+    else
+        let a:resource_line = 0 " false
+    endif
   ruby << EOF
 require 'json'
 
@@ -31,8 +36,15 @@ def terraform_complete(provider, resource)
             data = line
           end
         end
-        return JSON.generate(JSON.parse(data)[resource]["words"])
-    rescue 
+        if VIM::evaluate('a:resource_line') == 1 then
+            result = JSON.parse(data).keys.map { |x|
+            { "word" => x }
+            }
+        else
+            result = JSON.parse(data)[resource]["words"]
+        end
+        return JSON.generate(result)
+    rescue
         return []
     end
 end
@@ -61,7 +73,7 @@ fun! terraformcomplete#Complete(findstart, base)
     else
         let res = []
 		try
-			let a:result = terraformcomplete#GetProviderAndResource() 
+			let a:result = terraformcomplete#GetProviderAndResource()
 		catch
 			let a:result = ['', '']
 		endtry
