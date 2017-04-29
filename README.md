@@ -18,6 +18,10 @@
 
 [![asciicast](https://asciinema.org/a/118064.png)](https://asciinema.org/a/118064)
 
+## New Demo with more completion
+
+[![asciicast](https://asciinema.org/a/118207.png)](https://asciinema.org/a/118207)
+
 ## Todo for Terraform completion
 - [ ] Provider
 - [x] Resource
