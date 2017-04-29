@@ -22,9 +22,14 @@
 
 [![asciicast](https://asciinema.org/a/118207.png)](https://asciinema.org/a/118207)
 
+## Paramter Completion
+
+[![asciicast](https://asciinema.org/a/118243.png)](https://asciinema.org/a/118243)
+
 ## Todo for Terraform completion
 - [ ] Provider
 - [x] Resource
+- [x] Parameter
 - [ ] Variable
 - [ ] Cleaner code
 - [x] local/offline
