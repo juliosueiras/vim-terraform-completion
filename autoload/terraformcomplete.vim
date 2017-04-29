@@ -4,20 +4,30 @@ endif
 
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
-fun! terraformcomplete#GetProviderAndResource()
-    let a:curr_pos = getcurpos()
+fun! terraformcomplete#GetResource()
+    let s:curr_pos = getcurpos()
     execute '?resource'
     let a:provider = split(split(substitute(getline(getcurpos()[1]),'"', '', ''))[1], "_")[0]
+
 	let a:resource = substitute(split(split(getline(getcurpos()[1]))[1], a:provider . "_")[1], '"','','')
-    let a:test_pos = getcurpos()
-    call setpos(".", a:curr_pos)
-	return [a:provider, a:resource]
+    call setpos(".", s:curr_pos)
+	return a:resource
+endfun
+
+fun! terraformcomplete#GetProvider()
+    let s:curr_pos = getcurpos()
+    execute '?resource'
+    let a:provider = split(split(substitute(getline(getcurpos()[1]),'"', '', ''))[1], "_")[0]
+
+    call setpos(".", s:curr_pos)
+	return a:provider
 endfun
 
 function! terraformcomplete#rubyComplete(ins, provider, resource)
     let a:res = []
-    let a:resource_line = getline(".") =~ "resource" ? 1 : 0
-    let a:provider_line = getline(".") =~ "provider" ? 1 : 0
+    echo a:provider
+    let a:resource_line = getline(s:curr_pos[1]) =~ "resource"
+    let a:provider_line = getline(s:curr_pos[1]) =~ "provider" 
 
   ruby << EOF
 require 'json'
@@ -25,22 +35,23 @@ require 'json'
 def terraform_complete(provider, resource)
     begin
         data = ''
-        File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}.json", "r") do |f|
-          f.each_line do |line|
-            data = line
-          end
-        end
-
-        if VIM::evaluate('a:resource_line') == 1 then
-            result = JSON.parse(data).keys.map { |x|
-            { "word" => x }
-            }
+        if VIM::evaluate('a:provider_line') == 0 then
+            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}.json", "r") do |f|
+              f.each_line do |line|
+                data = line
+              end
+            end
+            if VIM::evaluate('a:resource_line') == 1 then
+                result = JSON.parse(data).keys.map { |x|
+                { "word" => x }
+                }
+            else
+                result = JSON.parse(data)[resource]["words"]
+            end
         elsif VIM::evaluate('a:provider_line') == 1 then
-            result = Dir["provider_json/**/*.json"].map { |x|
-              { "word" => x.split("provider_json/")[1].split('.json')[0] }
+            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/**/*.json").map { |x|
+              { "word" => x.split("../provider_json/")[1].split('.json')[0] }
             }
-        else
-            result = JSON.parse(data)[resource]["words"]
         end
 
         return JSON.generate(result)
@@ -58,6 +69,8 @@ class TerraformComplete
 end
 gem = TerraformComplete.new()
 EOF
+let a:resource_line = 0
+let a:provider_line = 0
 return a:res
 endfunction
 
@@ -73,13 +86,17 @@ fun! terraformcomplete#Complete(findstart, base)
     else
         let res = []
 		try
-			let a:result = terraformcomplete#GetProviderAndResource()
+			let a:provider = terraformcomplete#GetProvider()
 		catch
-			let a:result = ['', '']
+			let a:provider = ''
 		endtry
 
-        let a:provider = a:result[0]
-        let a:resource = a:result[1]
+		try
+			let a:resource = terraformcomplete#GetResource()
+		catch
+			let a:resource = ''
+		endtry
+
         for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource)
             if m.word =~ '^' . a:base
                 call add(res, m)
