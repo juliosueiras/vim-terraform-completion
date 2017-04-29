@@ -65,5 +65,9 @@ provider.each do |i|
     puts "Finish #{name} of #{provider_name}"
   end
 
+  if provider_name == "do" then 
+    provider_name = "digitalocean"
+  end
+
   File.open("provider_json/#{provider_name}.json", 'w') { |file| file.write(JSON.generate(result)) }
 end

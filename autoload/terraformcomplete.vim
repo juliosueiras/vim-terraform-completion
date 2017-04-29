@@ -16,19 +16,13 @@ endfun
 
 function! terraformcomplete#rubyComplete(ins, provider, resource)
     let a:res = []
-    if getline(".") =~ "resource"
-        let a:resource_line = 1 " true
-    else
-        let a:resource_line = 0 " false
-    endif
+    let a:resource_line = getline(".") =~ "resource" ? 1 : 0
+    let a:provider_line = getline(".") =~ "provider" ? 1 : 0
+
   ruby << EOF
 require 'json'
 
 def terraform_complete(provider, resource)
-    if provider == "digitalocean" then
-      provider = "do"
-    end
-
     begin
         data = ''
         File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}.json", "r") do |f|
@@ -36,13 +30,19 @@ def terraform_complete(provider, resource)
             data = line
           end
         end
+
         if VIM::evaluate('a:resource_line') == 1 then
             result = JSON.parse(data).keys.map { |x|
             { "word" => x }
             }
+        elsif VIM::evaluate('a:provider_line') == 1 then
+            result = Dir["provider_json/**/*.json"].map { |x|
+              { "word" => x.split("provider_json/")[1].split('.json')[0] }
+            }
         else
             result = JSON.parse(data)[resource]["words"]
         end
+
         return JSON.generate(result)
     rescue
         return []
