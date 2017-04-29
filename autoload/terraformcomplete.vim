@@ -28,7 +28,7 @@ fun! terraformcomplete#GetProvider()
 	return a:provider
 endfun
 
-function! terraformcomplete#rubyComplete(ins, provider, resource)
+function! terraformcomplete#rubyComplete(ins, provider, resource, attribute)
     let a:res = []
     let a:resource_line = getline(s:curr_pos[1]) =~ "resource"
     let a:provider_line = getline(s:curr_pos[1]) =~ "provider" 
@@ -49,8 +49,10 @@ def terraform_complete(provider, resource)
                 result = JSON.parse(data).keys.map { |x|
                 { "word" => x }
                 }
+            elsif VIM::evaluate('a:attribute') == "true" then
+                result = JSON.parse(data)[resource]["attributes"]
             else
-                result = JSON.parse(data)[resource]["words"]
+                result = JSON.parse(data)[resource]["arguments"]
             end
         elsif VIM::evaluate('a:provider_line') == 1 then
             result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/**/*.json").map { |x|
@@ -79,34 +81,87 @@ return a:res
 endfunction
 
 fun! terraformcomplete#Complete(findstart, base)
-    if a:findstart
-        " locate the start of the word
-        let line = getline('.')
-        let start = col('.') - 1
-        while start > 0 && line[start - 1] =~ '\a'
-            let start -= 1
-        endwhile
-        return start
-    else
-        let res = []
-		try
-			let a:provider = terraformcomplete#GetProvider()
-		catch
-			let a:provider = ''
-		endtry
+  if a:findstart
+    " locate the start of the word
+    let line = getline('.')
+    let start = col('.') - 1
+    while start > 0 && line[start - 1] =~ '\a'
+      let start -= 1
+    endwhile
+    return start
+  else
+    let res = []
+    try
+      let a:provider = terraformcomplete#GetProvider()
+    catch
+      let a:provider = ''
+    endtry
 
-		try
-			let a:resource = terraformcomplete#GetResource()
-		catch
-			let a:resource = ''
-		endtry
+    try
+      let a:resource = terraformcomplete#GetResource()
+    catch
+      let a:resource = ''
+    endtry
 
-        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource)
-            if m.word =~ '^' . a:base
-                call add(res, m)
+
+    if getline(".") =~ '${.*$'
+      try
+      let a:old_pos = getpos('.')
+      execute 'normal! gg'
+      let a:search_continue = 1
+      let a:resource_list = []
+      let a:type_list = {}
+      while a:search_continue != 0
+        let a:search_continue = search("resource \"", "W")
+
+        if a:search_continue != 0
+          try
+            let temp_resource = substitute(split(split(getline(a:search_continue),"resource ")[0], " ")[0], '"','','g')
+            call add(a:resource_list, { "word": temp_resource })
+
+            if has_key(a:type_list, temp_resource) == 0
+              let a:type_list[temp_resource] = []
             endif
-        endfor
-        return res
+            call add(a:type_list[temp_resource], { 'word': substitute(split(split(getline(a:search_continue),'resource ')[0], ' ')[1], '"','','g')})
+          catch
+            return []
+          endtry
+        endif
+      endwhile
+      call setpos('.', a:old_pos)
+      try
+        let a:curr = getline(".")
+        let a:attr = split(split(a:curr, "${")[1], '\.')
+        if len(a:attr) == 1
+          return a:type_list[a:attr[0]]
+        elseif len(a:attr) == 2
+          let a:provider = split(a:attr[0], "_")[0]
+
+          let a:resource = split(a:attr[0], a:provider . "_")[0]
+
+          for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true')
+            if m.word =~ '^' . a:base
+              call add(res, m)
+            endif
+          endfor
+          return res
+        else
+          return a:resource_list
+        endif
+      catch
+        return a:resource_list
+      endtry
+      catch
+        return a:resource_list
+      endtry
+    else
+      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'false')
+        if m.word =~ '^' . a:base
+          call add(res, m)
+        endif
+      endfor
+      return res
     endif
+  endif
 endfun
 

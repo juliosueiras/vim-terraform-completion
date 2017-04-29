@@ -1,1 +1,1 @@
-{"artifact":{"provider":"terraform-enterprise","words":[{"word":"name"},{"word":"type"},{"word":"build"},{"word":"version"},{"word":"metadata_keys"},{"word":"metadata"},{"word":"id"},{"word":"file_url"},{"word":"metadata_full"},{"word":"version_real"},{"word":"slug"}]}}
+{"artifact":{"provider":"terraform-enterprise","arguments":[{"word":"name"},{"word":"type"},{"word":"build"},{"word":"version"},{"word":"metadata_keys"},{"word":"metadata"}],"attributes":[{"word":"id"},{"word":"file_url"},{"word":"metadata_full"},{"word":"version_real"},{"word":"slug"}]}}

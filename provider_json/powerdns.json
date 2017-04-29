@@ -1,1 +1,1 @@
-{"record":{"provider":"powerdns","words":[{"word":"zone"},{"word":"name"},{"word":"type"},{"word":"ttl"},{"word":"records"}]}}
+{"record":{"provider":"powerdns","arguments":[{"word":"zone"},{"word":"name"},{"word":"type"},{"word":"ttl"},{"word":"records"}],"attributes":[]}}

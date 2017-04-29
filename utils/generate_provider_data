@@ -15,7 +15,7 @@ end
 provider.each do |i|
   page = Nokogiri::HTML(open("https://www.terraform.io#{i}"))
   provider_name = i.split('/')[-2]
-  data = []
+  arguments = []
 
   puts "Starting Provider of #{provider_name}"
 
@@ -23,7 +23,7 @@ provider.each do |i|
     if not x['href'] == '#' then
       if not x['href'] == "/docs/providers/#{provider_name}/index.html" then
         if not x['href'] == '/docs/providers/index.html' then
-          data.push(x['href'])
+          arguments.push(x['href'])
         end
       end
     end
@@ -31,37 +31,42 @@ provider.each do |i|
 
   result = {}
 
-  data.each do |x|
+  arguments.each do |x|
     page = Nokogiri::HTML(open("https://www.terraform.io#{x}"))
 
-    @start_element = "h2[@id='argument-reference']"
-    @end_element = "h2[@id='attributes-reference']"
-    @arguments = page.xpath("//*[preceding-sibling::#@start_element and
-                                following-sibling::#@end_element]
-                          | //#@start_element | //#@end_element")
-
-
-    data = []
-    resource = []
-    @arguments.css('ul li a').each do |i|
+    arguments = []
+    attributes = []
+    page.css("#argument-reference ~ ul:first-of-type").css('a').each do |i|
       if not i['name'].nil? then
-        data.push(i['name'])
+        if not i['name'].include? "-" then
+          arguments.push({ 'word' => i['name']})
+        else
+          arguments.push({ 'word' => i["name"].split("-")[0] })
+        end
       end
     end
-
-    page.css('ul li a').each do |i|
+    page.css("#attributes-reference ~ ul:first-of-type").css('a').each do |i|
       if not i['name'].nil? then
-        if not i['name'].include? "-1" then
-          resource.push({ 'word' => i['name']})
+        if not i['name'].include? "-" then
+          attributes.push({ 'word' => i['name']})
+        else
+          attributes.push({ 'word' => i['name'].split("-")[0]})
         end
       end
     end
 
-    data.each do |i|
-      resource.delete(i)
+    page.css("#attribute-reference ~ ul:first-of-type").css('a').each do |i|
+      if not i['name'].nil? then
+        if not i['name'].include? "-" then
+          attributes.push({ 'word' => i['name']})
+        else
+          attributes.push({ 'word' => i['name'].split("-")[0]})
+        end
+      end
     end
+
     name = x.split('/')[-1].split(".html")[0]
-    result[name] = { "provider" => provider_name, "words" => resource }
+    result[name] = { "provider" => provider_name, "arguments" => arguments, "attributes" => attributes }
     puts "Finish #{name} of #{provider_name}"
   end
 

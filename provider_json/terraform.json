@@ -1,1 +1,1 @@
-{"remote_state":{"provider":"terraform","words":[{"word":"backend"},{"word":"environment"},{"word":"config"}]}}
+{"remote_state":{"provider":"terraform","arguments":[{"word":"backend"},{"word":"environment"},{"word":"config"}],"attributes":[{"word":"backend"},{"word":"config"}]}}

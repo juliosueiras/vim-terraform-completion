@@ -1,1 +1,1 @@
-{"log":{"provider":"logentries","words":[{"word":"logset_id"},{"word":"name"},{"word":"retention_period"},{"word":"source"},{"word":"type"},{"word":"token"}]},"logset":{"provider":"logentries","words":[{"word":"name"},{"word":"location"}]}}
+{"log":{"provider":"logentries","arguments":[{"word":"logset_id"},{"word":"name"},{"word":"retention_period"},{"word":"source"},{"word":"type"}],"attributes":[{"word":"token"}]},"logset":{"provider":"logentries","arguments":[{"word":"name"},{"word":"location"}],"attributes":[]}}

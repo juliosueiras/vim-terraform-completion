@@ -1,1 +1,1 @@
-{"record":{"provider":"cloudflare","words":[{"word":"domain"},{"word":"name"},{"word":"value"},{"word":"type"},{"word":"ttl"},{"word":"priority"},{"word":"proxied"},{"word":"id"},{"word":"hostname"}]}}
+{"record":{"provider":"cloudflare","arguments":[{"word":"domain"},{"word":"name"},{"word":"value"},{"word":"type"},{"word":"ttl"},{"word":"priority"},{"word":"proxied"}],"attributes":[{"word":"id"},{"word":"name"},{"word":"value"},{"word":"type"},{"word":"ttl"},{"word":"priority"},{"word":"hostname"},{"word":"proxied"}]}}

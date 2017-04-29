@@ -1,1 +1,1 @@
-{"data_source":{"provider":"external","words":[{"word":"program"},{"word":"query"},{"word":"result"}]}}
+{"data_source":{"provider":"external","arguments":[{"word":"program"},{"word":"query"}],"attributes":[{"word":"result"}]}}

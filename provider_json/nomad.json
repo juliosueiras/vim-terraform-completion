@@ -1,1 +1,1 @@
-{"job":{"provider":"nomad","words":[{"word":"jobspec"},{"word":"deregister_on_destroy"},{"word":"deregister_on_id_change"}]}}
+{"job":{"provider":"nomad","arguments":[{"word":"jobspec"},{"word":"deregister_on_destroy"},{"word":"deregister_on_id_change"}],"attributes":[]}}
