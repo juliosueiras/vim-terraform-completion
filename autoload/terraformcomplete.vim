@@ -15,7 +15,7 @@ fun! terraformcomplete#GetResource()
 endfun
 
 fun! terraformcomplete#GetProvider()
-    let s:curr_pos = getcurpos()
+    let s:curr_pos = getpos(".")
     execute '?resource'
     let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
 
