@@ -1,0 +1,1 @@
+{"log":{"provider":"logentries","words":[{"word":"logset_id"},{"word":"name"},{"word":"retention_period"},{"word":"source"},{"word":"type"},{"word":"token"}]},"logset":{"provider":"logentries","words":[{"word":"name"},{"word":"location"}]}}

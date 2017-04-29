@@ -2,6 +2,8 @@ if !has("ruby") && !has("ruby/dyn")
     finish
 endif
 
+let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+
 fun! terraformcomplete#GetProviderAndResource()
     let a:curr_pos = getcurpos()
     execute '?resource'
@@ -15,59 +17,24 @@ endfun
 function! terraformcomplete#rubyComplete(ins, provider, resource)
     let a:res = []
   ruby << EOF
-require 'nokogiri'         
 require 'json'
-require 'open-uri'
 
 def terraform_complete(provider, resource)
-
-
-  begin
     if provider == "digitalocean" then
       provider = "do"
     end
 
-    page = Nokogiri::HTML(open("https://www.terraform.io/docs/providers/#{provider}"))
-
-    url = page.css("a[href*='/#{resource}.html']")[0]['href']
-
-    page = Nokogiri::HTML(open("https://www.terraform.io#{url}"))
-
-    def collect_between(first, last)
-      first == last ? [first] : [first, *collect_between(first.next, last)]
-    end
-
-    @start_element = "h2[@id='argument-reference']"
-    @end_element = "h2[@id='attributes-reference']"
-    @arguments = page.xpath("//*[preceding-sibling::#@start_element and
-                               following-sibling::#@end_element]
-                         | //#@start_element | //#@end_element")
-
-
-    data = []
-    resource = []
-    @arguments.css('ul li a').each do |x|
-      if not x['name'].nil? then
-        data.push(x['name'])
-      end
-    end
-
-    page.css('ul li a').each do |x|
-      if not x['name'].nil? then
-        if not x['name'].include? "-1" then
-          resource.push({ 'word' => x['name']})
+    begin
+        data = ''
+        File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}.json", "r") do |f|
+          f.each_line do |line|
+            data = line
+          end
         end
-      end
+        return JSON.generate(JSON.parse(data)[resource]["words"])
+    rescue 
+        return []
     end
-
-    data.each do |x|
-      resource.delete(x)
-    end
-
-    return JSON.generate(resource)
-  rescue
-    return JSON.generate([])
-  end
 end
 
 class TerraformComplete

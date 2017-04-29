@@ -1,0 +1,1 @@
+{"user":{"provider":"opsgenie","words":[{"word":"username"},{"word":"full_name"},{"word":"role"},{"word":"locale"},{"word":"timezone"},{"word":"id"}]},"team":{"provider":"opsgenie","words":[{"word":"name"},{"word":"description"},{"word":"member"},{"word":"username"},{"word":"role"},{"word":"id"}]}}

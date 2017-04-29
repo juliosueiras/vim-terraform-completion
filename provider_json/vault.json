@@ -1,0 +1,1 @@
+{"generic_secret":{"provider":"vault","words":[{"word":"path"},{"word":"data_json"},{"word":"allow_read"}]},"policy":{"provider":"vault","words":[{"word":"name"},{"word":"policy"}]}}

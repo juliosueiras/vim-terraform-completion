@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+require 'nokogiri'         
+require 'json'
+require 'open-uri'
+
+page = Nokogiri::HTML(open("https://www.terraform.io/docs/providers"))
+provider = []
+
+page.css(".nav a").each do |x|
+  if x['href'] =~ /docs\/providers\/.*\/index.html/ then
+    provider.push(x['href'])
+  end
+end
+
+provider.each do |i|
+  page = Nokogiri::HTML(open("https://www.terraform.io#{i}"))
+  provider_name = i.split('/')[-2]
+  data = []
+
+  puts "Starting Provider of #{provider_name}"
+
+  page.css(".docs-sidenav a").each do |x| 
+    if not x['href'] == '#' then
+      if not x['href'] == "/docs/providers/#{provider_name}/index.html" then
+        if not x['href'] == '/docs/providers/index.html' then
+          data.push(x['href'])
+        end
+      end
+    end
+  end
+
+  result = {}
+
+  data.each do |x|
+    page = Nokogiri::HTML(open("https://www.terraform.io#{x}"))
+
+    @start_element = "h2[@id='argument-reference']"
+    @end_element = "h2[@id='attributes-reference']"
+    @arguments = page.xpath("//*[preceding-sibling::#@start_element and
+                                following-sibling::#@end_element]
+                          | //#@start_element | //#@end_element")
+
+
+    data = []
+    resource = []
+    @arguments.css('ul li a').each do |i|
+      if not i['name'].nil? then
+        data.push(i['name'])
+      end
+    end
+
+    page.css('ul li a').each do |i|
+      if not i['name'].nil? then
+        if not i['name'].include? "-1" then
+          resource.push({ 'word' => i['name']})
+        end
+      end
+    end
+
+    data.each do |i|
+      resource.delete(i)
+    end
+    name = x.split('/')[-1].split(".html")[0]
+    result[name] = { "provider" => provider_name, "words" => resource }
+    puts "Finish #{name} of #{provider_name}"
+  end
+
+  File.open("provider_json/#{provider_name}.json", 'w') { |file| file.write(JSON.generate(result)) }
+end

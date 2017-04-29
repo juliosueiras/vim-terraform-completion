@@ -1,0 +1,1 @@
+{"database":{"provider":"influxdb","words":[{"word":"name"}]},"user":{"provider":"influxdb","words":[{"word":"name"},{"word":"password"},{"word":"admin"},{"word":"grant"},{"word":"database"},{"word":"privilege"}]},"continuous_query":{"provider":"influxdb","words":[{"word":"name"},{"word":"database"},{"word":"query"}]}}
