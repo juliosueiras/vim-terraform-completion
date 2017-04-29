@@ -5,11 +5,11 @@ endif
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 fun! terraformcomplete#GetResource()
-    let s:curr_pos = getcurpos()
+    let s:curr_pos = getpos(".")
     execute '?resource'
-    let a:provider = split(split(substitute(getline(getcurpos()[1]),'"', '', ''))[1], "_")[0]
+    let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
 
-	let a:resource = substitute(split(split(getline(getcurpos()[1]))[1], a:provider . "_")[1], '"','','')
+	let a:resource = substitute(split(split(getline("."))[1], a:provider . "_")[1], '"','','')
     call setpos(".", s:curr_pos)
 	return a:resource
 endfun
@@ -17,7 +17,7 @@ endfun
 fun! terraformcomplete#GetProvider()
     let s:curr_pos = getcurpos()
     execute '?resource'
-    let a:provider = split(split(substitute(getline(getcurpos()[1]),'"', '', ''))[1], "_")[0]
+    let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
 
     call setpos(".", s:curr_pos)
 	return a:provider
@@ -25,7 +25,6 @@ endfun
 
 function! terraformcomplete#rubyComplete(ins, provider, resource)
     let a:res = []
-    echo a:provider
     let a:resource_line = getline(s:curr_pos[1]) =~ "resource"
     let a:provider_line = getline(s:curr_pos[1]) =~ "provider" 
 
