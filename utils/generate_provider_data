@@ -52,29 +52,50 @@ provider.each do |i|
     attributes = []
 
     page.css("#argument-reference ~ ul:first-of-type > li").each do |i|
-      name = i.css('a').text()
-      info = i.text()
-      if not name.nil? then
-        name = (not name.include? "-") ? name : name.split("-")[0]
-        arguments.push({ 'word' => name, "info" => info})
+      begin 
+        begin
+          name = i.css("a[name]")[0]['name']
+        rescue
+          name = i.css("a[href]")[0]['href']
+        end
+        info = i.text()
+        if not name.nil? then
+          name = (not name.include? "-") ? name : name.split("-")[0]
+          arguments.push({ 'word' => name, "info" => info})
+        end
+      rescue
       end
     end
 
     page.css("#attributes-reference ~ ul:first-of-type li").each do |i|
-      name = i.css('a').text()
-      info = i.text()
-      if not name.nil? then
-        name = (not name.include? "-") ? name : name.split("-")[0]
-        attributes.push({ 'word' => name, "info" => info})
+      begin 
+        begin
+          name = i.css("a[name]")[0]['name']
+        rescue
+          name = i.css("a[href]")[0]['href']
+        end
+        info = i.text()
+        if not name.nil? then
+          name = (not name.include? "-") ? name : name.split("-")[0]
+          attributes.push({ 'word' => name, "info" => info})
+        end
+      rescue
       end
     end
 
     page.css("#attribute-reference ~ ul:first-of-type li").each do |i|
-      name = i.css('a').text()
-      info = i.text()
-      if not name.nil? then
-        name = (not name.include? "-") ? name : name.split("-")[0]
-        attributes.push({ 'word' => name, "info" => info})
+      begin 
+        begin
+          name = i.css("a[name]")[0]['name']
+        rescue
+          name = i.css("a[href]")[0]['href']
+        end
+        info = i.text()
+        if not name.nil? then
+          name = (not name.include? "-") ? name : name.split("-")[0]
+          attributes.push({ 'word' => name, "info" => info})
+        end
+      rescue
       end
     end
 
