@@ -30,6 +30,7 @@
 - [ ] Provider
 - [x] Resource
 - [x] Parameter
+- [ ] (WIP) Adding Info and Type to Argument and Attribute
 - [ ] Variable
 - [ ] Cleaner code
 - [x] local/offline
@@ -38,5 +39,6 @@
 
 ## Todo for HCL
 - [ ] Add Completion for hcl
+- [ ] Completion for Sublock
 ## Todo for Improvement
 - [ ] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
