@@ -2,6 +2,8 @@
 
 [![Join the chat at https://gitter.im/juliosueiras/vim-terraform-completion](https://badges.gitter.im/juliosueiras/vim-terraform-completion.svg)](https://gitter.im/juliosueiras/vim-terraform-completion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## [Demos](./DEMO.md)
+
 **A very early prototype**
 
 ## Installation
@@ -15,7 +17,6 @@
 `Plug 'juliosueiras/vim-terraform-completion'`
 
 
-### [Demos](./DEMO.md)
 
 ## Todo for Terraform completion
 - [ ] Provider
