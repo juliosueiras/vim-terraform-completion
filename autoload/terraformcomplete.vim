@@ -46,8 +46,10 @@ def terraform_complete(provider, resource)
               end
             end
             if VIM::evaluate('a:resource_line') == 1 then
-                result = JSON.parse(data).keys.map { |x|
-                { "word" => x }
+                temp = JSON.parse(data).keys
+                temp.delete("provider_arguments")
+                result = temp.map { |x|
+                    { "word" => x }
                 }
             elsif VIM::evaluate('a:attribute') == "true" then
                 result = JSON.parse(data)[resource]["attributes"]

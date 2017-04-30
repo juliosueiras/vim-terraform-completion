@@ -16,8 +16,20 @@ provider.each do |i|
   page = Nokogiri::HTML(open("https://www.terraform.io#{i}"))
   provider_name = i.split('/')[-2]
   arguments = []
+  provider_arguments = []
 
   puts "Starting Provider of #{provider_name}"
+
+  page.css("#argument-reference ~ ul:first-of-type > li").each do |i|
+    name = i.css('a').text()
+    info = i.text()
+    if not name.nil? then
+      name = (not name.include? "-") ? name : name.split("-")[0]
+      provider_arguments.push({ 'word' => name, "info" => info})
+    end
+  end
+
+
 
   page.css(".docs-sidenav a").each do |x| 
     if not x['href'] == '#' then
@@ -31,37 +43,38 @@ provider.each do |i|
 
   result = {}
 
+  result["provider_arguments"] = provider_arguments
+
   arguments.each do |x|
     page = Nokogiri::HTML(open("https://www.terraform.io#{x}"))
 
     arguments = []
     attributes = []
-    page.css("#argument-reference ~ ul:first-of-type").css('a').each do |i|
-      if not i['name'].nil? then
-        if not i['name'].include? "-" then
-          arguments.push({ 'word' => i['name']})
-        else
-          arguments.push({ 'word' => i["name"].split("-")[0] })
-        end
-      end
-    end
-    page.css("#attributes-reference ~ ul:first-of-type").css('a').each do |i|
-      if not i['name'].nil? then
-        if not i['name'].include? "-" then
-          attributes.push({ 'word' => i['name']})
-        else
-          attributes.push({ 'word' => i['name'].split("-")[0]})
-        end
+
+    page.css("#argument-reference ~ ul:first-of-type > li").each do |i|
+      name = i.css('a').text()
+      info = i.text()
+      if not name.nil? then
+        name = (not name.include? "-") ? name : name.split("-")[0]
+        arguments.push({ 'word' => name, "info" => info})
       end
     end
 
-    page.css("#attribute-reference ~ ul:first-of-type").css('a').each do |i|
-      if not i['name'].nil? then
-        if not i['name'].include? "-" then
-          attributes.push({ 'word' => i['name']})
-        else
-          attributes.push({ 'word' => i['name'].split("-")[0]})
-        end
+    page.css("#attributes-reference ~ ul:first-of-type li").each do |i|
+      name = i.css('a').text()
+      info = i.text()
+      if not name.nil? then
+        name = (not name.include? "-") ? name : name.split("-")[0]
+        attributes.push({ 'word' => name, "info" => info})
+      end
+    end
+
+    page.css("#attribute-reference ~ ul:first-of-type li").each do |i|
+      name = i.css('a').text()
+      info = i.text()
+      if not name.nil? then
+        name = (not name.include? "-") ? name : name.split("-")[0]
+        attributes.push({ 'word' => name, "info" => info})
       end
     end
 
