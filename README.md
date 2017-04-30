@@ -14,23 +14,15 @@
 ### Vim-Plug
 `Plug 'juliosueiras/vim-terraform-completion'`
 
-## Demo
 
-[![asciicast](https://asciinema.org/a/118064.png)](https://asciinema.org/a/118064)
-
-## New Demo with more completion
-
-[![asciicast](https://asciinema.org/a/118207.png)](https://asciinema.org/a/118207)
-
-## Paramter Completion
-
-[![asciicast](https://asciinema.org/a/118243.png)](https://asciinema.org/a/118243)
+### [Demos](./DEMO.md)
 
 ## Todo for Terraform completion
 - [ ] Provider
 - [x] Resource
 - [x] Parameter
-- [ ] (WIP) Adding Info and Type to Argument and Attribute
+- [x] Adding Info to Argument and Attribute(Type not including ,since Info
+    already indicate it)
 - [ ] Variable
 - [ ] Cleaner code
 - [x] local/offline
