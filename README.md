@@ -18,6 +18,7 @@
 
 ## General Todo
 - [x] Integrate Basic `terraform validate` and `tflint` into Synstatic
+**NOTE:** enabling deep check for tflint can be a bit slow
 
 [Demo of the linter](https://asciinema.org/a/118441)
 
