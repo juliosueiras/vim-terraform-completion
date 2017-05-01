@@ -1,4 +1,4 @@
-# Vim Terraform Completion - [Demos](./DEMO.md)
+# Vim Terraform Completion with Linter - [Demos](./DEMO.md)
 
 [![Join the chat at https://gitter.im/juliosueiras/vim-terraform-completion](https://badges.gitter.im/juliosueiras/vim-terraform-completion.svg)](https://gitter.im/juliosueiras/vim-terraform-completion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -17,7 +17,9 @@
 
 
 ## General Todo
-- [ ] (WIP) Integrate TFlint into Synstatic
+- [x] Integrate Basic `terraform validate` and `tflint` into Synstatic
+
+[Demo of the linter](https://asciinema.org/a/118441)
 
 ## Todo for Terraform completion
 - [ ] Provider

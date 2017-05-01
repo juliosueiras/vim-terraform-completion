@@ -1,5 +1,9 @@
 # Asciinema Demos
 
+## Linter Demo
+
+[![asciicast](https://asciinema.org/a/118441.png)](https://asciinema.org/a/118441)
+
 ## Demo
 
 [![asciicast](https://asciinema.org/a/118064.png)](https://asciinema.org/a/118064)

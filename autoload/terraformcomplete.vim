@@ -2,6 +2,12 @@ if !has("ruby") && !has("ruby/dyn")
     finish
 endif
 
+if exists('g:syntastic_extra_filetypes')
+    call add(g:syntastic_extra_filetypes, 'terraform')
+else
+    let g:syntastic_extra_filetypes = ['terraform']
+endif
+
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 fun! terraformcomplete#GetResource()
