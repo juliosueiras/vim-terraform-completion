@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/juliosueiras/vim-terraform-completion](https://badges.gitter.im/juliosueiras/vim-terraform-completion.svg)](https://gitter.im/juliosueiras/vim-terraform-completion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-- [Vim Terraform Completion with Linter - [Demos](./DEMO.md)](#vim-terraform-completion-with-linter---demosdemomd)
+- [Vim Terraform Completion with Linter - Demos](#vim-terraform-completion-with-linter---demos)
   * [Dependencies](#dependencies)
   * [Installation](#installation)
     + [NeoBundle](#neobundle)
