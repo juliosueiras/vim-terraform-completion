@@ -5,18 +5,28 @@
 
 **A very early prototype**
 
+## Dependencies
+
+- [vim-terraform](https://github.com/hashivim/vim-terraform)
+- [vim-syntastic](https://github.com/vim-syntastic/syntastic)
+
 ## Installation
 
 **Require `+ruby` or `+ruby/dyn` for vim**
 
 ### NeoBundle
+`NeoBundle 'hashivim/vim-terraform'`
+`NeoBundle 'vim-syntastic/syntastic'`
 `NeoBundle 'juliosueiras/vim-terraform-completion'`
 
 ### Vim-Plug
+`Plug 'hashivim/vim-terraform'`
+`Plug 'vim-syntastic/syntastic'`
 `Plug 'juliosueiras/vim-terraform-completion'`
 
-
 ## General Todo
+- [ ] Test from zero to useful setup using Docker
+- [ ] Provide config and example
 - [x] Integrate Basic `terraform validate` and `tflint` into Synstatic
 **NOTE:** enabling deep check for tflint can be a bit slow
 
