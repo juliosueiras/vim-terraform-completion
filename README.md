@@ -15,14 +15,14 @@
 **Require `+ruby` or `+ruby/dyn` for vim**
 
 ### NeoBundle
-```
+```vim
 NeoBundle 'hashivim/vim-terraform'
 NeoBundle 'vim-syntastic/syntastic'
 NeoBundle 'juliosueiras/vim-terraform-completion'
 ```
 
 ### Vim-Plug
-```
+```vim
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
