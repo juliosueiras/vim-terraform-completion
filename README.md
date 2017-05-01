@@ -16,6 +16,8 @@
 `Plug 'juliosueiras/vim-terraform-completion'`
 
 
+## General Todo
+- [ ] (WIP) Integrate TFlint into Synstatic
 
 ## Todo for Terraform completion
 - [ ] Provider
