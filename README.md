@@ -2,6 +2,16 @@
 
 [![Join the chat at https://gitter.im/juliosueiras/vim-terraform-completion](https://badges.gitter.im/juliosueiras/vim-terraform-completion.svg)](https://gitter.im/juliosueiras/vim-terraform-completion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+- [Vim Terraform Completion with Linter - [Demos](./DEMO.md)](#vim-terraform-completion-with-linter---demosdemomd)
+  * [Dependencies](#dependencies)
+  * [Installation](#installation)
+    + [NeoBundle](#neobundle)
+    + [Vim-Plug](#vim-plug)
+    + [Minimal Configuration](#minimal-configuration)
+  * [General Todo](#general-todo)
+  * [Todo for Terraform completion](#todo-for-terraform-completion)
+  * [Todo for HCL](#todo-for-hcl)
+  * [Todo for Improvement](#todo-for-improvement)
 
 **A very early prototype**
 
@@ -26,6 +36,27 @@ NeoBundle 'juliosueiras/vim-terraform-completion'
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
+```
+
+### Minimal Configuration
+```vim
+" Minimal Configuration
+set nocompatible
+syntax on
+filetype plugin indent on
+
+call plug#begin('~/.vim/plugged')
+Plug 'hashivim/vim-terraform'
+Plug 'vim-syntastic/syntastic'
+Plug 'juliosueiras/vim-terraform-completion'
+call plug#end()
+
+" (Optional)Remove Info(Preview) window
+set completeopt-=preview
+
+" (Optional)Hide Info(Preview) window after completions
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 ```
 
 ## General Todo
