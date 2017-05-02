@@ -12,6 +12,7 @@
   * [Todo for Terraform completion](#todo-for-terraform-completion)
   * [Todo for HCL](#todo-for-hcl)
   * [Todo for Improvement](#todo-for-improvement)
+  * [Contributors](#contributors)
 
 **A very early prototype**
 
@@ -84,3 +85,5 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 - [ ] Completion for Sublock
 ## Todo for Improvement
 - [ ] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
+
+## [Contributors](./CONTRIBUTORS.md)
