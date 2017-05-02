@@ -61,7 +61,7 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 ```
 
 ## General Todo
-- [ ] Test from zero to useful setup using Docker
+- [x] Test from zero to useful setup using Docker
 - [ ] Provide config and example
 - [x] Integrate Basic `terraform validate` and `tflint` into Synstatic
 **NOTE:** enabling deep check for tflint can be a bit slow
@@ -84,6 +84,6 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 - [ ] Add Completion for hcl
 - [ ] Completion for Sublock
 ## Todo for Improvement
-- [ ] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
+- [ ] (Current WIP)Add Travis-CI for testing, and ensuring the completion is outputing the right completion
 
 ## [Contributors](./CONTRIBUTORS.md)
