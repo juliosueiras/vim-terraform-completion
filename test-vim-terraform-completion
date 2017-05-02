@@ -1,0 +1,23 @@
+#!/bin/bash
+
+readonly IMAGE="vim-terraform-completion"
+readonly TAG=latest
+readonly ARGS="$@"
+
+# Stop running if the user is root
+if [[ "$(id -u $(whoami))" -eq "0" ]]
+then
+    echo "cannot run as root!, exiting"
+    exit 1
+fi
+
+
+# If the specified image isn't present, build it
+if [[ -z $(docker images | grep -w "$IMAGE" | grep -w "$TAG") ]]
+then
+    docker build -t vim-terraform-completion:latest .
+fi
+
+# run container
+docker run --rm -it $IMAGE:$TAG test.tf
+
