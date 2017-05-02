@@ -74,7 +74,7 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 - [x] Parameter
 - [x] Adding Info to Argument and Attribute(Type not including ,since Info
     already indicate it)
-- [ ] Variable
+- [ ] (Current WIP)Variable
 - [ ] Cleaner code
 - [x] local/offline
 - [ ] Add completion tags, ingress, and other subblock
