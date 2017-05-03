@@ -25,11 +25,7 @@ def main()
         captures = x.match(/Error loading files Error loading [^:]*: Error reading config for ([^\[]*)\[([^\]]*)\]: (.*)/).captures
         errors_res.push({:location=> "none", :variable=> "\"#{captures[0]}\" \"#{captures[1]}\"", :errormsg=> captures[2] })
       end
-
-      if x.match(/\* provider config '[^']*': (unknown variable referenced: '([^']*)'.*)/) != nil
-        captures = x.match(/\* provider config '[^']*': (unknown variable referenced: '([^']*)'.*)/).captures
-        errors_res.push({:location=> "none", :variable=> "var.#{captures[1]}", :errormsg=> captures[0] })
-      end
+      
 
       if x.match(/\* resource '([^']*)' [^:]*: ([^:']*):? '([^']*)'/) != nil
         captures = x.match(/\* resource '([^']*)' [^:]*: ([^:']*):? '([^']*)'/).captures
@@ -40,9 +36,15 @@ def main()
           errors_res.push({:location=> captures[0].split("."), :variable=> "var.#{captures[2]}", :errormsg=> captures[1] })
         end
       end
-      if x.match(/\* ([^.]*).([^:]*): (((?!error).)*)$/) != nil
-        captures = x.match(/\* ([^.]*).([^:]*): (((?!error).)*)$/).captures
-        errors_res.push({:location=> [captures[0], captures[1]],:variable=>"\"#{captures[0]}\" \"#{captures[1]}\"", :errormsg=> captures[2] })
+
+      if x.match(/\* ([^.]*).([^:]*): ((?!error).*): "([^\"]*)"/) != nil
+        captures = x.match(/\* ([^.]*).([^:]*): ((?!error).*): "([^\"]*)"/).captures
+
+        if captures[2] != "invalid variable syntax" 
+          errors_res.push({:location=> [captures[0], captures[1]],:variable=>"\"#{captures[0]}\" \"#{captures[1]}\"", :errormsg=> captures[2] })
+        else
+          errors_res.push({:location=> [captures[0], captures[1]],:variable=>captures[3], :errormsg=> captures[2] })
+        end
       end
 
       if x.match(/\* ([^.]*).([^:]*): "([^"]*)": (.*)/) != nil
@@ -60,6 +62,10 @@ def main()
         errors_res.push({:location=> [captures[0], captures[1]], :variable=> captures[2], :errormsg=> captures[3] })
       end
 
+      if x.match(/\* ([^.]*).([^:]*): (.*)/) != nil
+        captures = x.match(/\* ([^.]*).([^:]*): (.*)/).captures
+        errors_res.push({:location=> [captures[0], captures[1]], :variable=>"\"#{captures[0]}\" \"#{captures[1]}\"", :errormsg=> "#{captures[2]}" })
+      end
     }
     
     res = []
