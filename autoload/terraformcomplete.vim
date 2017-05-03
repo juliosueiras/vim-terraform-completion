@@ -41,6 +41,7 @@ function! terraformcomplete#rubyComplete(ins, provider, resource, attribute)
 
   ruby << EOF
 require 'json'
+require 'pry'
 
 def terraform_complete(provider, resource)
     begin
@@ -51,16 +52,19 @@ def terraform_complete(provider, resource)
                 data = line
               end
             end
+
+            parsed_data = JSON.parse(data)
+
             if VIM::evaluate('a:resource_line') == 1 then
-                temp = JSON.parse(data).keys
+                temp = parsed_data.keys
                 temp.delete("provider_arguments")
                 result = temp.map { |x|
                     { "word" => x }
                 }
             elsif VIM::evaluate('a:attribute') == "true" then
-                result = JSON.parse(data)[resource]["attributes"]
+                result = parsed_data[resource]["attributes"]
             else
-                result = JSON.parse(data)[resource]["arguments"]
+                result = parsed_data[resource]["arguments"]
             end
         elsif VIM::evaluate('a:provider_line') == 1 then
             result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/**/*.json").map { |x|
@@ -74,9 +78,23 @@ def terraform_complete(provider, resource)
     end
 end
 
+def terraform_get_vars()
+    if File.readable? "variables.tf" then
+        vars_array = File.read("variables.tf")
+        vars_array = vars_array.split("\n")
+        vars_array = vars_array.find_all {|x| x[/variable\s*".*"/]}
+        vars = vars_array.map {|x| { "word": x.split(" ")[1].tr("\"", '')} }
+        return JSON.generate(vars)
+    end
+    return []
+end
+
 class TerraformComplete
   def initialize()
     @buffer = Vim::Buffer.current
+   
+    print Vim::evaluate('a:ins')
+
     result = terraform_complete(VIM::evaluate('a:provider'), VIM::evaluate('a:resource'))
     Vim::command("let a:res = #{result}")
   end
@@ -112,64 +130,73 @@ fun! terraformcomplete#Complete(findstart, base)
     endtry
 
 
-    if getline(".") =~ '${.*$'
-      try
-      let a:old_pos = getpos('.')
-      execute 'normal! gg'
-      let a:search_continue = 1
-      let a:resource_list = []
-      let a:type_list = {}
-      while a:search_continue != 0
-        let a:search_continue = search("resource \"", "W")
+    if strpart(getline("."),0, getpos(".")[2]) =~ '\${[^}]*\%[}]$'
+        try
+            let a:old_pos = getpos('.')
+            execute 'normal! gg'
+            let a:search_continue = 1
+            let a:resource_list = []
+            let a:type_list = {}
+            while a:search_continue != 0
+                let a:search_continue = search('resource\s*"\w*"\s*"\w*"', "W")
 
-        if a:search_continue != 0
-          try
-            let temp_resource = substitute(split(split(getline(a:search_continue),"resource ")[0], " ")[0], '"','','g')
-            call add(a:resource_list, { "word": temp_resource })
+                if a:search_continue != 0
+                    try
+                        let temp_resource = substitute(split(split(getline(a:search_continue),"resource ")[0], " ")[0], '"','','g')
+                        call add(a:resource_list, { "word": temp_resource })
 
-            if has_key(a:type_list, temp_resource) == 0
-              let a:type_list[temp_resource] = []
-            endif
-            call add(a:type_list[temp_resource], { 'word': substitute(split(split(getline(a:search_continue),'resource ')[0], ' ')[1], '"','','g')})
-          catch
-            return []
-          endtry
-        endif
-      endwhile
-      call setpos('.', a:old_pos)
-      try
-        let a:curr = getline(".")
-        let a:attr = split(split(a:curr, "${")[1], '\.')
-        if len(a:attr) == 1
-          return a:type_list[a:attr[0]]
-        elseif len(a:attr) == 2
-          let a:provider = split(a:attr[0], "_")[0]
+                        if has_key(a:type_list, temp_resource) == 0
+                            let a:type_list[temp_resource] = []
+                        endif
+                        call add(a:type_list[temp_resource], { 'word': substitute(split(split(getline(a:search_continue),'resource ')[0], ' ')[1], '"','','g')})
+                    catch
+                        return []
+                    endtry
+                endif
+            endwhile
+            call add(a:resource_list, { "word": "var" })
+            call setpos('.', a:old_pos)
+            try
+                let a:curr = strpart(getline("."),0, getpos(".")[2])
+                let a:attr = filter(split(split(a:curr, "${")[-1], '\.'), 'v:val !~ "}"')
 
-          let a:resource = split(a:attr[0], a:provider . "_")[0]
+                if len(a:attr) == 1
+                    if a:attr[0] == "var" 
+                        ruby <<EOF
+                        Vim::command("let a:vars_res = #{terraform_get_vars()}")
+EOF
+                        return a:vars_res
+                    else
+                        return a:type_list[a:attr[0]]
+                    endif
+                elseif len(a:attr) == 2
+                    let a:provider = split(a:attr[0], "_")[0]
 
-          for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true')
-            if m.word =~ '^' . a:base
-              call add(res, m)
-            endif
-          endfor
-          return res
-        else
-          return a:resource_list
-        endif
-      catch
-        return a:resource_list
-      endtry
-      catch
-        return a:resource_list
-      endtry
+                    let a:resource = split(a:attr[0], a:provider . "_")[0]
+
+                    for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true')
+                        if m.word =~ '^' . a:base
+                            call add(res, m)
+                        endif
+                    endfor
+                    return res
+                else
+                    return a:resource_list
+                endif
+            catch
+                return a:resource_list
+            endtry
+        catch
+            return a:resource_list
+        endtry
     else
-      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'false')
-        if m.word =~ '^' . a:base
-          call add(res, m)
-        endif
-      endfor
-      return res
+        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'false')
+            if m.word =~ '^' . a:base
+                call add(res, m)
+            endif
+        endfor
+        return res
     endif
-  endif
+endif
 endfun
 
