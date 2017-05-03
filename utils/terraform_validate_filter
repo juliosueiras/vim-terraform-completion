@@ -4,14 +4,13 @@ require 'json'
 
 def main() 
 
-  begin
     errors = (%x(terraform validate -no-color 2>&1)).split("\n")
     if ARGV[1] == "--with-plan" 
       plan_errors = %x(terraform plan -no-color -input=false 2>&1)
       plan_errors = plan_errors.split("\n")
       plan_errors_error_line_num = 0
       plan_errors.each_index.find do |x|
-        if plan_errors[x].match(/.*error.*/i) != null
+        if plan_errors[x].match(/.*error.*/i) != nil
           plan_errors_error_line_num = x
         end
       end
@@ -27,16 +26,20 @@ def main()
         errors_res.push({:location=> "none", :variable=> "\"#{captures[0]}\" \"#{captures[1]}\"", :errormsg=> captures[2] })
       end
 
-      if x.match(/\* provider config '[^']*': (unknown variable referenced: '([^'']*)'.*)/) != nil
-        captures = x.match(/\* provider config '[^']*': (unknown variable referenced: '([^'']*)'.*)/).captures
+      if x.match(/\* provider config '[^']*': (unknown variable referenced: '([^']*)'.*)/) != nil
+        captures = x.match(/\* provider config '[^']*': (unknown variable referenced: '([^']*)'.*)/).captures
         errors_res.push({:location=> "none", :variable=> "var.#{captures[1]}", :errormsg=> captures[0] })
       end
 
       if x.match(/\* resource '([^']*)' [^:]*: ([^:']*):? '([^']*)'/) != nil
         captures = x.match(/\* resource '([^']*)' [^:]*: ([^:']*):? '([^']*)'/).captures
-        errors_res.push({:location=> captures[0].split("."), :variable=> captures[2], :errormsg=> captures[1] })
+
+        if captures[1] != "unknown variable referenced"
+          errors_res.push({:location=> captures[0].split("."), :variable=> captures[2], :errormsg=> captures[1] })
+        elsif
+          errors_res.push({:location=> captures[0].split("."), :variable=> "var.#{captures[2]}", :errormsg=> captures[1] })
+        end
       end
-      
       if x.match(/\* ([^.]*).([^:]*): (((?!error).)*)$/) != nil
         captures = x.match(/\* ([^.]*).([^:]*): (((?!error).)*)$/).captures
         errors_res.push({:location=> [captures[0], captures[1]],:variable=>"\"#{captures[0]}\" \"#{captures[1]}\"", :errormsg=> captures[2] })
@@ -70,9 +73,6 @@ def main()
       }
     }
     puts res
-  rescue 
-    puts "No File Found"
-  end
 end
 
 main()
