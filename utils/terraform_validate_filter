@@ -64,7 +64,7 @@ def main()
     res = []
     file.each_index.each {|x|
       errors_res.map {|i|
-        if file[x].match? /[^A-Za-z]*#{i[:variable]}([^A-Za-z0-9]{1,}|\n|$)/
+        if file[x].match? /[^A-Za-z0-9]{1,}#{i[:variable]}([^A-Za-z0-9]{1,}|\n|$)/
             if not res.include? "#{ARGV[0]}:#{x+1}:#{i[:errormsg]} : #{i[:variable]}"
               res.push("#{ARGV[0]}:#{x+1}:#{i[:errormsg]} : #{i[:variable]}")
             end
