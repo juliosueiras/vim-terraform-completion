@@ -4,6 +4,7 @@ require 'json'
 
 def main() 
 
+  begin
     errors = (%x(terraform validate -no-color 2>&1)).split("\n")
     if ARGV[1] == "--with-plan" 
       plan_errors = %x(terraform plan -no-color -input=false 2>&1)
@@ -79,6 +80,9 @@ def main()
       }
     }
     puts res
+  rescue
+    puts "An Error as Occur"
+  end
 end
 
 main()
