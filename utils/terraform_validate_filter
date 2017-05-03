@@ -34,8 +34,8 @@ def main()
         errors_res.push({"location": "none", "variable": "var.#{captures[1]}", "errormsg": captures[0] })
       end
 
-      if x.match? /\* resource '([^']*)' config: ([^:']*):? '([^']*)'/
-        captures = x.match(/\* resource '([^']*)' config: ([^:']*):? '([^']*)'/).captures
+      if x.match? /\* resource '([^']*)' [^:]*: ([^:']*):? '([^']*)'/
+        captures = x.match(/\* resource '([^']*)' [^:]*: ([^:']*):? '([^']*)'/).captures
         errors_res.push({"location": captures[0].split("."), "variable": captures[2], "errormsg": captures[1] })
       end
       
