@@ -66,6 +66,7 @@ let g:syntastic_terraform_tf_filter_plan = 1
 ```
 
 ## General Todo
+- [ ] Move regex code to a json(for easier extension)
 - [x] Test from zero to useful setup using Docker
 - [x] Provide config and example
 - [x] Integrate Basic `terraform validate` and `tflint` into Synstatic
