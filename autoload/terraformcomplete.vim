@@ -78,16 +78,6 @@ def terraform_complete(provider, resource)
     end
 end
 
-def terraform_get_vars()
-    if File.readable? "variables.tf" then
-        vars_array = File.read("variables.tf")
-        vars_array = vars_array.split("\n")
-        vars_array = vars_array.find_all {|x| x[/variable\s*".*"/]}
-        vars = vars_array.map {|x| { "word": x.split(" ")[1].tr("\"", '')} }
-        return JSON.generate(vars)
-    end
-    return []
-end
 
 class TerraformComplete
   def initialize()
@@ -163,6 +153,20 @@ fun! terraformcomplete#Complete(findstart, base)
                 if len(a:attr) == 1
                     if a:attr[0] == "var" 
                         ruby <<EOF
+                        require 'json'
+
+                        def terraform_get_vars()
+                            vars_file_path = "#{Vim::evaluate("expand('%:p:h')")}/variables.tf"
+                            if File.readable? vars_file_path then
+                                vars_array = File.read(vars_file_path)
+                                vars_array = vars_array.split("\n")
+                                vars_array = vars_array.find_all {|x| x[/variable\s*".*"/]}
+                                vars = vars_array.map {|x| { "word": x.split(" ")[1].tr("\"", '')} }
+                                return JSON.generate(vars)
+                            end
+                            return []
+                        end
+
                         Vim::command("let a:vars_res = #{terraform_get_vars()}")
 EOF
                         return a:vars_res
