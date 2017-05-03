@@ -37,7 +37,7 @@ endfun
 function! terraformcomplete#rubyComplete(ins, provider, resource, attribute)
     let a:res = []
     let a:resource_line = getline(s:curr_pos[1]) =~ "resource"
-    let a:provider_line = strpart(getline("."),0, getpos(".")[2]) =~ '^\s*resource\s*"\%["]$' 
+    let a:provider_line = (strpart(getline("."),0, getpos(".")[2]) =~ '^\s*resource\s*"\%["]$' || getline(s:curr_pos[1]) =~ "provider")
     
 
   ruby << EOF

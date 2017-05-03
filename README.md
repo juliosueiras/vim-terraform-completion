@@ -60,19 +60,23 @@ set completeopt-=preview
 " (Optional)Hide Info(Preview) window after completions
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" (Optional) Enable terraform plan to be include in filter
+let g:syntastic_terraform_tf_filter_plan = 1
 ```
 
 ## General Todo
 - [x] Test from zero to useful setup using Docker
-- [ ] Provide config and example
+- [x] Provide config and example
 - [x] Integrate Basic `terraform validate` and `tflint` into Synstatic
+- [x] Added a custom linter for providing a better error
 **NOTE:** enabling deep check for tflint can be a bit slow
 
 [Demo of the linter](https://asciinema.org/a/118441)
 
 ## Todo for Terraform completion
 - [ ] Provider
-- [x] Resource
+- [x] Resource(with Provider)
 - [x] Parameter
 - [x] Adding Info to Argument and Attribute(Type not including ,since Info
     already indicate it)
