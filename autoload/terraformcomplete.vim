@@ -17,9 +17,9 @@ fun! terraformcomplete#GetResource()
     endif
     let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
 
-	let a:resource = substitute(split(split(getline("."))[1], a:provider . "_")[1], '"','','')
+    let a:resource = substitute(split(split(getline("."))[1], a:provider . "_")[1], '"','','')
     call setpos('.', s:curr_pos)
-	return a:resource
+    return a:resource
 endfun
 
 fun! terraformcomplete#GetProvider()
@@ -37,11 +37,11 @@ endfun
 function! terraformcomplete#rubyComplete(ins, provider, resource, attribute)
     let a:res = []
     let a:resource_line = getline(s:curr_pos[1]) =~ "resource"
-    let a:provider_line = getline(s:curr_pos[1]) =~ "provider" 
+    let a:provider_line = strpart(getline("."),0, getpos(".")[2]) =~ '^\s*resource\s*"\%["]$' 
+    
 
   ruby << EOF
 require 'json'
-require 'pry'
 
 def terraform_complete(provider, resource)
     begin

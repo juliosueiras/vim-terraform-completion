@@ -1,6 +1,7 @@
 "============================================================================
-"File:        terraform_validate.vim
-"Description: Syntax checking plugin for syntastic.vim
+"File:        tf_filter.vim
+"Description: Syntax checking plugin for syntastic.vim(Custom Filter for
+"terraform)
 "Maintainer:  Julio Tain Sueiras <juliosueiras@gmail.com>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -10,22 +11,32 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_terraform_terraform_validate_checker')
+if exists('g:loaded_syntastic_terraform_tf_filter_checker')
     finish
 endif
-let g:loaded_syntastic_terraform_terraform_validate_checker = 1
+
+if !exists('g:syntastic_terraform_tf_filter_plan')
+  let g:syntastic_terraform_tf_filter_plan = 0
+endif
+
+let g:loaded_syntastic_terraform_tf_filter_checker = 1
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! SyntaxCheckers_terraform_terraform_validate_GetLocList() dict
-    let makeprg = self.makeprgBuild({ 'args_after': 'validate -no-color', 'fname': '' })
+let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+
+function! SyntaxCheckers_terraform_tf_filter_GetLocList() dict
+    if g:syntastic_terraform_tf_filter_plan == 1
+      let makeprg = self.makeprgBuild({'fname_after': '--with-plan' })
+    else
+      let makeprg = self.makeprgBuild({'fname_after': '' })
+    endif
 
     let errorformat =
-        \ 'Error\ loading\ files\ Error\ parsing %f:\ At\ %l:%c:\ %m'
+        \ '%f:%l:%m'
 
     let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb' }
-
     return SyntasticMake({
         \ 'defaults': { 'bufnr': bufnr(''), 'text': 'Syntax error' },
         \ 'makeprg': makeprg,
@@ -35,8 +46,8 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'terraform',
-    \ 'name': 'terraform_validate',
-    \ 'exec': 'terraform'})
+    \ 'name': 'tf_filter',
+    \ 'exec': s:path . '/../../utils/terraform_validate_filter'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

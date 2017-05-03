@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'pry'
+
+
+def main() 
+
+  begin
+    errors = (%x(terraform validate -no-color 2>&1)).split("\n")
+    if ARGV[1] == "--with-plan" 
+      plan_errors = %x(terraform plan -no-color -input=false 2>&1)
+      plan_errors = plan_errors.split("\n")
+      plan_errors_error_line_num = 0
+      plan_errors.each_index.find do |x|
+        if plan_errors[x].match? /.*error.*/i
+          plan_errors_error_line_num = x
+        end
+      end
+      errors.push(*plan_errors[plan_errors_error_line_num+1..-1])
+    end
+    file = File.read(ARGV[0]).split("\n")
+    errors_res = []
+
+    errors.each {|x|
+
+      if x.match? /\* provider config '[^']*': (unknown variable referenced: '([^'']*)'.*)/
+        captures = x.match(/\* provider config '[^']*': (unknown variable referenced: '([^'']*)'.*)/).captures
+        errors_res.push({"location": "none", "variable": "var.#{captures[1]}", "errormsg": captures[0] })
+      end
+
+      if x.match? /\* resource '([^']*)' config: ([^:']*):? '([^']*)'/
+        captures = x.match(/\* resource '([^']*)' config: ([^:']*):? '([^']*)'/).captures
+        errors_res.push({"location": captures[0].split("."), "variable": captures[2], "errormsg": captures[1] })
+      end
+      
+      if x.match? /\* ([^.]*).([^:]*): (((?!error).)*)$/
+        captures = x.match(/\* ([^.]*).([^:]*): (((?!error).)*)$/).captures
+        errors_res.push({"location": [captures[0], captures[1]],"variable":"\"#{captures[0]}\" \"#{captures[1]}\"", "errormsg": captures[2] })
+      end
+
+      if x.match? /\* ([^.]*).([^:]*): "([^"]*)": (.*)/
+        captures = x.match(/\* ([^.]*).([^:]*): "([^"]*)": (.*)/).captures
+        errors_res.push({"location": [captures[0], captures[1]], "variable":"\"#{captures[0]}\" \"#{captures[1]}\"", "errormsg": "#{captures[2]} #{captures[3]}" })
+      end
+      
+      if x.match? /\* ([^.]*).([^:]*): Resource '[^']*' ([^']*'[^']*'[^']*'([^']*)')/
+        captures = x.match(/\* ([^.]*).([^:]*): Resource '[^']*' ([^']*'[^']*'[^']*'([^']*)')/).captures
+        errors_res.push({"location": [captures[0], captures[1]], "variable":"#{captures[3]}", "errormsg": "#{captures[2]}" })
+      end
+
+      if x.match? /Error loading files Error loading [^:]*: Error reading config for ([^\[]*)\[([^\]]*)\]: ([^:]*): (.*)/
+        captures = x.match(/Error loading files Error loading [^:]*: Error reading config for ([^\[]*)\[([^\]]*)\]: ([^:]*): (.*)/).captures
+        errors_res.push({"location": [captures[0], captures[1]], "variable": captures[2], "errormsg": captures[3] })
+      end
+
+    }
+    
+    res = []
+    file.each_index.each {|x|
+      errors_res.map {|i|
+        if file[x].match? /[^A-Za-z]*#{i[:variable]}([^A-Za-z0-9]{1,}|\n|$)/
+            if not res.include? "#{ARGV[0]}:#{x+1}:#{i[:errormsg]} : #{i[:variable]}"
+              res.push("#{ARGV[0]}:#{x+1}:#{i[:errormsg]} : #{i[:variable]}")
+            end
+        end
+      }
+    }
+    puts res
+  rescue 
+    puts "No File Found"
+  end
+end
+
+main()
