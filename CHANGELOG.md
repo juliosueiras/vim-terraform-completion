@@ -11,7 +11,7 @@
 - New custom linter to filter `terraform validate` and `terraform plan` using to provide line number and error message for syntastic
     - introduce `g:syntastic_terraform_tf_filter` variable in vimrc for enabling terraform plan , default is 0
 
-[![asciicast](https://asciinema.org/a/91h3fablao72i70xjymu9w73r.png)](https://asciinema.org/a/91h3fablao72i70xjymu9w73r)
+[![asciicast](https://asciinema.org/a/118915.png)](https://asciinema.org/a/118915)
 
 ## 2017-05-03(Morning 2-4 AM)
 ### Improvement
