@@ -10,4 +10,4 @@
 - There is variable completion now, it will get the root folder level variables.tf
 - NOTE: There is still to be fix dealing with function like ${file()} etc
 
-    [![asciicast](https://asciinema.org/a/aezk645gig5i9fw8z4ampaybq.png)](https://asciinema.org/a/aezk645gig5i9fw8z4ampaybq)
+    [![asciicast](https://asciinema.org/a/dm4h6mwiv6n83pcebd15tvljl.png)](https://asciinema.org/a/dm4h6mwiv6n83pcebd15tvljl)
