@@ -128,7 +128,7 @@ fun! terraformcomplete#Complete(findstart, base)
             let a:resource_list = []
             let a:type_list = {}
             while a:search_continue != 0
-                let a:search_continue = search('resource\s*"\w*"\s*"\w*"', "W")
+                let a:search_continue = search('resource\s*"\w*"\s*"[^"]*"', "W")
 
                 if a:search_continue != 0
                     try
