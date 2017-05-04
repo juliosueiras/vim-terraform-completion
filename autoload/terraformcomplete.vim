@@ -31,8 +31,8 @@ let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 fun! terraformcomplete#GetResource()
     let s:curr_pos = getpos('.')
-    if getline('.') !~# 'resource'
-        execute '?resource'
+    if getline('.') !~# 'resource\s'
+        execute '?resource\s'
     endif
     let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
 
@@ -43,8 +43,8 @@ endfun
 
 fun! terraformcomplete#GetProvider()
     let s:curr_pos = getpos('.')
-    if getline(".") !~# 'resource'
-        execute '?resource'
+    if getline(".") !~# 'resource\s'
+        execute '?resource\s'
     endif
 
     let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
