@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
+Plug 'junegunn/vader.vim'
 call plug#end()
 
 " Syntastic Config
@@ -28,3 +29,4 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " (Optional) Enable terraform plan to be include in filter
 let g:syntastic_terraform_tf_filter_plan = 1
+

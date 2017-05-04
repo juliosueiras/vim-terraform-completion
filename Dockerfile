@@ -2,6 +2,7 @@ FROM base/archlinux
 USER root
 WORKDIR /root
 ADD example.vimrc .vimrc
+ADD tests/ tests/
 RUN pacman -Syy && \
     pacman -S vim ruby git unzip --noconfirm && \
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \

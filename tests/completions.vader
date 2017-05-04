@@ -1,0 +1,47 @@
+Execute (Make sure tab is off):
+  set expandtab
+
+Given terraform (Terraform test):
+
+Do (Autocompletion for resource first(aws) test):
+  iresource "aws_\<C-X>\<C-O>
+
+Expect (get aws_vpn_gateway_attachment):
+  resource "aws_acm_certificate
+
+Do (Autocompletion for resource second(docker) test):
+  iresource "docker_\<C-X>\<C-O>
+
+Expect (get docker_registry_image):
+  resource "docker_registry_image
+
+Given terraform (Terraform test):
+  resource "docker_registry_image" "sd" {
+  }
+
+Do (Autocompletion for resource first(aws) test):
+  o\<C-X>\<C-O>
+
+Expect (get aws_vpn_gateway_attachment):
+  resource "docker_registry_image" "sd" {
+          name
+  }
+
+Given terraform (Terraform test):
+  resource "docker_registry_image" "sd" {
+  }
+
+  resource "docker_registry_image" "sd2" {
+  }
+
+Do (Autocompletion for resource second(docker) test):
+  3joname = "${\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"
+
+
+Expect (get docker_registry_image):
+  resource "docker_registry_image" "sd" {
+  }
+
+  resource "docker_registry_image" "sd2" {
+          name = "${docker_registry_image.sd2.sha256_digest}"
+  }
