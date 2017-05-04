@@ -1,5 +1,8 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-04(3 am)
+### Improvement
+- Added Tagbar config for Terraform
 ## 2017-05-03(Night)
 ### Improvement for Repo
 - Added Travis and added basic test using vader.vim

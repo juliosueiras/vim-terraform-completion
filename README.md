@@ -82,6 +82,8 @@ let g:syntastic_terraform_tf_filter_plan = 1
 ## Extra
 ### Tagbar Config for Terraform
 
+[![asciicast](https://asciinema.org/a/32w8wselqmrwk1ce8mj5k2rut.png)](https://asciinema.org/a/32w8wselqmrwk1ce8mj5k2rut)
+
 This should inside `~/.ctags`
 ```
 --langdef=terraform
