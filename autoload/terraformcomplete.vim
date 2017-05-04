@@ -10,6 +10,25 @@ endif
 
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
+" Still work in progress
+" function! terraformcomplete#GetDoc()
+"   if &filetype == "vim"
+"     execute 'tab help ' . expand("<cWORD>")
+"   else
+"     let s:curr_pos = getpos('.')
+"     if getline('.') !~# 'resource'
+"       execute '?resource'
+"     endif
+"     let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
+
+"     let a:resource = substitute(split(split(getline("."))[1], a:provider . "_")[1], '"','','')
+"     call setpos('.', s:curr_pos)
+    
+"     execute '!' . s:path . '/../utils/get_doc ' . s:path . ' ' . expand("<cWORD>") . " " . a:provider . " " . a:resource
+"   endif 
+" endfunction
+
+
 fun! terraformcomplete#GetResource()
     let s:curr_pos = getpos('.')
     if getline('.') !~# 'resource'
@@ -54,15 +73,14 @@ def terraform_complete(provider, resource)
             end
 
             parsed_data = JSON.parse(data)
-
-            if VIM::evaluate('a:resource_line') == 1 then
+            if VIM::evaluate('a:attribute') == "true" then
+                result = parsed_data[resource]["attributes"]
+            elsif VIM::evaluate('a:resource_line') == 1 then
                 temp = parsed_data.keys
                 temp.delete("provider_arguments")
                 result = temp.map { |x|
                     { "word" => x }
                 }
-            elsif VIM::evaluate('a:attribute') == "true" then
-                result = parsed_data[resource]["attributes"]
             else
                 result = parsed_data[resource]["arguments"]
             end
