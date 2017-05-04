@@ -1,12 +1,12 @@
 Execute (Make sure tab is off):
   set expandtab
 
-Given terraform (Terraform test):
+Given terraform (Resource Completion Test):
 
 Do (Autocompletion for resource first(aws) test):
   iresource "aws_\<C-X>\<C-O>
 
-Expect (get aws_vpn_gateway_attachment):
+Expect (get aws_acm_certificate):
   resource "aws_acm_certificate
 
 Do (Autocompletion for resource second(docker) test):
@@ -15,11 +15,11 @@ Do (Autocompletion for resource second(docker) test):
 Expect (get docker_registry_image):
   resource "docker_registry_image
 
-Given terraform (Terraform test):
+Given terraform (Argument Completion Test):
   resource "docker_registry_image" "sd" {
   }
 
-Do (Autocompletion for resource first(aws) test):
+Do (Autocompletion for Argument Test):
   o\<C-X>\<C-O>
 
 Expect (get aws_vpn_gateway_attachment):
@@ -27,14 +27,14 @@ Expect (get aws_vpn_gateway_attachment):
           name
   }
 
-Given terraform (Terraform test):
+Given terraform (Interpolation Completion Test):
   resource "docker_registry_image" "sd" {
   }
 
   resource "docker_registry_image" "sd2" {
   }
 
-Do (Autocompletion for resource second(docker) test):
+Do (Autocompletion for interpolation):
   3joname = "${\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"
 
 
