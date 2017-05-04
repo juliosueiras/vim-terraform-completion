@@ -2,6 +2,7 @@
 
 ## [Changelog](./CHANGELOG.md)
 
+[![Build Status](https://travis-ci.org/juliosueiras/vim-terraform-completion.svg?branch=master)](https://travis-ci.org/juliosueiras/vim-terraform-completion)
 [![Join the chat at https://gitter.im/juliosueiras/vim-terraform-completion](https://badges.gitter.im/juliosueiras/vim-terraform-completion.svg)](https://gitter.im/juliosueiras/vim-terraform-completion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 - [Vim Terraform Completion with Linter - [Demos](./DEMO.md)](#vim-terraform-completion-with-linter---demosdemomd)
@@ -137,6 +138,6 @@ let g:tagbar_type_terraform = {
 - [ ] Add Completion for hcl
 - [ ] Completion for Sublock
 ## Todo for Improvement
-- [ ] (Current WIP)Add Travis-CI for testing, and ensuring the completion is outputing the right completion
+- [X] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
 
 ## [Contributors](./CONTRIBUTORS.md)

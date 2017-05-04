@@ -1,5 +1,8 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-03(Night)
+### Improvement for Repo
+- Added Travis and added basic test using vader.vim
 
 ## 2017-05-03(Afternoon)
 ### Improvement
