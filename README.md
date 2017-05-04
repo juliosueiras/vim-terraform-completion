@@ -53,6 +53,10 @@ syntax on
 filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
+
+" (Optinal for Tag Sidebar
+" Plug 'majutsushi/tagbar'
+
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
