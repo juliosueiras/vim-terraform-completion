@@ -124,6 +124,7 @@ let g:tagbar_type_terraform = {
 - [x] Provide config and example
 - [x] Integrate Basic `terraform validate` and `tflint` into Synstatic
 - [x] Added a custom linter for providing a better error
+- [ ] (WIP) Full Snippets
 **NOTE:** enabling deep check for tflint can be a bit slow
 
 [Demo of the linter](https://asciinema.org/a/118441)
