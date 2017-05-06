@@ -131,6 +131,7 @@ let g:tagbar_type_terraform = {
 
 ## Todo for Terraform completion
 - [ ] Provider
+- [ ] (WIP)Data
 - [x] Resource(with Provider)
 - [x] Parameter
 - [x] Adding Info to Argument and Attribute(Type not including ,since Info
