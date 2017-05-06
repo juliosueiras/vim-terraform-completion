@@ -12,6 +12,24 @@ endif
 
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
+let s:oldpos = []
+function! terraformcomplete#JumpRef()
+    try 
+        if getline(".") !~# '^\s*\(resource\|data\)\s*"'
+            let old_pos = getpos(".")
+            execute 'normal! t}'
+            let a:curr = strpart(getline("."),0, getpos(".")[2]-1)
+            let a:attr = split(split(a:curr, "${")[-1], '\.')
+            call setpos('.', old_pos)
+            let s:oldpos = getpos('.')
+            call search('.*\s*"' . a:attr[0] . '"\s*"' . a:attr[1] . '".*')
+        else
+            call setpos('.', s:oldpos)
+            let s:oldpos = []
+        end
+    catch
+    endtry
+endfunction
 " TODO: Not finish
 " function! terraformcomplete#GetDoc()
 "   if &filetype == "vim"

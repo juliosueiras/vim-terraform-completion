@@ -121,6 +121,8 @@ let g:tagbar_type_terraform = {
 ## General Todo
 - [ ] Move regex code to a json(for easier extension)
 - [x] Test from zero to useful setup using Docker
+- [x] Jump Reference (Ctrl-L first time to jump to resource definition, second time
+    on the same line to jump back)
 - [x] Provide config and example
 - [x] Integrate Basic `terraform validate` and `tflint` into Synstatic
 - [x] Added a custom linter for providing a better error
@@ -131,6 +133,7 @@ let g:tagbar_type_terraform = {
 
 ## Todo for Terraform completion
 - [ ] Provider
+- [ ] (WIP)Module
 - [x] Data
 - [x] Resource(with Provider)
 - [x] Parameter

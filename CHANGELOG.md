@@ -1,5 +1,11 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-06(5 am)
+### New Feature
+- Jump Reference for Resource/Data
+
+[![asciicast](https://asciinema.org/a/119366.png)](https://asciinema.org/a/119366)
+
 ## 2017-05-06(2 am)
 ### New Feature
 - Data Completion
