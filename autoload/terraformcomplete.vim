@@ -17,12 +17,14 @@ function! terraformcomplete#JumpRef()
     try 
         if getline(".") !~# '^\s*\(resource\|data\)\s*"'
             let old_pos = getpos(".")
-            execute 'normal! t}'
-            let a:curr = strpart(getline("."),0, getpos(".")[2]-1)
-            let a:attr = split(split(a:curr, "${")[-1], '\.')
-            call setpos('.', old_pos)
-            let s:oldpos = getpos('.')
-            call search('.*\s*"' . a:attr[0] . '"\s*"' . a:attr[1] . '".*')
+            if strpart(getline("."),0, getpos(".")[2]) =~ ".*{"
+                execute 'normal! t}'
+                let a:curr = strpart(getline("."),0, getpos(".")[2]-1)
+                let a:attr = split(split(a:curr, "${")[-1], '\.')
+                call setpos('.', old_pos)
+                let s:oldpos = getpos('.')
+                call search('.*\s*"' . a:attr[0] . '"\s*"' . a:attr[1] . '".*')
+            end
         else
             call setpos('.', s:oldpos)
             let s:oldpos = []
