@@ -15,17 +15,20 @@ let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:oldpos = []
 function! terraformcomplete#JumpRef()
     try 
-        if getline(".") !~# '^\s*\(resource\|data\)\s*"'
-            let old_pos = getpos(".")
-            if strpart(getline("."),0, getpos(".")[2]) =~ ".*{"
-                execute 'normal! t}'
-                let a:curr = strpart(getline("."),0, getpos(".")[2]-1)
-                let a:attr = split(split(a:curr, "${")[-1], '\.')
-                call setpos('.', old_pos)
-                let s:oldpos = getpos('.')
+        let old_pos = getpos(".")
+        if strpart(getline("."),0, getpos(".")[2]) =~ ".*{"
+            execute 'normal! t}'
+            let a:curr = strpart(getline("."),0, getpos(".")[2])
+            let a:attr = split(split(a:curr, "${")[-1], '\.')
+            call setpos('.', old_pos)
+            let s:oldpos = getpos('.')
+
+            if a:attr[0] == 'var'
+                call search('\s*variable\s*"' . a:attr[1] . '".*')
+            else
                 call search('.*\s*"' . a:attr[0] . '"\s*"' . a:attr[1] . '".*')
-                echo 'Jump to ' . a:attr[0] . '.' . a:attr[1]
             end
+            echo 'Jump to ' . a:attr[0] . '.' . a:attr[1]
         else
             call setpos('.', s:oldpos)
             echo 'Jumping Back'
