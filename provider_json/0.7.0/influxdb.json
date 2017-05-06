@@ -1,0 +1,1 @@
+{"provider_arguments":[],"resources":{"database":{"provider":"influxdb","arguments":[{"word":"name","info":"name - (Required) The name for the database. This must be unique on the\nInfluxDB server.\n"}],"attributes":[]}},"datas":{},"unknowns":{}}

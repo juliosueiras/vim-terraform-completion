@@ -9,8 +9,32 @@ else
 endif
 
 
+if !exists('g:terraformcomplete_version')
+  ruby <<EOF
+    ENV['PATH'].split(':').each do |folder|
+        if File.exists?(folder+'/terraform')
+            Vim::command("let g:terraformcomplete_version = '#{`terraform -v`.match(/v(.*)/).captures[0]}'")
+        else
+            Vim::command("let g:terraformcomplete_version = '0.9.4'")
+        end
+    end
+EOF
+endif
 
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+
+if !exists('g:terraform_docs_versions')
+    let g:terraform_docs_versions = []
+    for s:version in split(globpath(s:path . '/../provider_json', "**/"), '\n')
+        let g:terraform_docs_versions += split(split(s:version, s:path . '/../provider_json/')[-1], '/')
+    endfor
+endif
+
+
+
+
+
+
 
 let s:oldpos = []
 function! terraformcomplete#JumpRef()
@@ -94,7 +118,7 @@ def terraform_complete(provider, resource)
     begin
         data = ''
         if VIM::evaluate('a:provider_line') == 0 then
-            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}.json", "r") do |f|
+            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('g:terraformcomplete_version')}/#{provider}.json", "r") do |f|
               f.each_line do |line|
                 data = line
               end
@@ -127,8 +151,8 @@ def terraform_complete(provider, resource)
               end
             end
         elsif VIM::evaluate('a:provider_line') == 1 then
-            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/**/*.json").map { |x|
-              { "word" => x.split("../provider_json/")[1].split('.json')[0] }
+            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('g:terraformcomplete_version')}/**/*.json").map { |x|
+              { "word" => x.split("../provider_json/#{VIM::evaluate('g:terraformcomplete_version')}/")[1].split('.json')[0] }
             }
         end
 
@@ -166,6 +190,10 @@ fun! terraformcomplete#Complete(findstart, base)
     endwhile
     return start
   else
+    if index(g:terraform_docs_versions, g:terraformcomplete_version) ==? -1
+        let g:terraformcomplete_version = '0.9.4'
+    endif
+
     let res = []
     try
       let a:provider = terraformcomplete#GetProvider()

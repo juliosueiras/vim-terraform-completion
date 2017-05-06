@@ -5,4 +5,5 @@ endif
 
 " autocmd FileType terraform nnoremap <C-L> :call terraformcomplete#GetDoc()<CR>
 autocmd FileType terraform nnoremap <C-L> :call terraformcomplete#JumpRef()<CR>
+
 set keywordprg=:help

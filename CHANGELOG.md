@@ -1,5 +1,9 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-06(3 pm)
+### New Feature
+- Version based Completion
+
 ## 2017-05-06(5 am)
 ### New Feature
 - Jump Reference for Resource/Data

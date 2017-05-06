@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'json'
 require 'open-uri'
 
-page = Nokogiri::HTML(open("https://www.terraform.io/docs/providers"))
+page = Nokogiri::HTML(open("http://localhost:4567/docs/providers"))
 provider = []
 
 page.css(".nav a").each do |x|
@@ -13,8 +13,13 @@ page.css(".nav a").each do |x|
 end
 
 
+if not Dir.exist? "provider_json/#{ARGV[0]}"
+  Dir.mkdir "provider_json/#{ARGV[0]}"
+end
+
 provider.each do |i|
-  page = Nokogiri::HTML(open("https://www.terraform.io#{i}"))
+  begin
+  page = Nokogiri::HTML(open("http://localhost:4567#{i}"))
   provider_name = i.split('/')[-2]
   links = []
   provider_arguments = []
@@ -53,7 +58,7 @@ provider.each do |i|
   result["unknowns"] = {}
 
   links.each do |x|
-    page = Nokogiri::HTML(open("https://www.terraform.io#{x}"))
+    page = Nokogiri::HTML(open("http://localhost:4567#{x}"))
 
     arguments = []
     attributes = []
@@ -124,5 +129,7 @@ provider.each do |i|
     provider_name = "digitalocean"
   end
 
-  File.open("provider_json/#{provider_name}.json", 'w') { |file| file.write(JSON.generate(result)) }
+  File.open("provider_json/#{ARGV[0]}/#{provider_name}.json", 'w') { |file| file.write(JSON.generate(result)) }
+  rescue
+  end
 end
