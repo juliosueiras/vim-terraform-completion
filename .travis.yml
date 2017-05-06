@@ -1,7 +1,20 @@
-sudo: required
+language: ruby
+sudo: false
+addons:
+    apt:
+      packages:
+        - vim-gtk
 
-services:
-  - docker
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - vim --version
+  - cp example.vimrc ~/.vimrc
+  - vim +PlugInstall +qall
+  - curl https://releases.hashicorp.com/terraform/0.9.4/terraform_0.9.4_linux_amd64.zip -o terraform_0.9.4_linux_amd64.zip
+  - unzip terraform_0.9.4_linux_amd64.zip
+  - mv terraform /usr/bin/terraform
+  - vim +PlugInstall
 
 script:
-  - ./test-vim-terraform-completion
+  - vim +Vader! tests/* && echo Success || echo Failure
