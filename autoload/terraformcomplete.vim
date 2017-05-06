@@ -24,9 +24,11 @@ function! terraformcomplete#JumpRef()
                 call setpos('.', old_pos)
                 let s:oldpos = getpos('.')
                 call search('.*\s*"' . a:attr[0] . '"\s*"' . a:attr[1] . '".*')
+                echo 'Jump to ' . a:attr[0] . '.' . a:attr[1]
             end
         else
             call setpos('.', s:oldpos)
+            echo 'Jumping Back'
             let s:oldpos = []
         end
     catch
