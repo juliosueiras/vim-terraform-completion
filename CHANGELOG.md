@@ -4,7 +4,7 @@
 ### New Feature
 - Jump Reference for Resource/Data
 
-[![asciicast](https://asciinema.org/a/119366.png)](https://asciinema.org/a/119366)
+[![asciicast](https://asciinema.org/a/119371.png)](https://asciinema.org/a/119371)
 
 ## 2017-05-06(2 am)
 ### New Feature
