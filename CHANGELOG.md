@@ -1,5 +1,11 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-06(2 am)
+### New Feature
+- Data Completion
+
+[![asciicast](https://asciinema.org/a/119362.png)](https://asciinema.org/a/119362)
+
 ## 2017-05-04(3 am)
 ### Improvement
 - Added Tagbar config for Terraform

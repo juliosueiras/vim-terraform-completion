@@ -12,10 +12,11 @@ page.css(".nav a").each do |x|
   end
 end
 
+
 provider.each do |i|
   page = Nokogiri::HTML(open("https://www.terraform.io#{i}"))
   provider_name = i.split('/')[-2]
-  arguments = []
+  links = []
   provider_arguments = []
 
   puts "Starting Provider of #{provider_name}"
@@ -32,10 +33,13 @@ provider.each do |i|
 
 
   page.css(".docs-sidenav a").each do |x| 
+
+
+
     if not x['href'] == '#' then
       if not x['href'] == "/docs/providers/#{provider_name}/index.html" then
         if not x['href'] == '/docs/providers/index.html' then
-          arguments.push(x['href'])
+          links.push(x['href'])
         end
       end
     end
@@ -44,15 +48,27 @@ provider.each do |i|
   result = {}
 
   result["provider_arguments"] = provider_arguments
+  result["resources"] = {}
+  result["datas"] = {}
+  result["unknowns"] = {}
 
-  arguments.each do |x|
+  links.each do |x|
     page = Nokogiri::HTML(open("https://www.terraform.io#{x}"))
 
     arguments = []
     attributes = []
+    location = ""
+
+    if x.match? /\/docs\/providers\/[^\/]*\/r\/.*/
+      location = "resources"
+    elsif x.match? /\/docs\/providers\/[^\/]*\/d\/.*/
+      location = "datas"
+    else 
+      location = "unknowns"
+    end
 
     page.css("#argument-reference ~ ul:first-of-type > li").each do |i|
-      begin 
+      begin
         begin
           name = i.css("a[name]")[0]['name']
         rescue
@@ -100,7 +116,7 @@ provider.each do |i|
     end
 
     name = x.split('/')[-1].split(".html")[0]
-    result[name] = { "provider" => provider_name, "arguments" => arguments, "attributes" => attributes }
+    result[location][name] = { "provider" => provider_name, "arguments" => arguments, "attributes" => attributes }
     puts "Finish #{name} of #{provider_name}"
   end
 
