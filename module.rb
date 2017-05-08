@@ -7,7 +7,6 @@ module ModuleUtils
   def load_arg_module(source)
     source_raw = source.match(/"(.*)"/).captures()[0]
 
-    puts source_raw
     if source_raw.start_with?"github"
       link = 'https://raw.githubusercontent.com'
       source = source_raw.split('/')[1..-1]
@@ -27,7 +26,8 @@ module ModuleUtils
     end
 
     variables = ''
-    ['inputs.tf', 'variables.tf'].each do |i|
+    result = []
+    ['main.tf', 'inputs.tf', 'variables.tf'].each do |i|
       if link.start_with?"http" 
         url = URI.parse("#{link}/#{i}")
         req = Net::HTTP.new(url.host, url.port)
@@ -35,18 +35,24 @@ module ModuleUtils
         res = req.request_head(url.path)
         if not res.code == "404" 
           variables = open("#{link}/#{i}").read.split("\n").select { |x| x[/variable/]}
+          variables.each do |x|
+            result.push({ "word": x.match(/"(.*)"/).captures()[0] })
+          end
         end
       else
         if File.exist?"#{link}/#{i}"
           variables = open("#{link}/#{i}").read.split("\n").select { |x| x[/variable/]}
+          variables.each do |x|
+            result.push({ "word": x.match(/"(.*)"/).captures()[0] })
+          end
         end
       end
     end
-    res = []
-    variables.each do |x|
-      res.push({ "word": x.match(/"(.*)"/).captures()[0] })
-    end
 
-    return JSON.generate(res)
+    return JSON.generate(result)
   end
 end
+
+    
+include ModuleUtils
+load_arg_module('source = "github.com/segmentio/stack/ecs-cluster"')

@@ -249,6 +249,7 @@ fun! terraformcomplete#Complete(findstart, base)
                 endif
             endwhile
             call add(a:resource_list, { "word": "var" })
+            call add(a:resource_list, { "word": "module" })
             call setpos('.', a:old_pos)
             try
                 let a:curr = strpart(getline("."),0, getpos(".")[2])
