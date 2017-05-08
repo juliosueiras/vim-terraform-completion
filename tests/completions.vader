@@ -3,45 +3,81 @@ Execute (Make sure tab is off):
 
 Given terraform (Resource Completion Test):
 
+Do (Autocompletion for data first(aws) test):
+  idata "aws_\<C-X>\<C-O>
+
+Expect (get aws_acm_certificate):
+  data "aws_acm_certificate
+
+Given terraform (Module Online Completion Test):
+  module "tf-aws-vpc" {
+    source = "github.com/terraform-community-modules/tf_aws_vpc"
+  }
+
+Do (Autocompletion for online module argument completion):
+  jo\<C-X>\<C-O>
+
+Expect (get name):
+  module "tf-aws-vpc" {
+    source = "github.com/terraform-community-modules/tf_aws_vpc"
+    name
+  }
+
+Given terraform (Module Offline Completion Test):
+  module "test" {
+    source = "./tests/modules"
+  }
+
+Do (Autocompletion for offline module argument completion):
+  jo\<C-X>\<C-O>
+
+Expect (get var_name):
+  module "test" {
+    source = "./tests/modules"
+    var_name
+  }
+
+Given terraform (Resource Completion Test):
+
 Do (Autocompletion for resource first(aws) test):
   iresource "aws_\<C-X>\<C-O>
 
-Expect (get aws_acm_certificate):
-  resource "aws_acm_certificate
+Expect (get aws_api_gateway_account):
+  resource "aws_api_gateway_account
 
 Do (Autocompletion for resource second(docker) test):
   iresource "docker_\<C-X>\<C-O>
 
-Expect (get docker_registry_image):
-  resource "docker_registry_image
+Expect (get docker_container):
+  resource "docker_container
 
 Given terraform (Argument Completion Test):
-  resource "docker_registry_image" "sd" {
+  resource "docker_container" "sd" {
   }
 
 Do (Autocompletion for Argument Test):
   o\<C-X>\<C-O>
 
 Expect (get aws_vpn_gateway_attachment):
-  resource "docker_registry_image" "sd" {
+  resource "docker_container" "sd" {
           name
   }
 
 Given terraform (Interpolation Completion Test):
-  resource "docker_registry_image" "sd" {
+  resource "docker_container" "sd" {
   }
 
-  resource "docker_registry_image" "sd2" {
+  resource "docker_container" "sd2" {
   }
 
 Do (Autocompletion for interpolation):
   3joname = "${\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"
 
 
-Expect (get docker_registry_image):
-  resource "docker_registry_image" "sd" {
+Expect (get docker_container):
+  resource "docker_container" "sd" {
   }
 
-  resource "docker_registry_image" "sd2" {
-          name = "${docker_registry_image.sd2.sha256_digest}"
+  resource "docker_container" "sd2" {
+          name = "${docker_container.sd2.ip_address}"
   }

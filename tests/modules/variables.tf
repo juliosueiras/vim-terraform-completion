@@ -1,0 +1,1 @@
+variable "var_name" {}
