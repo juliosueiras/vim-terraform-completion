@@ -34,7 +34,7 @@ module ModuleUtils
         req.use_ssl = true if url.scheme == 'https'
         res = req.request_head(url.path)
         if not res.code == "404" 
-          variables = open("#{link}/#{i}").read.split("\n").select { |x| x[/variable/]}
+          variables = open("#{link}/#{i}").read.split("\n").select { |x| x[/^\s*variable\s*"/]}
           variables.each do |x|
             result.push({ "word": x.match(/"(.*)"/).captures()[0] })
           end
@@ -52,7 +52,3 @@ module ModuleUtils
     return JSON.generate(result)
   end
 end
-
-    
-include ModuleUtils
-load_arg_module('source = "github.com/segmentio/stack/ecs-cluster"')
