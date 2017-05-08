@@ -126,6 +126,7 @@ let g:tagbar_type_terraform = {
 - [x] Test from zero to useful setup using Docker
 - [x] Jump Reference (Ctrl-L first time to jump to resource definition, second time
     on the same line to jump back)
+- [x] Show Doc (Ctrl-K)
 - [x] Provide config and example
 - [x] Integrate Basic `terraform validate` and `tflint` into Synstatic
 - [x] Added a custom linter for providing a better error

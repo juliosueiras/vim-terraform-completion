@@ -1,5 +1,11 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-08(4 am)
+### New Feature
+- Show Docs
+
+[![asciicast](https://asciinema.org/a/119587.png)](https://asciinema.org/a/119587)
+
 ## 2017-05-06(3 pm)
 ### New Feature
 - Version based Completion

@@ -62,23 +62,26 @@ function! terraformcomplete#JumpRef()
     catch
     endtry
 endfunction
-" TODO: Not finish
-" function! terraformcomplete#GetDoc()
-"   if &filetype == "vim"
-"     execute 'tab help ' . expand("<cWORD>")
-"   else
-"     let s:curr_pos = getpos('.')
-"     if getline(".") !~# '^\s*\(resource\|data\)\s*"'
-"         execute '?\s*\(resource\|data\)\s*"'
-"     endif
-"     let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
 
-"     let a:resource = substitute(split(split(getline("."))[1], a:provider . "_")[1], '"','','')
-"     call setpos('.', s:curr_pos)
-    
-"     execute '!' . s:path . '/../utils/get_doc ' . s:path . ' ' . expand("<cWORD>") . " " . a:provider . " " . a:resource
-"   endif 
-" endfunction
+function! terraformcomplete#GetDoc()
+    let s:curr_pos = getpos('.')
+    if getline(".") !~# '^\s*\(resource\|data\)\s*"'
+        execute '?\s*\(resource\|data\)\s*"'
+    endif
+    let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
+
+    let a:resource = substitute(split(split(getline("."))[1], a:provider . "_")[1], '"','','')
+    if getline(".") =~ '^data.*'
+        let s:type = 'datas'
+    else
+        let s:type = 'resources'
+    end
+    call setpos('.', s:curr_pos)
+
+    let res = system(s:path . '/../utils/get_doc ' . s:path . ' ' . expand("<cWORD>") . " " . a:provider . " " . a:resource . " " . s:type)
+
+    echo substitute(res, '\n', '', '')
+endfunction
 
 
 fun! terraformcomplete#GetResource()
