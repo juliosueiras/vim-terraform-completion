@@ -1,4 +1,11 @@
-service: docker
+sudo: required
+
+language: ruby
+
+rvm: 2.3.1
+
+services:
+  - docker
 
 # addons:
 #     apt:
