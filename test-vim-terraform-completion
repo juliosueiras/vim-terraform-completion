@@ -19,5 +19,5 @@ then
 fi
 
 # run container
-docker run --rm -it $IMAGE:$TAG '+Vader! tests/*' && echo Success || echo Failure
+docker run --rm -it $IMAGE:$TAG '+Vader! tests/*'
 

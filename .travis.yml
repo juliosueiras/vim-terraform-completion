@@ -1,23 +1,21 @@
-language: ruby
-rvm: 2.3.1
-sudo: false
+service: docker
 
-addons:
-    apt:
-      packages:
-        - vim-gtk
+# addons:
+#     apt:
+#       packages:
+#         - vim-gtk
 
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - vim --version
-  - cp example.vimrc ~/.vimrc
-  - mkdir -p ~/.vim/autoload
-  - cp tests/plug.vim ~/.vim/autoload/plug.vim
-  - vim +PlugInstall +qall
+# before_script:
+  # - export DISPLAY=:99.0
+  # - sh -e /etc/init.d/xvfb start
+  # - vim --version
+  # - cp example.vimrc ~/.vimrc
+  # - mkdir -p ~/.vim/autoload
+  # - cp tests/plug.vim ~/.vim/autoload/plug.vim
+  # - vim +PlugInstall +qall
   # - curl https://releases.hashicorp.com/terraform/0.9.4/terraform_0.9.4_linux_amd64.zip -o terraform_0.9.4_linux_amd64.zip -k
   # - unzip terraform_0.9.4_linux_amd64.zip
   # - mv terraform /usr/bin/terraform
 
 script:
-  - vim +Vader! tests/* && echo Success || echo Failure
+  - ./test-vim-terraform-completion
