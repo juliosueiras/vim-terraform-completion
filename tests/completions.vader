@@ -79,5 +79,5 @@ Expect (get docker_container):
   }
 
   resource "docker_container" "sd2" {
-          name = "${docker_container.sd2.ip_address}"
+          name = "${docer_container.sd2.ip_address}"
   }
