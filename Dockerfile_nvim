@@ -1,0 +1,15 @@
+FROM tiokksar/neovim
+USER root
+WORKDIR /root
+ADD example.vimrc ~/.config/nvim/init.vim
+ADD tests/ tests/
+RUN apt-get update && apt-get install -y curl ruby ruby-dev git
+RUN gem install neovim
+RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+RUN nvim +PlugInstall +qall
+RUN curl https://releases.hashicorp.com/terraform/0.9.4/terraform_0.9.4_linux_amd64.zip -o terraform_0.9.4_linux_amd64.zip && \
+    unzip terraform_0.9.4_linux_amd64.zip && \
+    mv terraform /usr/bin/terraform
+
+ENTRYPOINT ["nvim"]

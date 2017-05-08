@@ -15,7 +15,7 @@ fi
 # If the specified image isn't present, build it
 if [[ -z $(docker images | grep -w "$IMAGE" | grep -w "$TAG") ]]
 then
-    docker build -t vim-terraform-completion:latest .
+    docker build -t vim-terraform-completion:latest . -f Dockerfile_$VIM_TYPE
 fi
 
 # run container
