@@ -14,6 +14,7 @@ if !exists('g:terraformcomplete_version')
     ENV['PATH'].split(':').each do |folder|
         if File.exists?(folder+'/terraform')
             Vim::command("let g:terraformcomplete_version = '#{`terraform -v`.match(/v(.*)/).captures[0]}'")
+
         else
             Vim::command("let g:terraformcomplete_version = '0.9.4'")
         end
@@ -301,21 +302,24 @@ EOF
             return a:resource_list
         endtry
     else
-      let s:curr_pos = getpos('.')
-      execute '?^\s*\(resource\|data\)\s*"'
-      if getline('.') =~ '^\s*data'
-        let a:data_or_resource = 0
-      else
-        let a:data_or_resource = 1
-      endif
+      try
+          let s:curr_pos = getpos('.')
+          execute '?^\s*\(resource\|data\)\s*"'
+          if getline('.') =~ '^\s*data'
+            let a:data_or_resource = 0
+          else
+            let a:data_or_resource = 1
+          endif
 
-      call setpos('.', s:curr_pos)
-      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'false', a:data_or_resource)
-        if m.word =~ '^' . a:base
-          call add(res, m)
-        endif
-      endfor
-      return res
+          call setpos('.', s:curr_pos)
+          for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'false', a:data_or_resource)
+            if m.word =~ '^' . a:base
+              call add(res, m)
+            endif
+          endfor
+          return res
+      catch
+      endtry
     endif
   endif
 endfun
