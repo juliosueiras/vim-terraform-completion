@@ -1,5 +1,12 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-08(6 am)
+### New Feature
+- Moudle GitHub Argument Completion(Working on offline and attribute completion
+    for module)
+
+[![asciicast](https://asciinema.org/a/119591.png)](https://asciinema.org/a/119591)
+
 ## 2017-05-08(4 am)
 ### New Feature
 - Show Docs

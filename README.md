@@ -138,7 +138,7 @@ let g:tagbar_type_terraform = {
 ## Todo for Terraform completion
 - [x] Version-based Completion
 - [ ] Provider
-- [ ] (WIP)Module
+- [x]? (WIP)Module(Online, Working of offline)
 - [x] Data
 - [x] Resource(with Provider)
 - [x] Parameter

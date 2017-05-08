@@ -93,6 +93,7 @@ fun! terraformcomplete#GetResource()
 
     let a:resource = substitute(split(split(getline("."))[1], a:provider . "_")[1], '"','','')
     call setpos('.', s:curr_pos)
+    unlet s:curr_pos
     return a:resource
 endfun
 
@@ -105,10 +106,12 @@ fun! terraformcomplete#GetProvider()
     let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
 
     call setpos(".", s:curr_pos)
+    unlet s:curr_pos
 	return a:provider
 endfun
 
 function! terraformcomplete#rubyComplete(ins, provider, resource, attribute, data_or_resource)
+    let s:curr_pos = getpos('.')
     let a:res = []
     let a:resource_line = getline(s:curr_pos[1]) =~ "^\s*resource"
     let a:data_line = getline(s:curr_pos[1]) =~ "^\s*data"
@@ -305,22 +308,41 @@ EOF
             return a:resource_list
         endtry
     else
-      try
+        try
           let s:curr_pos = getpos('.')
-          execute '?^\s*\(resource\|data\)\s*"'
-          if getline('.') =~ '^\s*data'
-            let a:data_or_resource = 0
-          else
-            let a:data_or_resource = 1
-          endif
+          let s:oldline = getline('.')
+          call search('^\s*\(resource\|data\|module\)\s*"', 'b')
+          if getline('.') =~ '^\s*module'
+            call setpos('.', s:curr_pos)
+            let s:curr_pos = getpos('.')
+              execute '?\(source\|\module\).*'
 
-          call setpos('.', s:curr_pos)
-          for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'false', a:data_or_resource)
-            if m.word =~ '^' . a:base
-              call add(res, m)
+              let a:line = getline(".")
+              call setpos('.', s:curr_pos)
+              if a:line =~ "source"
+              ruby <<EOF
+                  require "#{Vim::evaluate("s:path")}/../module"
+                  include ModuleUtils
+                  line = Vim::evaluate("a:line")
+                  Vim::command("let a:res = #{load_arg_module(line.to_s)}")
+EOF
+              return a:res
             endif
-          endfor
-          return res
+          else
+            if getline('.') =~ '^\s*data'
+              let a:data_or_resource = 0
+            else
+              let a:data_or_resource = 1
+            endif
+
+            call setpos('.', s:curr_pos)
+            for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'false', a:data_or_resource)
+              if m.word =~ '^' . a:base
+                call add(res, m)
+              endif
+            endfor
+            return res
+          endif
       catch
       endtry
     endif
