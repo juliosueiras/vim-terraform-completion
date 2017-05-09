@@ -9,5 +9,7 @@ RUN vim +PlugInstall +qall
 RUN curl https://releases.hashicorp.com/terraform/0.9.4/terraform_0.9.4_linux_amd64.zip -o terraform_0.9.4_linux_amd64.zip && \
     unzip terraform_0.9.4_linux_amd64.zip && \
     mv terraform /usr/bin/terraform
+RUN mkdir -p ~/.vim/plugged/vim-terraform-completion
+ADD . ~/.vim/plugged/vim-terraform-completion
 ADD tests/ tests/
 ENTRYPOINT ["sh"]

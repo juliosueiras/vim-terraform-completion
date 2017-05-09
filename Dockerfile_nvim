@@ -9,6 +9,8 @@ RUN curl https://releases.hashicorp.com/terraform/0.9.4/terraform_0.9.4_linux_am
     unzip terraform_0.9.4_linux_amd64.zip && \
     mv terraform /usr/bin/terraform
 RUN mkdir -p /home/dev/.config/nvim
+RUN mkdir -p /home/dev/.vim/plugged/vim-terraform-completion
+ADD . /home/dev/.vim/plugged/vim-terraform-completion
 ADD example.vimrc /home/dev/.config/nvim/init.vim
 RUN nvim +PlugInstall +qall
 ADD tests/ tests/
