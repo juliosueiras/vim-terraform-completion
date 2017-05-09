@@ -126,7 +126,7 @@ let g:tagbar_type_terraform = {
 ```
 
 ## General Todo
-- [ ] Support for Neomake
+- [x] Support for Neomake(Require further testing)
 - [ ] Move regex code to a json(for easier extension)
 - [x] Test from zero to useful setup using Docker
 - [x] Jump Reference (Ctrl-L first time to jump to resource definition, second time
