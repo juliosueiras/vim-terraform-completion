@@ -9,3 +9,4 @@ augroup TerraformCompleteKeys
 augroup END
 
 set keywordprg=:help
+
