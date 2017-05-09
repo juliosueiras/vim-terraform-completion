@@ -1,0 +1,52 @@
+Execute (Make sure tab is off):
+  set expandtab
+
+Given terraform (Resource Completion Test):
+
+Do (Autocompletion for resource first test):
+  iresource "aws_\<C-X>\<C-O>
+
+Expect (get aws_api_gateway_account):
+  resource "aws_api_gateway_account
+
+Do (Autocompletion for resource second docker test):
+  iresource "docker_\<C-X>\<C-O>
+
+Expect (get docker_container):
+  resource "docker_container
+
+Given terraform (Argument Completion Test):
+
+  resource "docker_container" "sd" {
+  }
+
+Do (Autocompletion for Argument Test):
+  jo\<C-X>\<C-O>
+
+Expect (get aws_vpn_gateway_attachment):
+
+  resource "docker_container" "sd" {
+          name
+  }
+
+Given terraform (Resource Interpolation Completion Test):
+
+  resource "docker_container" "sd" {
+  }
+
+  resource "docker_container" "sd2" {
+  }
+
+Do (Autocompletion for interpolation):
+  4joname = "${\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"\<ESC>
+  oname = "${\<C-X>\<C-O>.\<C-X>\<C-O>\<C-N>.\<C-X>\<C-O>}"\<ESC>
+
+Expect (get docker_container):
+
+  resource "docker_container" "sd" {
+  }
+
+  resource "docker_container" "sd2" {
+          name = "${docker_container.sd.ip_address}"
+          name = "${docker_container.sd2.ip_address}"
+  }

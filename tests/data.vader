@@ -1,0 +1,31 @@
+Execute (Make sure tab is off):
+  set expandtab
+
+Given terraform (Data Completion Test):
+
+Do (Autocompletion for data first(aws) test):
+  idata "aws_\<C-X>\<C-O>
+
+Expect (get aws_acm_certificate):
+  data "aws_acm_certificate
+
+Given terraform (Interpolation for Data Completion Test):
+
+  data "aws_db_instance" "sd" {
+  }
+
+  resource "docker_container" "sd2" {
+  }
+
+Do (Autocompletion for interpolation):
+  4joname = "${data.\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"
+
+Expect (get address):
+
+  data "aws_db_instance" "sd" {
+  }
+
+  resource "docker_container" "sd2" {
+          name = "${data.aws_db_instance.sd.address}"
+  }
+

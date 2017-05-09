@@ -1,0 +1,63 @@
+Execute (Make sure tab is off):
+  set expandtab
+
+Given terraform (Module Offline Completion Test):
+
+  module "test" {
+    source = "./tests/modules"
+  }
+
+Do (Autocompletion for offline module argument completion):
+  2jo\<C-X>\<C-O>
+
+Expect (get var_name):
+
+  module "test" {
+    source = "./tests/modules"
+    var_name
+  }
+
+Given terraform (Module Online Attribute Completion Test):
+
+  module "vpc" {
+    source = "github.com/terraform-community-modules/tf_aws_vpc"
+  }
+
+  resource "aws_db_instance" "test" {
+  }
+
+Do (Autocompletion for online module attributes completion):
+  5joname = "${module.\<C-X>\<C-O>.\<C-X>\<C-O>}"
+
+Expect (get private subnets):
+
+  module "vpc" {
+    source = "github.com/terraform-community-modules/tf_aws_vpc"
+  }
+
+  resource "aws_db_instance" "test" {
+          name = "${module.vpc.private_subnets}"
+  }
+
+Given terraform (Module Offline Attribute Completion Test):
+
+  module "test" {
+    source = "./tests/modules"
+  }
+
+  resource "aws_db_instance" "test" {
+  }
+
+Do (Autocompletion for offline module attributes completion):
+  5joname = "${module.\<C-X>\<C-O>.\<C-X>\<C-O>}"
+
+Expect (get output test):
+
+  module "test" {
+    source = "./tests/modules"
+  }
+
+  resource "aws_db_instance" "test" {
+          name = "${module.test.output_var}"
+  }
+

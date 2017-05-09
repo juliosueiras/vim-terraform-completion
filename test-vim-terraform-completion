@@ -19,5 +19,5 @@ then
 fi
 
 # run container
-docker run --rm -it $IMAGE:$TAG '+Vader! tests/*'
+docker run --rm -it $IMAGE:$TAG "$VIM_TYPE -c 'Vader! tests/*' > /dev/null\n"
 

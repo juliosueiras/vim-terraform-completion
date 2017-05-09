@@ -13,4 +13,4 @@ ADD example.vimrc /home/dev/.config/nvim/init.vim
 RUN nvim +PlugInstall +qall
 ADD tests/ tests/
 
-ENTRYPOINT ["nvim"]
+ENTRYPOINT ["sh"]
