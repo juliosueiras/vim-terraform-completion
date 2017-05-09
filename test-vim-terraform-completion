@@ -19,5 +19,4 @@ then
 fi
 
 # run container
-docker run --rm -it $IMAGE:$TAG -c  "$VIM_TYPE -u tests.vimrc -c 'Vader! tests/*' > /dev/null\n"
-
+docker run --rm -it $IMAGE:$TAG -c  "$VIM_TYPE -u ~/.vim/plugged/vim-terraform-completion/tests.vim -c 'Vader! tests/*' > /dev/null\n"
