@@ -215,48 +215,35 @@ fun! terraformcomplete#Complete(findstart, base)
     endtry
 
 
-    if strpart(getline("."),0, getpos(".")[2]) =~ '\${[^}]*\%[}]$'
-        try
+    if strpart(getline('.'),0, getpos('.')[2]) =~ '\${[^}]*\%[}]$'
+    try
             let a:old_pos = getpos('.')
             execute 'normal! gg'
             let a:search_continue = 1
             let a:resource_list = []
             let a:type_list = {}
-            while a:search_continue != 0
-                let a:search_continue = search('\(resource\|data\)\s*"\w*"\s*"[^"]*"', "W")
+            let a:data_list = []
+            let a:data_type_list = {}
 
-                if a:search_continue != 0
-                    try
-                        if getline(a:search_continue) =~ "^\s*resource\s*"
-                          let temp_resource = substitute(split(split(getline(a:search_continue),"resource ")[0], " ")[0], '"','','g')
-                        else
-                          let temp_resource = substitute(split(split(getline(a:search_continue),"data ")[0], " ")[0], '"','','g')
-                        endif
-                        call add(a:resource_list, { "word": temp_resource })
-
-                        if has_key(a:type_list, temp_resource) == 0
-                            let a:type_list[temp_resource] = []
-                        endif
-
-                        if getline(a:search_continue) =~ "^\s*resource\s*"
-                          call add(a:type_list[temp_resource], { 'word': substitute(split(split(getline(a:search_continue),'resource ')[0], ' ')[1], '"','','g')})
-                        else
-                          call add(a:type_list[temp_resource], { 'word': substitute(split(split(getline(a:search_continue),'data ')[0], ' ')[1], '"','','g')})
-                        endif
-                    catch
-                        return []
-                    endtry
-                endif
-            endwhile
-            call add(a:resource_list, { "word": "var" })
-            call add(a:resource_list, { "word": "module" })
+            let a:all_res = terraformcomplete#GetAll('resource')
+            let a:resource_list = a:all_res[0]
+            let a:type_list = a:all_res[1]
+            call add(a:resource_list, { 'word': 'var' })
+            call add(a:resource_list, { 'word': 'module' })
+            call add(a:resource_list, { 'word': 'data' })
             call setpos('.', a:old_pos)
             try
-                let a:curr = strpart(getline("."),0, getpos(".")[2])
-                let a:attr = filter(split(split(a:curr, "${")[-1], '\.'), 'v:val !~ "}"')
+                let a:curr = strpart(getline('.'),0, getpos('.')[2])
+                let a:attr = filter(split(split(a:curr, '${')[-1], '\.'), 'v:val !~ "}"')
 
                 if len(a:attr) == 1
-                    if a:attr[0] == "var" 
+                    if a:attr[0] == "data" 
+                      let a:data_list = terraformcomplete#GetAll('data')[0]
+                      return a:data_list
+                    elseif a:attr[0] == "module" 
+                      let a:module_list = terraformcomplete#GetAllModule()[0]
+                      return a:module_list
+                    elseif a:attr[0] == "var" 
                         ruby <<EOF
                         require 'json'
 
@@ -276,29 +263,54 @@ fun! terraformcomplete#Complete(findstart, base)
 EOF
                         return a:vars_res
                     else
-                        return a:type_list[a:attr[0]]
+                        if a:type_list != {}
+                          return a:type_list[a:attr[0]]
+                        else
+                          return 
+                        endif
                     endif
                 elseif len(a:attr) == 2
-                    let a:provider = split(a:attr[0], "_")[0]
-
-                    let a:resource = split(a:attr[0], a:provider . "_")[0]
-                    let a:old_pos = getpos('.')
-                    execute '?^\s*\(data\|resource\)\s*"' . a:attr[0] . '"\s*"' . a:attr[1] . '"'
-
-                    if getline('.') =~ '^\s*data'
-                      let a:data_or_resource = 0
+                    if a:attr[0] == "data" 
+                      let a:data_type_list = terraformcomplete#GetAll('data')[1]
+                      return a:data_type_list[a:attr[1]]
+                    elseif a:attr[0] == "module"
+                        let a:file_path = expand('%:p:h')
+                        let a:line = terraformcomplete#GetAllModule()[1][a:attr[1]][0]
+                        ruby <<EOF
+                        require "#{Vim::evaluate("s:path")}/../module"
+                        include ModuleUtils
+                        line = Vim::evaluate("a:line")
+                        file_path = Vim::evaluate("a:file_path")
+                        Vim::command("let a:res = #{load_attr_module(line.to_s, file_path)}")
+EOF
+                        return a:res
                     else
+                      let a:provider = split(a:attr[0], "_")[0]
+
+                      let a:resource = split(a:attr[0], a:provider . "_")[0]
                       let a:data_or_resource = 1
-                    endif
 
-                    call setpos('.', a:old_pos)
-
-                    for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource)
+                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource)
                         if m.word =~ '^' . a:base
-                            call add(res, m)
+                          call add(res, m)
                         endif
-                    endfor
-                    return res
+                      endfor
+                      return res
+                    endif
+                elseif len(a:attr) == 3
+                    if a:attr[0] == "data"
+                        let a:res = []
+                        let a:provider = split(a:attr[1], "_")[0]
+
+                        let a:resource = split(a:attr[1], a:provider . "_")[0]
+                        let a:data_or_resource = 0
+                        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource)
+                            if m.word =~ '^' . a:base
+                                call add(a:res, m)
+                            endif
+                        endfor
+                        return a:res
+                    endif
                 else
                     return a:resource_list
                 endif
@@ -321,11 +333,13 @@ EOF
               let a:line = getline(".")
               call setpos('.', s:curr_pos)
               if a:line =~ "source"
+                  let a:file_path = expand('%:p:h')
               ruby <<EOF
                   require "#{Vim::evaluate("s:path")}/../module"
                   include ModuleUtils
                   line = Vim::evaluate("a:line")
-                  Vim::command("let a:res = #{load_arg_module(line.to_s)}")
+                  file_path = Vim::evaluate("a:file_path")
+                  Vim::command("let a:res = #{load_arg_module(line.to_s, file_path)}")
 EOF
               return a:res
             endif
@@ -350,3 +364,56 @@ EOF
   endif
 endfun
 
+fun! terraformcomplete#GetAllModule() abort
+  let a:old_pos = getpos('.')
+  execute 'normal! gg'
+  let a:search_continue = 1
+  let a:list = []
+  let a:source_list = {}
+  while a:search_continue != 0
+
+    let a:search_continue = search('module\s*".*"\s*', 'W')
+
+    if a:search_continue != 0 
+      let temp = substitute(split(split(getline(a:search_continue),'module ')[0], ' ')[0], '"','','g')
+      let a:old_pos = getpos('.')
+      call search('source\s*=')
+      let a:source = getline(".")
+      call setpos('.', a:old_pos)
+      call add(a:list, { 'word': temp })
+
+      if has_key(a:source_list, temp) == 0
+        let a:source_list[temp] = []
+      endif
+
+      call add(a:source_list[temp], a:source )
+    endif
+  endwhile
+  call setpos('.', a:old_pos)
+  return [a:list, a:source_list]
+endfunc
+
+fun! terraformcomplete#GetAll(data_or_resource) abort
+  let a:old_pos = getpos('.')
+  execute 'normal! gg'
+  let a:search_continue = 1
+  let a:list = []
+  let a:type_list = {}
+  while a:search_continue != 0
+
+    let a:search_continue = search(a:data_or_resource . '\s*"\w*"\s*"[^"]*"', 'W')
+
+    if a:search_continue != 0 
+      let temp = substitute(split(split(getline(a:search_continue),a:data_or_resource . ' ')[0], ' ')[0], '"','','g')
+      call add(a:list, { 'word': temp })
+
+      if has_key(a:type_list, temp) == 0
+        let a:type_list[temp] = []
+      endif
+
+      call add(a:type_list[temp], { 'word': substitute(split(split(getline(a:search_continue), a:data_or_resource . ' ')[0], ' ')[1], '"','','g')})
+    endif
+  endwhile
+  call setpos('.', a:old_pos)
+  return [a:list, a:type_list]
+endfunc

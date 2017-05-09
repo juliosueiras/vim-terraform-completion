@@ -9,6 +9,25 @@ Do (Autocompletion for data first(aws) test):
 Expect (get aws_acm_certificate):
   data "aws_acm_certificate
 
+Given terraform (Interpolation for Data Completion Test):
+  data "aws_db_instance" "sd" {
+  }
+
+  resource "docker_container" "sd2" {
+  }
+
+Do (Autocompletion for interpolation):
+  3joname = "${data.\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"
+
+
+Expect (get address):
+  data "aws_db_instance" "sd" {
+  }
+
+  resource "docker_container" "sd2" {
+          name = "${data.aws_db_instance.sd.address}"
+  }
+
 Given terraform (Module Online Completion Test):
   module "tf-aws-vpc" {
     source = "github.com/terraform-community-modules/tf_aws_vpc"
@@ -35,6 +54,46 @@ Expect (get var_name):
   module "test" {
     source = "./tests/modules"
     var_name
+  }
+
+Given terraform (Module Online Attribute Completion Test):
+  module "tf-aws-vpc" {
+    source = "github.com/terraform-community-modules/tf_aws_vpc"
+  }
+
+  resource "aws_db_instance" "test" {
+  }
+
+Do (Autocompletion for online module attributes completion):
+  3joname = "${module.\<C-X>\<C-O>.\<C-X>\<C-O>}"
+
+Expect (get private subnets):
+  module "vpc" {
+    source = "github.com/terraform-community-modules/tf_aws_vpc"
+  }
+
+  resource "aws_db_instance" "test" {
+          name = "${module.vpc.private_subnets}"
+  }
+
+Given terraform (Module Offline Attribute Completion Test):
+  module "test" {
+    source = "./tests/modules"
+  }
+
+  resource "aws_db_instance" "test" {
+  }
+
+Do (Autocompletion for offline module attributes completion):
+  3joname = "${module.\<C-X>\<C-O>.\<C-X>\<C-O>}"
+
+Expect (get output test):
+  module "test" {
+    source = "./tests/modules"
+  }
+
+  resource "aws_db_instance" "test" {
+          name = "${module.test.output_test}"
   }
 
 Given terraform (Resource Completion Test):

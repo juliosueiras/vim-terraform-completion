@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'json'
 require 'open-uri'
 
-page = Nokogiri::HTML(open("http://localhost:4567/docs/providers"))
+page = Nokogiri::HTML(open("https://terraform.io/docs/providers"))
 provider = []
 
 page.css(".nav a").each do |x|
@@ -19,7 +19,7 @@ end
 
 provider.each do |i|
   begin
-  page = Nokogiri::HTML(open("http://localhost:4567#{i}"))
+  page = Nokogiri::HTML(open("https://terraform.io#{i}"))
   provider_name = i.split('/')[-2]
   links = []
   provider_arguments = []
@@ -58,7 +58,7 @@ provider.each do |i|
   result["unknowns"] = {}
 
   links.each do |x|
-    page = Nokogiri::HTML(open("http://localhost:4567#{x}"))
+    page = Nokogiri::HTML(open("http://terraform.io#{x}"))
 
     arguments = []
     attributes = []
@@ -121,6 +121,9 @@ provider.each do |i|
     end
 
     name = x.split('/')[-1].split(".html")[0]
+    if name.split('_')[0] == provider_name
+      name = name.split('_')[1..-1].join('_')
+    end
     result[location][name] = { "provider" => provider_name, "arguments" => arguments, "attributes" => attributes }
     puts "Finish #{name} of #{provider_name}"
   end
