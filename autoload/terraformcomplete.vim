@@ -51,7 +51,11 @@ function! terraformcomplete#JumpRef()
             if a:attr[0] == 'var'
                 call search('\s*variable\s*"' . a:attr[1] . '".*')
             else
+              if a:attr[0] == "data" 
+                call search('.*\s*"' . a:attr[1] . '"\s*"' . a:attr[2] . '".*')
+              else
                 call search('.*\s*"' . a:attr[0] . '"\s*"' . a:attr[1] . '".*')
+              endif
             end
             echo 'Jump to ' . a:attr[0] . '.' . a:attr[1]
         else
@@ -77,10 +81,33 @@ function! terraformcomplete#GetDoc()
         let s:type = 'resources'
     end
     call setpos('.', s:curr_pos)
+    let a:curr_word = expand("<cWORD>")
+    let a:search_word = ''
+    let a:word_array = []
 
-    let res = system(s:path . '/../utils/get_doc ' . s:path . ' ' . expand("<cWORD>") . " " . a:provider . " " . a:resource . " " . s:type)
+    if a:curr_word =~ '${.*}'
+      let a:word_array = split(matchlist(a:curr_word, '\v\$\{(.*)\}')[1], '\.')
+      if a:word_array[0] == 'data'
+        let a:provider = split(a:word_array[1], "_")[0]
+        let a:resource = split(a:word_array[1], a:provider . "_")[0]
+        let s:type = 'datas'
+        let a:res_type = 'attributes'
+        let a:search_word = a:word_array[3]
+      else
+        let a:provider = split(a:word_array[0], "_")[0]
+        let a:resource = split(a:word_array[0], a:provider . "_")[0]
+        let s:type = 'resources'
+        let a:res_type = 'attributes'
+        let a:search_word = a:word_array[2]
+      endif
+    else
+      let a:search_word = a:curr_word
+      let a:res_type = 'arguments'
+    endif
 
-    echo substitute(res, '\n', '', '')
+      let res = system(s:path . '/../utils/get_doc ' . s:path . " '" . a:search_word . "' " . a:provider . " " . a:resource . " " . s:type . " " . a:res_type)
+
+      echo substitute(res, '\n', '', '')
 endfunction
 
 
