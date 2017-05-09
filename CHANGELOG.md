@@ -1,5 +1,8 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-09(3 am)
+### New Feature
+- Show docs for data/resource attribute
 ## 2017-05-08(10 pm)
 ### New Feature
 - Module Attribute completion(Github online, and offline
