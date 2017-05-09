@@ -7,7 +7,7 @@ Given terraform (Module Offline Completion Test):
   }
 
 Do (Autocompletion for offline module argument completion):
-  1jo\<C-X>\<C-O>
+  1jo\<C-X>\<C-O>\<ESC><<
 
 Expect (get var_name):
   module "test" {
