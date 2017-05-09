@@ -16,21 +16,18 @@ Expect (get docker_container):
   resource "docker_container
 
 Given terraform (Argument Completion Test):
-
   resource "docker_container" "sd" {
   }
 
 Do (Autocompletion for Argument Test):
-  jo\<C-X>\<C-O>
+  o\<C-X>\<C-O>
 
 Expect (get aws_vpn_gateway_attachment):
-
   resource "docker_container" "sd" {
-          name
+  name
   }
 
 Given terraform (Resource Interpolation Completion Test):
-
   resource "docker_container" "sd" {
   }
 
@@ -38,15 +35,14 @@ Given terraform (Resource Interpolation Completion Test):
   }
 
 Do (Autocompletion for interpolation):
-  4joname = "${\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"\<ESC>
+  3joname = "${\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"\<ESC>
   oname = "${\<C-X>\<C-O>.\<C-X>\<C-O>\<C-N>.\<C-X>\<C-O>}"\<ESC>
 
 Expect (get docker_container):
-
   resource "docker_container" "sd" {
   }
 
   resource "docker_container" "sd2" {
-          name = "${docker_container.sd.ip_address}"
-          name = "${docker_container.sd2.ip_address}"
+  name = "${docker_container.sd.ip_address}"
+  name = "${docker_container.sd2.ip_address}"
   }

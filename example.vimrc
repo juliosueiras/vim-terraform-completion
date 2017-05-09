@@ -7,7 +7,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
-Plug 'junegunn/vader.vim'
 call plug#end()
 
 " Syntastic Config

@@ -10,5 +10,8 @@ env:
 services:
   - docker
 
+before_script:
+  - git clone https://github.com/junegunn/vader.vim
+
 script:
   - ./test-vim-terraform-completion

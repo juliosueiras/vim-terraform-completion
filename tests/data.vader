@@ -10,7 +10,6 @@ Expect (get aws_acm_certificate):
   data "aws_acm_certificate
 
 Given terraform (Interpolation for Data Completion Test):
-
   data "aws_db_instance" "sd" {
   }
 
@@ -18,14 +17,12 @@ Given terraform (Interpolation for Data Completion Test):
   }
 
 Do (Autocompletion for interpolation):
-  4joname = "${data.\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"
+  3joname = "${data.\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"
 
 Expect (get address):
-
   data "aws_db_instance" "sd" {
   }
 
   resource "docker_container" "sd2" {
-          name = "${data.aws_db_instance.sd.address}"
+  name = "${data.aws_db_instance.sd.address}"
   }
-

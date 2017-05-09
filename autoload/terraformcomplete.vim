@@ -217,8 +217,6 @@ fun! terraformcomplete#Complete(findstart, base)
 
     if strpart(getline('.'),0, getpos('.')[2]) =~ '\${[^}]*\%[}]$'
     try
-            let a:old_pos = getpos('.')
-            execute 'normal! gg'
             let a:search_continue = 1
             let a:resource_list = []
             let a:type_list = {}
@@ -231,7 +229,7 @@ fun! terraformcomplete#Complete(findstart, base)
             call add(a:resource_list, { 'word': 'var' })
             call add(a:resource_list, { 'word': 'module' })
             call add(a:resource_list, { 'word': 'data' })
-            call setpos('.', a:old_pos)
+
             try
                 let a:curr = strpart(getline('.'),0, getpos('.')[2])
                 let a:attr = filter(split(split(a:curr, '${')[-1], '\.'), 'v:val !~ "}"')
@@ -370,16 +368,30 @@ fun! terraformcomplete#GetAllModule() abort
   let a:search_continue = 1
   let a:list = []
   let a:source_list = {}
+  if getline(".") =~ 'module\s*".*"\s*' 
+      let temp = substitute(split(split(getline(1),'module ')[0], ' ')[0], '"','','g')
+      let a:oldpos = getpos('.')
+      call search('source\s*=')
+      let a:source = getline('.')
+      call setpos('.', a:oldpos)
+      call add(a:list, { 'word': temp })
+
+      if has_key(a:source_list, temp) == 0
+        let a:source_list[temp] = []
+      endif
+
+      call add(a:source_list[temp], a:source )
+  endif
   while a:search_continue != 0
 
     let a:search_continue = search('module\s*".*"\s*', 'W')
 
     if a:search_continue != 0 
       let temp = substitute(split(split(getline(a:search_continue),'module ')[0], ' ')[0], '"','','g')
-      let a:old_pos = getpos('.')
+      let a:oldpos = getpos('.')
       call search('source\s*=')
       let a:source = getline(".")
-      call setpos('.', a:old_pos)
+      call setpos('.', a:oldpos)
       call add(a:list, { 'word': temp })
 
       if has_key(a:source_list, temp) == 0
@@ -399,6 +411,16 @@ fun! terraformcomplete#GetAll(data_or_resource) abort
   let a:search_continue = 1
   let a:list = []
   let a:type_list = {}
+  if getline(".") =~ a:data_or_resource . '\s*"\w*"\s*"[^"]*"' 
+      let temp = substitute(split(split(getline(a:search_continue),a:data_or_resource . ' ')[0], ' ')[0], '"','','g')
+      call add(a:list, { 'word': temp })
+
+      if has_key(a:type_list, temp) == 0
+        let a:type_list[temp] = []
+      endif
+
+      call add(a:type_list[temp], { 'word': substitute(split(split(getline(a:search_continue), a:data_or_resource . ' ')[0], ' ')[1], '"','','g')})
+  endif
   while a:search_continue != 0
 
     let a:search_continue = search(a:data_or_resource . '\s*"\w*"\s*"[^"]*"', 'W')
