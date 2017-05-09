@@ -7,7 +7,7 @@ RUN curl https://releases.hashicorp.com/terraform/0.9.4/terraform_0.9.4_linux_am
     unzip terraform_0.9.4_linux_amd64.zip && \
     mv terraform /usr/bin/terraform
 ADD tests/ tests/
-ADD tests.vimrc tests.vimrc
-ADD vader.vim vader.vim
-ADD . vim-terraform-completion
+COPY tests.vimrc tests.vimrc
+ADD vader.vim/ vader.vim/
+ADD . vim-terraform-completion/
 ENTRYPOINT ["/bin/sh"]

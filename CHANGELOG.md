@@ -4,6 +4,9 @@
 ### New Feature
 - Support for Neomake
 ## 2017-05-09(3 am)
+
+[![asciicast](https://asciinema.org/a/119739.png)](https://asciinema.org/a/119739)
+
 ### New Feature
 - Show docs for data/resource attribute
 ## 2017-05-08(10 pm)
