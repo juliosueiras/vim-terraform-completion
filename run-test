@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+vim -u tests.vimrc -c 'Vader! tests/*' > /dev/null
