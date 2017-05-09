@@ -1,5 +1,13 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-08(10 pm)
+### New Feature
+- Module Attribute completion(Github online, and offline
+### Improvement
+- Fix data interpolation from ${[name]} to ${data.[name]}
+- Fix module relative lookup(now it will look in the same folder as the editing tf file)
+- Fine tune some provider scrapping, where name include in the resource link(like opc)
+
 ## 2017-05-08(6 am)
 ### New Feature
 - Moudle GitHub Argument Completion(Working on offline and attribute completion
