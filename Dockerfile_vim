@@ -12,4 +12,4 @@ RUN curl https://releases.hashicorp.com/terraform/0.9.4/terraform_0.9.4_linux_am
 RUN mkdir -p ~/.vim/plugged/vim-terraform-completion
 ADD . ~/.vim/plugged/vim-terraform-completion
 ADD tests/ tests/
-ENTRYPOINT ["sh"]
+ENTRYPOINT ["/bin/sh"]
