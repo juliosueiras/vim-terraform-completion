@@ -158,7 +158,7 @@ let g:tagbar_type_terraform = {
 
 ## Todo for HCL
 - [ ] Add Completion for hcl
-- [ ] Completion for Sublock
+- [ ] (WIP, will take a bit longer)Completion for Sublock
 ## Todo for Improvement
 - [X] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
 
