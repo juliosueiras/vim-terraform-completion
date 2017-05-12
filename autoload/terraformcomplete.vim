@@ -51,14 +51,13 @@ endif
 
 if !exists('g:terraformcomplete_version')
   ruby <<EOF
+    res = '0.9.4'
     ENV['PATH'].split(':').each do |folder|
         if File.exists?(folder+'/terraform')
-            Vim::command("let g:terraformcomplete_version = '#{`terraform -v`.match(/v(.*)/).captures[0]}'")
-
-        else
-            Vim::command("let g:terraformcomplete_version = '0.9.4'")
+            res = `terraform -v`.match(/v(.*)/).captures[0]
         end
     end
+    Vim::command("let g:terraformcomplete_version = '#{res}'")
 EOF
 endif
 
@@ -145,7 +144,7 @@ function! terraformcomplete#GetDoc()
       let a:res_type = 'arguments'
     endif
 
-      let res = system(s:path . '/../utils/get_doc ' . s:path . " '" . a:search_word . "' " . a:provider . " " . a:resource . " " . s:type . " " . a:res_type)
+      let res = system(s:path . '/../utils/get_doc ' . s:path . " '" . a:search_word . "' " . a:provider . " " . a:resource . " " . s:type . " " . a:res_type . " " . g:terraformcomplete_version)
 
       echo substitute(res, '\n', '', '')
 endfunction
