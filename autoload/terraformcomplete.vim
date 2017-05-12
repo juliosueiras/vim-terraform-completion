@@ -340,12 +340,14 @@ EOF
                     elseif a:attr[0] == "module"
                         let a:file_path = expand('%:p:h')
                         let a:line = terraformcomplete#GetAllModule()[1][a:attr[1]][0]
+                        let a:module_name = a:attr[1]
                         ruby <<EOF
                         require "#{Vim::evaluate("s:path")}/../module"
                         include ModuleUtils
+                        name = Vim::evaluate("a:module_name")
                         line = Vim::evaluate("a:line")
                         file_path = Vim::evaluate("a:file_path")
-                        Vim::command("let a:res = #{load_attr_module(line.to_s, file_path)}")
+                        Vim::command("let a:res = #{load_attr_module(name, line.to_s, file_path)}")
 EOF
                         return a:res
                     else
@@ -385,28 +387,25 @@ EOF
             return a:resource_list
         endtry
     else
-        try
+      try
           let s:curr_pos = getpos('.')
           let s:oldline = getline('.')
           call search('^\s*\(resource\|data\|module\)\s*"', 'b')
           if getline('.') =~ '^\s*module'
+            let a:module_name = matchlist(getline("."), '^\s*module\s*"\(.*\)".*')[1]
+            execute '/^\s*source.*'
+            let a:line = getline(".")
             call setpos('.', s:curr_pos)
-            let s:curr_pos = getpos('.')
-              execute '?\(source\|\module\).*'
-
-              let a:line = getline(".")
-              call setpos('.', s:curr_pos)
-              if a:line =~ "source"
-                  let a:file_path = expand('%:p:h')
+            let a:file_path = expand('%:p:h')
               ruby <<EOF
                   require "#{Vim::evaluate("s:path")}/../module"
                   include ModuleUtils
+                  name = Vim::evaluate("a:module_name")
                   line = Vim::evaluate("a:line")
                   file_path = Vim::evaluate("a:file_path")
-                  Vim::command("let a:res = #{load_arg_module(line.to_s, file_path)}")
+                  Vim::command("let a:res = #{load_arg_module(name, line.to_s, file_path)}")
 EOF
               return a:res
-            endif
           else
             if getline('.') =~ '^\s*data'
               let a:data_or_resource = 0
@@ -422,8 +421,8 @@ EOF
             endfor
             return res
           endif
-      catch
-      endtry
+        catch
+        endtry
     endif
   endif
 endfun
