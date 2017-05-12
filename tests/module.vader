@@ -24,7 +24,7 @@ Given terraform (Module Online Attribute Completion Test):
   }
 
 Do (Autocompletion for online module attributes completion):
-  4joname = "${module.\<C-X>\<C-O>.\<C-X>\<C-O>}"
+  :w test.tf\<CR>:!terraform get\<CR>4joname = "${module.\<C-X>\<C-O>.\<C-X>\<C-O>}"
 
 Expect (get private subnets):
   module "vpc" {
