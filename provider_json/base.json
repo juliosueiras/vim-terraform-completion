@@ -1,0 +1,38 @@
+[
+    {
+        "word": "count",
+        "info": "(int) - The number of identical resources to create. This doesn't apply to all resources. For details on using variables in conjunction with count, see Using Variables with count below."
+    },
+    {
+        "word": "depends_on",
+        "info": "(list of strings) - Explicit dependencies that this resource has. These dependencies will be created before this resource. For syntax and other details, see the section below on explicit dependencies."
+    },
+    {
+        "word": "provider",
+        "info": "(string) - The name of a specific provider to use for this resource. The name is in the format of TYPE.ALIAS, for example, aws.west. Where west is set using the alias attribute in a provider. See multiple provider instances."
+    },
+    {
+        "word": "lifecycle",
+        "kind": "subblock",
+        "subblock": [
+            {
+                "word": "create_before_destroy "
+            },
+            {
+                "word": "prevent_destroy"
+
+            },
+            {
+                "word": "ignore_changes"
+            }
+        ]
+    },
+    {
+        "word": "timeouts",
+        "kind": "subblock",
+        "subblock": [
+            { "word": "create"},
+            {"word":"delete"}
+        ]
+    }
+]

@@ -1,5 +1,13 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-14
+### New Features
+- Basic Block Completion
+- Functions Completion
+- Added Basic Resource Arguments
+### Improvement
+- Much better attribute completion
+
 ## 2017-05-09(5 am)
 ### New Feature
 - Support for Neomake

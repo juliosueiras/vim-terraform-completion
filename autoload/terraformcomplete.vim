@@ -222,6 +222,7 @@ def terraform_complete(provider, resource)
               else
                 result = parsed_data['resources'][resource]["arguments"]
               end
+              result.concat(JSON.parse(File.read("#{VIM::evaluate('s:path')}/../provider_json/base.json")))
             end
         elsif VIM::evaluate('a:provider_line') == 1 then
             result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('g:terraformcomplete_version')}/**/*.json").map { |x|
@@ -289,16 +290,21 @@ fun! terraformcomplete#Complete(findstart, base)
         ruby <<EOF
             require 'json'
             data = ''
-            File.open("#{VIM::evaluate('s:path')}/../provider_json/test/#{VIM::evaluate('a:provider')}.json", "r") do |f|
+            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('g:terraformcomplete_version')}/#{VIM::evaluate('a:provider')}.json", "r") do |f|
               f.each_line do |line|
                 data = line
               end
             end
 
+            base_data = JSON.parse(File.read("#{VIM::evaluate('s:path')}/../provider_json/base.json"))
+
             test = VIM::evaluate("a:test_name")
             parsed_data = ''
-            JSON.parse(data)['resources'][VIM::evaluate("a:resource")]['arguments'].each do |i| 
-                VIM::message(i)
+            result = JSON.parse(data)['resources'][VIM::evaluate("a:resource")]['arguments']
+
+            result.concat(base_data)
+
+            result.each do |i| 
                 if i['word'] == test
                     parsed_data = JSON.generate(i['subblock'])
                     break
@@ -326,10 +332,32 @@ EOF
             call add(a:resource_list, { 'word': 'var' })
             call add(a:resource_list, { 'word': 'module' })
             call add(a:resource_list, { 'word': 'data' })
+            ruby <<EOF
+            require 'json'
+            res = JSON.parse(File.read("#{VIM::evaluate('s:path')}/../provider_json/functions.json"))
+            res.each do |i|
+                VIM::command("call add(a:resource_list, #{JSON.generate(i)})") 
+            end
+EOF
 
             try
                 let a:curr = strpart(getline('.'),0, getpos('.')[2])
-                let a:attr = filter(split(split(a:curr, '${')[-1], '\.'), 'v:val !~ "}"')
+
+                ruby <<EOF
+                temp = VIM::evaluate('a:curr')
+                if temp[-1] != '.'
+                    temp = temp[0..-2]
+                end
+                if temp.match?(/\${.*[^\w.](?:(?![^\w.]))(.*\.)$/)
+                    res = temp.match(/\${.*[^\w.](?:(?![^\w.]))(.*\.)$/)[1]
+                elsif temp.match?(/.*\${(.*)$/)
+                    res = temp.match(/.*\${(.*)$/)[1]
+                end
+
+                VIM::command("let a:temp_attr = '#{res}'")
+EOF
+                let a:attr = split(a:temp_attr, '\.')
+
 
                 if len(a:attr) == 1
                     if a:attr[0] == "data" 

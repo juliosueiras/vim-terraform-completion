@@ -1,0 +1,152 @@
+[
+    {
+        "word": "basename"
+    },
+    {
+        "word": "base64decode"
+    },
+    {
+        "word": "base64encode"
+    },
+    {
+        "word": "base64sha256"
+    },
+    {
+        "word": "base64sha512"
+    },
+    {
+        "word": "ceil"
+    },
+    {
+        "word": "chomp"
+    },
+    {
+        "word": "cidrhost"
+    },
+    {
+        "word": "cidrnetmask"
+    },
+    {
+        "word": "cidrsubnet"
+    },
+    {
+        "word": "coalesce"
+    },
+    {
+        "word": "coalescelist"
+    },
+    {
+        "word": "compact"
+    },
+    {
+        "word": "concat"
+    },
+    {
+        "word": "dirname"
+    },
+    {
+        "word": "distinct"
+    },
+    {
+        "word": "element"
+    },
+    {
+        "word": "file"
+    },
+    {
+        "word": "matchkeys"
+    },
+    {
+        "word": "floor"
+    },
+    {
+        "word": "format"
+    },
+    {
+        "word": "formatlist"
+    },
+    {
+        "word": "index"
+    },
+    {
+        "word": "join"
+    },
+    {
+        "word": "jsonencode"
+    },
+    {
+        "word": "length"
+    },
+    {
+        "word": "list"
+    },
+    {
+        "word": "log"
+    },
+    {
+        "word": "lower"
+    },
+    {
+        "word": "map"
+    },
+    {
+        "word": "max"
+    },
+    {
+        "word": "md5"
+    },
+    {
+        "word": "merge"
+    },
+    {
+        "word": "min"
+    },
+    {
+        "word": "pathexpand"
+    },
+    {
+        "word": "uuid"
+    },
+    {
+        "word": "replace"
+    },
+    {
+        "word": "sha1"
+    },
+    {
+        "word": "sha256"
+    },
+    {
+        "word": "sha512"
+    },
+    {
+        "word": "signum"
+    },
+    {
+        "word": "slice"
+    },
+    {
+        "word": "sort"
+    },
+    {
+        "word": "split"
+    },
+    {
+        "word": "substr"
+    },
+    {
+        "word": "timestamp"
+    },
+    {
+        "word": "title"
+    },
+    {
+        "word": "trimspace"
+    },
+    {
+        "word": "upper"
+    },
+    {
+        "word": "zipmap"
+    }
+]

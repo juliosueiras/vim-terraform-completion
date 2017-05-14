@@ -155,6 +155,7 @@ let g:tagbar_type_terraform = {
 - [x] local/offline
 - [ ] Add completion tags, ingress, and other subblock
 - [ ] Further seperate data source from resource
+- [x] Completion for functions(file,etc) and basic resource arguments(count,lifecyle, etc)
 
 ## Todo for HCL
 - [ ] Add Completion for hcl
