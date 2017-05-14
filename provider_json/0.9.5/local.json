@@ -1,1 +1,1 @@
-{"provider_arguments":[],"resources":{"file":{"provider":"local","arguments":[{"word":"content","info":"content - (Required) The content of file to create.\n"},{"word":"filename","info":"filename - (Required) The path of the file to create.\n"}],"attributes":[]}},"datas":{},"unknowns":{}}
+{"provider_arguments":[],"resources":{"file":{"provider":"local","arguments":[{"word":"content","info":"content - (Required) The content of file to create."},{"word":"filename","info":"filename - (Required) The path of the file to create."}],"attributes":[]}},"datas":{},"unknowns":{}}

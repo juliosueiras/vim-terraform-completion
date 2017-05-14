@@ -95,7 +95,11 @@ provider.each do |i|
                 i1['subblock'] = []
                 i1['kind'] = 'subblock'
                 sub_name.parent.next.next.css("li").each do |i2|
-                  name = i2.css('a').text()
+                  begin
+                    name = i2.css("a[name]")[0]['name']
+                  rescue
+                    name = i2.css("a[href]")[0]['href']
+                  end
                   info = i2.text()
                   if not name.nil? then
                     name = (not name.include? "-") ? name : name.split("-")[0]
@@ -123,7 +127,11 @@ provider.each do |i|
                 i1['subblock'] = []
                 i1['kind'] = 'subblock'
                 sub_ul.css("li").each do |i2|
-                  name = i2.css('a').text()
+                  begin
+                    name = i2.css("a[name]")[0]['name']
+                  rescue
+                    name = i2.css("a[href]")[0]['href']
+                  end
                   info = i2.text()
                   if not name.nil? then
                     name = (not name.include? "-") ? name : name.split("-")[0]

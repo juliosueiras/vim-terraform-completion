@@ -280,6 +280,37 @@ fun! terraformcomplete#Complete(findstart, base)
       let a:resource = ''
     endtry
 
+    let a:old_pos = getpos(".")
+    try
+        execute 'normal! [{'
+        let a:test_line = getline(".")
+        call setpos(".",a:old_pos)
+        let a:test_name = matchlist(a:test_line, '\s*\([^ ]*\)\s*{', '')[1]
+        ruby <<EOF
+            require 'json'
+            data = ''
+            File.open("#{VIM::evaluate('s:path')}/../provider_json/test/#{VIM::evaluate('a:provider')}.json", "r") do |f|
+              f.each_line do |line|
+                data = line
+              end
+            end
+
+            test = VIM::evaluate("a:test_name")
+            parsed_data = ''
+            JSON.parse(data)['resources'][VIM::evaluate("a:resource")]['arguments'].each do |i| 
+                VIM::message(i)
+                if i['word'] == test
+                    parsed_data = JSON.generate(i['subblock'])
+                    break
+                end
+            end
+            VIM::command("let a:res = #{parsed_data}")
+EOF
+        return a:res
+    catch
+    endtry
+    call setpos(".",a:old_pos)
+
 
     if strpart(getline('.'),0, getpos('.')[2]) =~ '\${[^}]*\%[}]$'
     try
