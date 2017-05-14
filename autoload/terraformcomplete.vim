@@ -350,8 +350,8 @@ EOF
                 end
                 if temp.match?(/\${.*[^\w.](?:(?![^\w.]))(.*\.)$/)
                     res = temp.match(/\${.*[^\w.](?:(?![^\w.]))(.*\.)$/)[1]
-                elsif temp.match?(/.*\${(.*)$/)
-                    res = temp.match(/.*\${(.*)$/)[1]
+                elsif temp.match?(/.*\${(.*\.)$/)
+                    res = temp.match(/.*\${(.*\.)$/)[1]
                 end
 
                 VIM::command("let a:temp_attr = '#{res}'")
