@@ -348,9 +348,9 @@ EOF
                 if temp[-1] != '.'
                     temp = temp[0..-2]
                 end
-                if temp.match?(/\${.*[^\w.](?:(?![^\w.]))(.*\.)$/)
+                if temp.match(/\${.*[^\w.](?:(?![^\w.]))(.*\.)$/) != nil
                     res = temp.match(/\${.*[^\w.](?:(?![^\w.]))(.*\.)$/)[1]
-                elsif temp.match?(/.*\${(.*\.)$/)
+                elsif temp.match(/.*\${(.*\.)$/) != nil
                     res = temp.match(/.*\${(.*\.)$/)[1]
                 end
 
