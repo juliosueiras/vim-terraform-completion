@@ -8,6 +8,8 @@
 ### Improvement
 - Much better attribute completion
 
+[![asciicast](https://asciinema.org/a/120505.png)](https://asciinema.org/a/120505)
+
 ## 2017-05-09(5 am)
 ### New Feature
 - Support for Neomake
