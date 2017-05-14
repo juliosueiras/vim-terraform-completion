@@ -12,127 +12,179 @@ page.css(".nav a").each do |x|
   end
 end
 
-
 if not Dir.exist? "provider_json/#{ARGV[0]}"
   Dir.mkdir "provider_json/#{ARGV[0]}"
 end
 
 provider.each do |i|
-  begin
-  page = Nokogiri::HTML(open("https://terraform.io#{i}"))
-  provider_name = i.split('/')[-2]
-  links = []
-  provider_arguments = []
+    page = Nokogiri::HTML(open("https://terraform.io#{i}"))
+    provider_name = i.split('/')[-2]
+    links = []
+    provider_arguments = []
 
-  puts "Starting Provider of #{provider_name}"
+    puts "Starting Provider of #{provider_name}"
 
-  page.css("#argument-reference ~ ul:first-of-type > li").each do |i|
-    name = i.css('a').text()
-    info = i.text()
-    if not name.nil? then
-      name = (not name.include? "-") ? name : name.split("-")[0]
-      provider_arguments.push({ 'word' => name, "info" => info})
+    page.css("#argument-reference ~ ul:first-of-type > li").each do |e|
+      name = e.css('a').text()
+      info = e.text()
+      if not name.nil? then
+        name = (not name.include? "-") ? name : name.split("-")[0]
+        provider_arguments.push({ 'word' => name, "info" => info})
+      end
     end
-  end
 
+    page.css(".docs-sidenav a").each do |x| 
 
-
-  page.css(".docs-sidenav a").each do |x| 
-
-
-
-    if not x['href'] == '#' then
-      if not x['href'] == "/docs/providers/#{provider_name}/index.html" then
-        if not x['href'] == '/docs/providers/index.html' then
-          links.push(x['href'])
+      if not x['href'] == '#' then
+        if not x['href'] == "/docs/providers/#{provider_name}/index.html" then
+          if not x['href'] == '/docs/providers/index.html' then
+            links.push(x['href'])
+          end
         end
       end
     end
-  end
 
-  result = {}
+    result = {}
 
-  result["provider_arguments"] = provider_arguments
-  result["resources"] = {}
-  result["datas"] = {}
-  result["unknowns"] = {}
+    result["provider_arguments"] = provider_arguments
+    result["resources"] = {}
+    result["datas"] = {}
+    result["unknowns"] = {}
 
-  links.each do |x|
-    page = Nokogiri::HTML(open("http://terraform.io#{x}"))
+    links.each do |x|
+      page = Nokogiri::HTML(open("http://terraform.io#{x}"))
 
-    arguments = []
-    attributes = []
-    location = ""
+      arguments = []
+      attributes = []
+      location = ""
 
-    if x.match? /\/docs\/providers\/[^\/]*\/r\/.*/
-      location = "resources"
-    elsif x.match? /\/docs\/providers\/[^\/]*\/d\/.*/
-      location = "datas"
-    else 
-      location = "unknowns"
-    end
+      if x.match? /\/docs\/providers\/[^\/]*\/r\/.*/
+        location = "resources"
+      elsif x.match? /\/docs\/providers\/[^\/]*\/d\/.*/
+        location = "datas"
+      else 
+        location = "unknowns"
+      end
 
-    page.css("#argument-reference ~ ul:first-of-type > li").each do |i|
+      page.css("#argument-reference ~ ul:first-of-type > li").each do |i|
+        begin
+          begin
+            name = i.css("a[name]")[0]['name']
+          rescue
+            name = i.css("a[href]")[0]['href']
+          end
+          if i.css("p").empty?
+            info = i.text()
+          else
+            info = i.css("p")[0].text()
+          end
+          if not name.nil? then
+            name = (not name.include? "-") ? name : name.split("-")[0]
+            arguments.push({ 'word' => name, "info" => info})
+          end
+        rescue
+        end
+      end
+
       begin
-        begin
-          name = i.css("a[name]")[0]['name']
-        rescue
-          name = i.css("a[href]")[0]['href']
-        end
-        info = i.text()
-        if not name.nil? then
-          name = (not name.include? "-") ? name : name.split("-")[0]
-          arguments.push({ 'word' => name, "info" => info})
-        end
-      rescue
-      end
-    end
-
-    page.css("#attributes-reference ~ ul:first-of-type li").each do |i|
-      begin 
-        begin
-          name = i.css("a[name]")[0]['name']
-        rescue
-          name = i.css("a[href]")[0]['href']
-        end
-        info = i.text()
-        if not name.nil? then
-          name = (not name.include? "-") ? name : name.split("-")[0]
-          attributes.push({ 'word' => name, "info" => info})
+        sub_names = page.css("#argument-reference ~ * > code")
+        sub_names.each do |sub_name| 
+          begin
+            arguments.map do |i1|
+              if sub_name.text == i1['word']
+                i1['subblock'] = []
+                i1['kind'] = 'subblock'
+                sub_name.parent.next.next.css("li").each do |i2|
+                  name = i2.css('a').text()
+                  info = i2.text()
+                  if not name.nil? then
+                    name = (not name.include? "-") ? name : name.split("-")[0]
+                    i1['subblock'].push({ 'word' => name, "info" => info})
+                  end
+                end
+              else
+                i1
+              end
+            end
+          rescue
+            puts "Error Found #{sub_name}"
+          end
         end
       rescue
+        puts "Error Found #{x}"
       end
-    end
 
-    page.css("#attribute-reference ~ ul:first-of-type li").each do |i|
-      begin 
-        begin
-          name = i.css("a[name]")[0]['name']
-        rescue
-          name = i.css("a[href]")[0]['href']
-        end
-        info = i.text()
-        if not name.nil? then
-          name = (not name.include? "-") ? name : name.split("-")[0]
-          attributes.push({ 'word' => name, "info" => info})
+      begin
+        sub_uls = page.css("#argument-reference ~ ul")[0].css("ul")
+        sub_uls.each do |sub_ul| 
+          begin
+            arguments.map do |i1|
+              if sub_ul.parent.css('a[name]')[0]['name'] == i1['word']
+                i1['subblock'] = []
+                i1['kind'] = 'subblock'
+                sub_ul.css("li").each do |i2|
+                  name = i2.css('a').text()
+                  info = i2.text()
+                  if not name.nil? then
+                    name = (not name.include? "-") ? name : name.split("-")[0]
+                    i1['subblock'].push({ 'word' => name, "info" => info})
+                  end
+                end
+              else
+                i1
+              end
+            end
+          rescue
+            puts "Error Found #{sub_name}"
+          end
         end
       rescue
+        puts "Error Found #{x}"
       end
+
+      page.css("#attributes-reference ~ ul:first-of-type li").each do |i|
+        begin 
+          begin
+            name = i.css("a[name]")[0]['name']
+          rescue
+            name = i.css("a[href]")[0]['href']
+          end
+          info = i.text()
+          if not name.nil? then
+            name = (not name.include? "-") ? name : name.split("-")[0]
+            attributes.push({ 'word' => name, "info" => info})
+          end
+        rescue
+        end
+      end
+
+      page.css("#attribute-reference ~ ul:first-of-type li").each do |i|
+        begin 
+          begin
+            name = i.css("a[name]")[0]['name']
+          rescue
+            name = i.css("a[href]")[0]['href']
+          end
+          info = i.text()
+          if not name.nil? then
+            name = (not name.include? "-") ? name : name.split("-")[0]
+            attributes.push({ 'word' => name, "info" => info})
+          end
+        rescue
+        end
+      end
+
+      name = x.split('/')[-1].split(".html")[0]
+      if name.split('_')[0] == provider_name
+        name = name.split('_')[1..-1].join('_')
+      end
+      result[location][name] = { "provider" => provider_name, "arguments" => arguments, "attributes" => attributes }
+      puts "Finish #{name} of #{provider_name}"
     end
 
-    name = x.split('/')[-1].split(".html")[0]
-    if name.split('_')[0] == provider_name
-      name = name.split('_')[1..-1].join('_')
+    if provider_name == "do" then 
+      provider_name = "digitalocean"
     end
-    result[location][name] = { "provider" => provider_name, "arguments" => arguments, "attributes" => attributes }
-    puts "Finish #{name} of #{provider_name}"
-  end
 
-  if provider_name == "do" then 
-    provider_name = "digitalocean"
-  end
-
-  File.open("provider_json/#{ARGV[0]}/#{provider_name}.json", 'w') { |file| file.write(JSON.generate(result)) }
-  rescue
-  end
+    File.open("provider_json/#{ARGV[0]}/#{provider_name}.json", 'w') { |file| file.write(JSON.generate(result)) }
 end
