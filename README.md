@@ -142,8 +142,9 @@ let g:tagbar_type_terraform = {
 [Demo of the linter](https://asciinema.org/a/118441)
 
 ## Todo for Terraform completion
-- [x] Version-based Completion
+- (Scrape due to Speed, Storage, and Inconsistency) Version-based Completion
 - [ ] Provider
+- [x] Completion for functions(file,etc) and basic resource arguments(count,lifecyle, etc)
 - [x] Module (Make sure you run `terraform get` beforehand)
 - [x] Data
 - [x] Resource(with Provider)
@@ -155,11 +156,10 @@ let g:tagbar_type_terraform = {
 - [x] local/offline
 - [ ] Add completion tags, ingress, and other subblock
 - [ ] Further seperate data source from resource
-- [x] Completion for functions(file,etc) and basic resource arguments(count,lifecyle, etc)
 
 ## Todo for HCL
 - [ ] Add Completion for hcl
-- [X] Completion for Sublock(Done for Completion, require further checking for Edge Cases)
+- [X] Completion for Sublock
 ## Todo for Improvement
 - [X] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
 

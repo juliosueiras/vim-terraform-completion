@@ -1,5 +1,12 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-15
+### Remove
+- Version based completion is remove due to load time, storage, and the docs are inconsistent
+### Improvement
+- All data and resources arguments have type with it now
+- Block completion is complete , thanks to data from [VladRassokhin](https://github.com/VladRassokhin/)
+
 ## 2017-05-14
 ### New Features
 - Basic Block Completion

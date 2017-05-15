@@ -1,0 +1,1 @@
+{"provider_arguments":[],"resources":{"file":{"provider":"local","arguments":[{"word":"content","info":"content - (Required) The content of file to create.","kind":"String"},{"word":"filename","kind":"String"}],"attributes":[]}},"datas":{},"unknowns":{}}

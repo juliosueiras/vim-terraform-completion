@@ -3,7 +3,7 @@ require 'json'
 
 begin
 data = ''
-File.open("#{ARGV[0]}/../provider_json/#{ARGV[6]}/#{ARGV[2]}.json", "r") do |f|
+File.open("#{ARGV[0]}/../provider_json/#{ARGV[2]}.json", "r") do |f|
   f.each_line do |line|
     data = line
   end

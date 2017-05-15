@@ -49,31 +49,7 @@ endif
 
 
 
-if !exists('g:terraformcomplete_version')
-  ruby <<EOF
-    res = '0.9.4'
-    ENV['PATH'].split(':').each do |folder|
-        if File.exists?(folder+'/terraform')
-            res = `terraform -v`.match(/v(.*)/).captures[0]
-        end
-    end
-    Vim::command("let g:terraformcomplete_version = '#{res}'")
-EOF
-endif
-
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-
-if !exists('g:terraform_docs_versions')
-    let g:terraform_docs_versions = []
-    for s:version in split(globpath(s:path . '/../provider_json', "**/"), '\n')
-        let g:terraform_docs_versions += split(split(s:version, s:path . '/../provider_json/')[-1], '/')
-    endfor
-endif
-
-
-
-
-
 
 
 let s:oldpos = []
@@ -144,7 +120,7 @@ function! terraformcomplete#GetDoc()
       let a:res_type = 'arguments'
     endif
 
-      let res = system(s:path . '/../utils/get_doc ' . s:path . " '" . a:search_word . "' " . a:provider . " " . a:resource . " " . s:type . " " . a:res_type . " " . g:terraformcomplete_version)
+      let res = system(s:path . '/../utils/get_doc ' . s:path . " '" . a:search_word . "' " . a:provider . " " . a:resource . " " . s:type . " " . a:res_type)
 
       echo substitute(res, '\n', '', '')
 endfunction
@@ -191,7 +167,7 @@ def terraform_complete(provider, resource)
     begin
         data = ''
         if VIM::evaluate('a:provider_line') == 0 then
-            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('g:terraformcomplete_version')}/#{provider}.json", "r") do |f|
+            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}.json", "r") do |f|
               f.each_line do |line|
                 data = line
               end
@@ -222,11 +198,11 @@ def terraform_complete(provider, resource)
               else
                 result = parsed_data['resources'][resource]["arguments"]
               end
-              result.concat(JSON.parse(File.read("#{VIM::evaluate('s:path')}/../provider_json/base.json")))
+              result.concat(JSON.parse(File.read("#{VIM::evaluate('s:path')}/../extra_json/base.json")))
             end
         elsif VIM::evaluate('a:provider_line') == 1 then
-            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('g:terraformcomplete_version')}/**/*.json").map { |x|
-              { "word" => x.split("../provider_json/#{VIM::evaluate('g:terraformcomplete_version')}/")[1].split('.json')[0] }
+            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/**/*.json").map { |x|
+              { "word" => x.split("../provider_json/")[1].split('.json')[0] }
             }
         end
 
@@ -264,10 +240,6 @@ fun! terraformcomplete#Complete(findstart, base)
     endwhile
     return start
   else
-    if index(g:terraform_docs_versions, g:terraformcomplete_version) ==? -1
-        let g:terraformcomplete_version = '0.9.4'
-    endif
-
     let res = []
     try
       let a:provider = terraformcomplete#GetProvider()
@@ -290,13 +262,13 @@ fun! terraformcomplete#Complete(findstart, base)
         ruby <<EOF
             require 'json'
             data = ''
-            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('g:terraformcomplete_version')}/#{VIM::evaluate('a:provider')}.json", "r") do |f|
+            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('a:provider')}.json", "r") do |f|
               f.each_line do |line|
                 data = line
               end
             end
 
-            base_data = JSON.parse(File.read("#{VIM::evaluate('s:path')}/../provider_json/base.json"))
+            base_data = JSON.parse(File.read("#{VIM::evaluate('s:path')}/../extra_json/base.json"))
 
             test = VIM::evaluate("a:test_name")
             parsed_data = ''
@@ -334,7 +306,7 @@ EOF
             call add(a:resource_list, { 'word': 'data' })
             ruby <<EOF
             require 'json'
-            res = JSON.parse(File.read("#{VIM::evaluate('s:path')}/../provider_json/functions.json"))
+            res = JSON.parse(File.read("#{VIM::evaluate('s:path')}/../extra_json/functions.json"))
             res.each do |i|
                 VIM::command("call add(a:resource_list, #{JSON.generate(i)})") 
             end
