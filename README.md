@@ -22,7 +22,8 @@
   * [Todo for Terraform completion](#todo-for-terraform-completion)
   * [Todo for HCL](#todo-for-hcl)
   * [Todo for Improvement](#todo-for-improvement)
-  * [Contributors](#contributors)%
+  * [Credits](#credits)
+  * [Contributors](#contributors)
 
 **A very early prototype**
 
@@ -162,5 +163,8 @@ let g:tagbar_type_terraform = {
 - [X] Completion for Sublock
 ## Todo for Improvement
 - [X] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
+
+## Credits
+- Completion data is from Terraform Official Documentation and Model data from [Intellij-HCL](https://github.com/VladRassokhin/intellij-hcl/)
 
 ## [Contributors](./CONTRIBUTORS.md)
