@@ -25,7 +25,9 @@
   * [Credits](#credits)
   * [Contributors](#contributors)
 
-**A very early prototype**
+### Block Completions
+
+![block completion](pics/block.png)
 
 ## Dependencies
 
@@ -160,7 +162,7 @@ let g:tagbar_type_terraform = {
 
 ## Todo for HCL
 - [ ] Add Completion for hcl
-- [X] Completion for Sublock
+- [X] Completion for Sublock(Indicate by `Type(B)` )
 ## Todo for Improvement
 - [X] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
 
