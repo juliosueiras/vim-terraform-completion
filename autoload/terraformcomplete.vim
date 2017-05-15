@@ -201,7 +201,7 @@ def terraform_complete(provider, resource)
               result.concat(JSON.parse(File.read("#{VIM::evaluate('s:path')}/../extra_json/base.json")))
             end
         elsif VIM::evaluate('a:provider_line') == 1 then
-            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/**/*.json").map { |x|
+            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/*.json").map { |x|
               { "word" => x.split("../provider_json/")[1].split('.json')[0] }
             }
         end

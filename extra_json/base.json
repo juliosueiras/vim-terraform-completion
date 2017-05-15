@@ -16,7 +16,7 @@
     },
     {
         "word": "lifecycle",
-        "kind": "Set",
+        "kind": "Set(B)",
         "subblock": [
             {
                 "word": "create_before_destroy "
@@ -32,7 +32,7 @@
     },
     {
         "word": "timeouts",
-        "kind": "subblock",
+        "kind": "Map(B)",
         "subblock": [
             { "word": "create"},
             {"word":"delete"}
