@@ -26,8 +26,11 @@
   * [Contributors](#contributors)
 
 ### Block Completions
+(R) for Require , (O) for Optional and (B) for Block
 
 ![block completion](pics/block.png)
+
+![block 2 completion](pics/block2.png)
 
 ## Dependencies
 
