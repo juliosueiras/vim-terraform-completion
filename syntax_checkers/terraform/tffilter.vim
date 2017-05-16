@@ -1,5 +1,5 @@
 "============================================================================
-"File:        tf_filter.vim
+"File:        tffilter.vim
 "Description: Syntax checking plugin for syntastic.vim(Custom Filter for
 "terraform)
 "Maintainer:  Julio Tain Sueiras <juliosueiras@gmail.com>
@@ -11,24 +11,24 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_terraform_tf_filter_checker')
+if exists('g:loaded_syntastic_terraform_tffilter_checker')
     finish
 endif
 
-if !exists('g:syntastic_terraform_tf_filter_plan')
-  let g:syntastic_terraform_tf_filter_plan = 0
+if !exists('g:syntastic_terraform_tffilter_plan')
+  let g:syntastic_terraform_tffilter_plan = 0
 endif
 
-let g:loaded_syntastic_terraform_tf_filter_checker = 1
+let g:loaded_syntastic_terraform_tffilter_checker = 1
 
 let s:save_cpo = &cpo
 set cpo&vim
 
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
-function! SyntaxCheckers_terraform_tf_filter_GetLocList() dict
-    if g:syntastic_terraform_tf_filter_plan == 1
-      let makeprg = self.makeprgBuild({'fname_after': '--with-plan' })
+function! SyntaxCheckers_terraform_tffilter_GetLocList() dict
+    if g:syntastic_terraform_tffilter_plan == 1
+      let makeprg = self.makeprgBuild({'fname_after': ' --with-plan' })
     else
       let makeprg = self.makeprgBuild({'fname_after': '' })
     endif
@@ -37,17 +37,19 @@ function! SyntaxCheckers_terraform_tf_filter_GetLocList() dict
         \ '%f:%l:%m'
 
     let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb' }
+
     return SyntasticMake({
-        \ 'defaults': { 'bufnr': bufnr(''), 'text': 'Syntax error' },
+        \ 'defaults': { 'bufnr': bufnr('')},
         \ 'makeprg': makeprg,
         \ 'cwd': expand('%:p:h'),
         \ 'errorformat': errorformat })
+
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'terraform',
-    \ 'name': 'tf_filter',
-    \ 'exec': s:path . '/../../utils/terraform_validate_filter'})
+    \ 'name': 'tffilter',
+    \ 'exec': 'tffilter' })
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

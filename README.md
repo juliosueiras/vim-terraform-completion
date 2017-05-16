@@ -87,7 +87,7 @@ autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " (Optional) Enable terraform plan to be include in filter
-let g:syntastic_terraform_tf_filter_plan = 1
+let g:syntastic_terraform_tffilter_plan = 1
 
 " (Optional, If terraform exist is Default to the version of it, or else Defalt to 0.9.4) Version to complete from
 let g:terraformcomplete_version = '0.9.4'
@@ -142,6 +142,8 @@ let g:tagbar_type_terraform = {
 - [ ] (WIP) Full Snippets
 
 **NOTE:** enabling deep check for tflint can be a bit slow
+
+**NOTE:** To use `tffilter` please add `export PATH=$PATH:/path/to/this/plugin/bin` to your bashrc or zshrc
 
 [Demo of the linter](https://asciinema.org/a/118441)
 
