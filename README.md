@@ -28,9 +28,9 @@
 ### Block Completions
 (R) for Require , (O) for Optional and (B) for Block
 
-![block completion](pics/block.png)
+![block completion](pics/block_completion1.png)
 
-![block 2 completion](pics/block2.png)
+![block 2 completion](pics/block_completion2.png)
 
 ## Dependencies
 
