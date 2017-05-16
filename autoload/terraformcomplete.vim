@@ -257,6 +257,8 @@ fun! terraformcomplete#Complete(findstart, base)
     try
         execute 'normal! [{'
         let a:test_line = getline(".")
+        execute 'normal! [{'
+        let a:data_or_resource = matchlist(getline("."), '\s*\([^" ]*\)\s*.*', '')[1]
         call setpos(".",a:old_pos)
         let a:test_name = matchlist(a:test_line, '\s*\([^ ]*\)\s*{', '')[1]
         ruby <<EOF
@@ -272,7 +274,7 @@ fun! terraformcomplete#Complete(findstart, base)
 
             test = VIM::evaluate("a:test_name")
             parsed_data = ''
-            result = JSON.parse(data)['resources'][VIM::evaluate("a:resource")]['arguments']
+            result = JSON.parse(data)["#{VIM::evaluate('a:data_or_resource')}s"][VIM::evaluate("a:resource")]['arguments']
 
             result.concat(base_data)
 
