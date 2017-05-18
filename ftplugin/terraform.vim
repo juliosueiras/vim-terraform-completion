@@ -9,5 +9,5 @@ augroup TerraformCompleteKeys
     autocmd FileType terraform noremap <buffer> <C-L> :call terraformcomplete#JumpRef()<CR>
 augroup END
 
-set keywordprg=:help
+silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#Run()<CR>
 

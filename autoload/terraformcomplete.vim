@@ -51,6 +51,17 @@ endif
 
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
+fun! terraformcomplete#Run()
+    let file = expand('%')
+    botright new
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal nowrap
+    setlocal noswapfile
+    silent execute ':r!terraform plan -no-color -input=false'
+    noremap <silent><buffer> q :q<CR>
+endfunc
+
 
 let s:oldpos = []
 function! terraformcomplete#JumpRef()
@@ -420,7 +431,7 @@ EOF
             return a:resource_list
         endtry
     else
-      try
+        try
           let s:curr_pos = getpos('.')
           let s:oldline = getline('.')
           call search('^\s*\(resource\|data\|module\)\s*"', 'b')
@@ -454,8 +465,8 @@ EOF
             endfor
             return res
           endif
-        catch
-        endtry
+      catch
+      endtry
     endif
   endif
 endfun
