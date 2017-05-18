@@ -51,6 +51,18 @@ endif
 
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
+
+function! terraformcomplete#OutputFold()
+    let curr_line = getline(v:lnum)
+    if match(curr_line, '-/+ .*') >= 0
+        return ">1"
+    elseif match(curr_line, '\~ .*') >= 0
+        return ">1"
+    else
+        return "="
+    end
+endfunction
+
 fun! terraformcomplete#Run()
     let file = expand('%')
     botright new
@@ -58,10 +70,12 @@ fun! terraformcomplete#Run()
     setlocal bufhidden=hide
     setlocal nowrap
     setlocal noswapfile
+    setlocal readonly
     silent execute ':r!terraform plan -no-color -input=false'
+    setlocal foldmethod=expr
+    setlocal foldexpr=terraformcomplete#OutputFold()
     noremap <silent><buffer> q :q<CR>
 endfunc
-
 
 let s:oldpos = []
 function! terraformcomplete#JumpRef()
