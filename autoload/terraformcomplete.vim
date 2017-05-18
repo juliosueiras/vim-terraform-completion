@@ -374,15 +374,19 @@ EOF
                         require 'json'
 
                         def terraform_get_vars()
-                            vars_file_path = "#{Vim::evaluate("expand('%:p:h')")}/variables.tf"
-                            if File.readable? vars_file_path then
-                                vars_array = File.read(vars_file_path)
-                                vars_array = vars_array.split("\n")
-                                vars_array = vars_array.find_all {|x| x[/variable\s*".*"/]}
-                                vars = vars_array.map {|x| { "word": x.split(" ")[1].tr("\"", '')} }
-                                return JSON.generate(vars)
+                            path = "#{Vim::evaluate("expand('%:p:h')")}"
+                            curr_file = "#{Vim::evaluate("expand('%:p')")}"
+                            vars_file_paths = ["#{path}/variables.tf", "#{path}/vars.tf", curr_file]
+                            vars = []
+                            vars_file_paths.each do |file|
+                                if File.readable? file then
+                                    vars_array = File.read(file)
+                                    vars_array = vars_array.split("\n")
+                                    vars_array = vars_array.find_all {|x| x[/variable\s*".*"/]}
+                                    vars.concat(vars_array.map {|x| { "word": x.split(" ")[1].tr("\"", '')} })
+                                end
                             end
-                            return []
+                            return JSON.generate(vars)
                         end
 
                         Vim::command("let a:vars_res = #{terraform_get_vars()}")
