@@ -6,6 +6,10 @@
 
 [![asciicast](https://asciinema.org/a/121068.png)](https://asciinema.org/a/121068)
 
+- Run as Async Job
+
+[![asciicast](https://asciinema.org/a/121097.png)](https://asciinema.org/a/121097)
+
 ### Improvement
 - Module completion for subpath of github/bitbucket
 
