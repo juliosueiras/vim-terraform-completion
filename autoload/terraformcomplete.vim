@@ -56,6 +56,10 @@ function! terraformcomplete#OutputFold()
     let curr_line = getline(v:lnum)
     if match(curr_line, '-/+ .*') >= 0
         return ">1"
+    elseif match(curr_line, '^+ .*') >= 0
+        return ">1"
+    elseif match(curr_line, '^- .*') >= 0
+        return ">1"
     elseif match(curr_line, '\~ .*') >= 0
         return ">1"
     else
