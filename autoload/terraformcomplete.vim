@@ -56,6 +56,8 @@ function! terraformcomplete#OutputFold()
     let curr_line = getline(v:lnum)
     if match(curr_line, '-/+ .*') >= 0
         return ">1"
+    elseif match(curr_line, '^\* .*') >= 0
+        return ">1"
     elseif match(curr_line, '^+ .*') >= 0
         return ">1"
     elseif match(curr_line, '^- .*') >= 0
@@ -100,30 +102,14 @@ fun! terraformcomplete#NeovimRun()
         echo 'Running Plan in background'
 
         let g:planOutputFile = tempname()
-        let job1 = jobstart(['bash', '-c', 'terraform plan -input=false -no-color > ' . g:planOutputFile ], extend({'shell': ''}, s:callbacks))
-    endif
-endfun
-
-fun! terraformcomplete#AsyncRun()
-    if v:version < 800
-        echoerr 'AsyncRun requires VIM version 8 or higher'
-        return
-    endif
-
-    if exists('g:planOutputFile')
-        echo 'Already running Plan in background'
-    else
-        echo 'Running Plan in background'
-
-        let g:planOutputFile = tempname()
-        call job_start('terraform plan -input=false -no-color', {'close_cb': 'terraformcomplete#AsyncRunHandler', 'out_io': 'file', 'out_name': g:planOutputFile})
+        let job1 = jobstart(['/bin/sh', '-c', 'terraform plan -input=false -no-color &> ' . g:planOutputFile ], extend({'shell': ''}, s:callbacks))
     endif
 endfun
 
 function! terraformcomplete#AsyncRunHandler(channel)
 	    let file = expand('%')
 	    botright new
-        execute ":r " . g:planOutputFile
+        execute ':r ' . g:planOutputFile
 	    setlocal buftype=nofile
 	    setlocal bufhidden=hide
 	    setlocal nowrap
@@ -148,7 +134,7 @@ fun! terraformcomplete#AsyncRun()
         echo 'Running Plan in background'
 
         let g:planOutputFile = tempname()
-        call job_start('terraform plan -input=false -no-color', {'close_cb': 'terraformcomplete#AsyncRunHandler', 'out_io': 'file', 'out_name': g:planOutputFile})
+        call job_start(["/bin/sh", "-c", "terraform plan -input=false -no-color &> " . g:planOutputFile], {'close_cb': 'terraformcomplete#AsyncRunHandler'})
     endif
 endfun
 
@@ -597,7 +583,7 @@ fun! terraformcomplete#GetAllModule() abort
   let a:list = []
   let a:source_list = {}
   if getline(".") =~ 'module\s*".*"\s*' 
-      let temp = substitute(split(split(getline(1),'module ')[0], ' ')[0], '"','','g')
+      let temp = substitute(split(split(getline(1),'\s*module ')[0], ' ')[0], '"','','g')
       let a:oldpos = getpos('.')
       call search('source\s*=')
       let a:source = getline('.')
