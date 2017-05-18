@@ -67,6 +67,91 @@ function! terraformcomplete#OutputFold()
     end
 endfunction
 
+function! terraformcomplete#NeovimRunHandler(job_id, data, event) dict
+	if a:event == 'stdout'
+	elseif a:event == 'stderr'
+	else
+	    let file = expand('%')
+	    botright new
+        execute ':r ' . g:planOutputFile
+	    setlocal buftype=nofile
+	    setlocal bufhidden=hide
+	    setlocal nowrap
+	    setlocal noswapfile
+	    setlocal readonly
+	    setlocal foldmethod=expr
+	    setlocal foldexpr=terraformcomplete#OutputFold()
+        execute 'normal! GG'
+	    noremap <silent><buffer> q :q<CR>
+        unlet g:planOutputFile
+	endif
+endfunction
+
+fun! terraformcomplete#NeovimRun() 
+    let s:callbacks = {
+                \ 'on_stdout': function('terraformcomplete#NeovimRunHandler'),
+                \ 'on_stderr': function('terraformcomplete#NeovimRunHandler'),
+                \ 'on_exit': function('terraformcomplete#NeovimRunHandler')
+                \ }
+
+    if exists('g:planOutputFile')
+        echo 'Already running Plan in background'
+    else
+        echo 'Running Plan in background'
+
+        let g:planOutputFile = tempname()
+        let job1 = jobstart(['bash', '-c', 'terraform plan -input=false -no-color > ' . g:planOutputFile ], extend({'shell': ''}, s:callbacks))
+    endif
+endfun
+
+fun! terraformcomplete#AsyncRun()
+    if v:version < 800
+        echoerr 'AsyncRun requires VIM version 8 or higher'
+        return
+    endif
+
+    if exists('g:planOutputFile')
+        echo 'Already running Plan in background'
+    else
+        echo 'Running Plan in background'
+
+        let g:planOutputFile = tempname()
+        call job_start('terraform plan -input=false -no-color', {'close_cb': 'terraformcomplete#AsyncRunHandler', 'out_io': 'file', 'out_name': g:planOutputFile})
+    endif
+endfun
+
+function! terraformcomplete#AsyncRunHandler(channel)
+	    let file = expand('%')
+	    botright new
+        execute ":r " . g:planOutputFile
+	    setlocal buftype=nofile
+	    setlocal bufhidden=hide
+	    setlocal nowrap
+	    setlocal noswapfile
+	    setlocal readonly
+	    setlocal foldmethod=expr
+	    setlocal foldexpr=terraformcomplete#OutputFold()
+        execute 'normal! GG'
+	    noremap <silent><buffer> q :q<CR>
+        unlet g:planOutputFile
+endfunction
+
+fun! terraformcomplete#AsyncRun()
+    if v:version < 800
+        echoerr 'AsyncRun requires VIM version 8 or higher'
+        return
+    endif
+
+    if exists('g:planOutputFile')
+        echo 'Already running Plan in background'
+    else
+        echo 'Running Plan in background'
+
+        let g:planOutputFile = tempname()
+        call job_start('terraform plan -input=false -no-color', {'close_cb': 'terraformcomplete#AsyncRunHandler', 'out_io': 'file', 'out_name': g:planOutputFile})
+    endif
+endfun
+
 fun! terraformcomplete#Run()
     let file = expand('%')
     botright new

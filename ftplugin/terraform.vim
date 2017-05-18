@@ -9,5 +9,12 @@ augroup TerraformCompleteKeys
     autocmd FileType terraform noremap <buffer> <C-L> :call terraformcomplete#JumpRef()<CR>
 augroup END
 
-silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#Run()<CR>
+
+if has('nvim')
+    silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#NeovimRun()<CR>
+elseif v:version >= 800
+    silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#AsyncRun()<CR>
+else
+    silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#Run()<CR>
+end
 
