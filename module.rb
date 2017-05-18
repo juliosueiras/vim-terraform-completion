@@ -5,22 +5,33 @@ require "net/http"
 require 'digest'
 
 module ModuleUtils
-  def load_arg_module(name, source, path)
+  def parse_link(name, source)
     source_raw = source.match(/"(.*)"/).captures()[0]
-
-    if source_raw.start_with?"github"
-      hash_module = Digest::MD5.hexdigest "root.#{name}-#{source_raw}"
-      puts hash_module
-      link = "./.terraform/modules/#{hash_module}"
-    else
+    if source_raw.start_with?"./"
       link = source_raw
+    else
+      hash_module = Digest::MD5.hexdigest "root.#{name}-#{source_raw}"
+      if source_raw.split("/").length >= 4
+        link = "./.terraform/modules/#{hash_module}"
+        source_raw.split('/')[3..-1].each do |i| 
+          link += "/#{i}"
+        end
+      else
+        link = "./.terraform/modules/#{hash_module}"
+      end
     end
+    return link
+  end
+
+  def load_arg_module(name, source, path)
+
+    link = parse_link(name, source)
 
     variables = ''
     result = []
 
     ['main.tf', 'inputs.tf', 'variables.tf'].each do |i|
-      if File.exist?"#{path}/#{link}/#{i}"
+      if File.exist? "#{path}/#{link}/#{i}"
         variables = open("#{path}/#{link}/#{i}").read.split("\n").select { |x| x[/variable/]}
         variables.each do |x|
           result.push({ "word": x.match(/"(.*)"/).captures()[0] })
@@ -32,15 +43,7 @@ module ModuleUtils
   end
 
   def load_attr_module(name,source, path)
-    source_raw = source.match(/"(.*)"/).captures()[0]
-
-    if source_raw.start_with?"github"
-      hash_module = Digest::MD5.hexdigest "root.#{name}-#{source_raw}"
-      puts hash_module
-      link = "./.terraform/modules/#{hash_module}"
-    else
-      link = source_raw
-    end
+    link = parse_link(name, source)
 
     variables = ''
     result = []
@@ -57,4 +60,3 @@ module ModuleUtils
     return JSON.generate(result)
   end
 end
-
