@@ -37,5 +37,23 @@
             { "word": "create"},
             {"word":"delete"}
         ]
+    },
+    {
+        "word": "connection",
+        "kind": "Map(B)",
+        "subblock": [
+            { "word": "type"},
+            {"word":"user"},
+            {"word":"password"},
+            {"word":"host"},
+            {"word":"port"},
+            {"word":"timeout"},
+            {"word":"script_path"},
+            {"word":"private_key"},
+            {"word":"agent"},
+            {"word":"https"},
+            {"word":"insecure"},
+            {"word":"cacert"}
+        ]
     }
 ]
