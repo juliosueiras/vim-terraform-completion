@@ -9,6 +9,22 @@ Do (Autocompletion for data first(aws) test):
 Expect (get aws_acm_certificate):
   data "aws_acm_certificate
 
+Given terraform (Block Argument Completion Test):
+  data "aws_vpc" "test" {
+    filter {
+    }
+  }
+
+Do (Autocompletion for Block Argument Test):
+  1jo\<C-X>\<C-O>
+
+Expect (get adapter_type):
+  data "aws_vpc" "test" {
+    filter {
+    name
+    }
+  }
+
 Given terraform (Interpolation for Data Completion Test):
   data "aws_db_instance" "sd" {
   }

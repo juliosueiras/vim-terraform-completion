@@ -15,7 +15,21 @@ Expect (get var_name):
   var_name
   }
 
-Given terraform (Module Online Attribute Completion Test):
+Given terraform (Module Online argument Subpath Completion Test):
+  module "consul" {
+    source = "github.com/hashicorp/consul/terraform/aws"
+  }
+
+Do (Autocompletion for online module argument Subpath completion):
+  :w test.tf\<CR>:!terraform get\<CR>1jo\<C-X>\<C-O>\<ESC><<
+
+Expect (get private subnets):
+  module "consul" {
+    source = "github.com/hashicorp/consul/terraform/aws"
+  platform
+  }
+
+Given terraform (Module Online Attribute single path Completion Test):
   module "vpc" {
     source = "github.com/terraform-community-modules/tf_aws_vpc"
   }
@@ -23,7 +37,7 @@ Given terraform (Module Online Attribute Completion Test):
   resource "aws_db_instance" "test" {
   }
 
-Do (Autocompletion for online module attributes completion):
+Do (Autocompletion for online module attributes single path completion):
   :w test.tf\<CR>:!terraform get\<CR>4joname = "${module.\<C-X>\<C-O>.\<C-X>\<C-O>}"
 
 Expect (get private subnets):
@@ -34,6 +48,27 @@ Expect (get private subnets):
   resource "aws_db_instance" "test" {
   name = "${module.vpc.private_subnets}"
   }
+
+Given terraform (Module Online Attribute Subpath Completion Test):
+  module "consul" {
+    source = "github.com/hashicorp/consul/terraform/aws"
+  }
+
+  resource "aws_db_instance" "test" {
+  }
+
+Do (Autocompletion for online module attributes Subpath completion):
+  :w test.tf\<CR>:!terraform get\<CR>4joname = "${module.\<C-X>\<C-O>.\<C-X>\<C-O>}"
+
+Expect (get private subnets):
+  module "consul" {
+    source = "github.com/hashicorp/consul/terraform/aws"
+  }
+
+  resource "aws_db_instance" "test" {
+  name = "${module.consul.server_address}"
+  }
+
 
 Given terraform (Module Offline Attribute Completion Test):
   module "test" {

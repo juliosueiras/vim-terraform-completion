@@ -27,6 +27,23 @@ Expect (get aws_vpn_gateway_attachment):
   name
   }
 
+Given terraform (Block Argument Completion Test):
+  resource "vsphere_virtual_machine" "sd" {
+    network_interface {
+    }
+  }
+
+Do (Autocompletion for Block Argument Test):
+  1jo\<C-X>\<C-O>
+
+Expect (get adapter_type):
+  resource "vsphere_virtual_machine" "sd" {
+    network_interface {
+    adapter_type
+    }
+  }
+
+
 Given terraform (Resource Interpolation Completion Test):
   resource "docker_container" "sd" {
   }
