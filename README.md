@@ -175,5 +175,6 @@ let g:tagbar_type_terraform = {
 
 ## Credits
 - Completion data is from Terraform Official Documentation and Model data from [Intellij-HCL](https://github.com/VladRassokhin/intellij-hcl/)
+- Folding adapted from [vim-terraform](https://github.com/hashivim/vim-terraform)
 
 ## [Contributors](./CONTRIBUTORS.md)
