@@ -184,9 +184,9 @@ endfun
 function! terraformcomplete#rubyComplete(ins, provider, resource, attribute, data_or_resource)
     let s:curr_pos = getpos('.')
     let a:res = []
-    let a:resource_line = getline(s:curr_pos[1]) =~ "^\s*resource"
-    let a:data_line = getline(s:curr_pos[1]) =~ "^\s*data"
-    let a:provider_line = (strpart(getline("."),0, getpos(".")[2]) =~ '^\s*\(resource\|data\)\s*"\%["]$' || getline(s:curr_pos[1]) =~ "provider")
+    let a:resource_line = getline(s:curr_pos[1]) =~ "^[ ]*resource"
+    let a:data_line = getline(s:curr_pos[1]) =~ "^[ ]*data"
+    let a:provider_line = (strpart(getline("."),0, getpos(".")[2]) =~ '^[ ]*\(resource\|data\)[ ]*"\%["]$' || getline(s:curr_pos[1]) =~ "provider")
     
 
   ruby << EOF
@@ -351,8 +351,8 @@ EOF
                 if temp[-1] != '.'
                     temp = temp[0..-2]
                 end
-                if temp.match(/\${.*[^\w.](?:(?![^\w.]))(.*\.)$/) != nil
-                    res = temp.match(/\${.*[^\w.](?:(?![^\w.]))(.*\.)$/)[1]
+                if temp.match(/\${.*[^\w.-](?:(?![^\w.-]))(.*\.)$/) != nil
+                    res = temp.match(/\${.*[^\w.-](?:(?![^\w.-]))(.*\.)$/)[1]
                 elsif temp.match(/.*\${(.*\.)$/) != nil
                     res = temp.match(/.*\${(.*\.)$/)[1]
                 end
@@ -442,6 +442,18 @@ EOF
                             endif
                         endfor
                         return a:res
+                    else
+                      let a:provider = split(a:attr[0], "_")[0]
+
+                      let a:resource = split(a:attr[0], a:provider . "_")[0]
+                      let a:data_or_resource = 1
+
+                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource)
+                        if m.word =~ '^' . a:base
+                          call add(res, m)
+                        endif
+                      endfor
+                      return res
                     endif
                 else
                     return a:resource_list
