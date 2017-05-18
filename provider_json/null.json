@@ -1,0 +1,1 @@
+{"provider_arguments":[],"resources":{"resource": { "arguments":[{ "word": "triggers", "kind": "Map(O)", "info": "A mapping of values which should trigger a rerun of this set of provisioners. Values are meant to be interpolated references to variables or attributes of other resources." }] }},"datas":{},"unknowns":{}}
