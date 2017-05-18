@@ -16,12 +16,12 @@ Given terraform (Block Argument Completion Test):
   }
 
 Do (Autocompletion for Block Argument Test):
-  1jo\<C-X>\<C-O>
+  1jo\<C-X>\<C-O>\<ESC><<
 
 Expect (get adapter_type):
   data "aws_vpc" "test" {
     filter {
-    name
+  name
     }
   }
 

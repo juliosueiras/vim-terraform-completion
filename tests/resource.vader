@@ -34,12 +34,12 @@ Given terraform (Block Argument Completion Test):
   }
 
 Do (Autocompletion for Block Argument Test):
-  1jo\<C-X>\<C-O>
+  1jo\<C-X>\<C-O>\<ESC><<
 
 Expect (get adapter_type):
   resource "vsphere_virtual_machine" "sd" {
     network_interface {
-    adapter_type
+  adapter_type
     }
   }
 
