@@ -1,5 +1,14 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-18
+### New Feature
+- Run(`<leader>rr`) and Fold Output
+
+[![asciicast](https://asciinema.org/a/121068.png)](https://asciinema.org/a/121068)
+
+### Improvement
+- Module completion for subpath of github/bitbucket
+
 ## 2017-05-15
 ### Remove
 - Version based completion is remove due to load time, storage, and the docs are inconsistent
