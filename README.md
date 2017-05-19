@@ -1,4 +1,4 @@
-# Vim Terraform Completion with Linter - [Demos](./DEMO.md)
+# (Neo)Vim Terraform Completion with Linter - [Demos](./DEMO.md)
 
 ## [Changelog](./CHANGELOG.md)
 
