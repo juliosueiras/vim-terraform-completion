@@ -92,8 +92,6 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " (Optional) Enable terraform plan to be include in filter
 let g:syntastic_terraform_tffilter_plan = 1
 
-" (Optional, If terraform exist is Default to the version of it, or else Defalt to 0.9.4) Version to complete from
-let g:terraformcomplete_version = '0.9.4'
 ```
 
 ## Extra
