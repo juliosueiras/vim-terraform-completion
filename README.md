@@ -34,8 +34,10 @@
 
 ## Dependencies
 
-- [vim-terraform](https://github.com/hashivim/vim-terraform)
-- [vim-syntastic](https://github.com/vim-syntastic/syntastic)
+- [vim-terraform](https://github.com/hashivim/vim-terraform) (For FileType)
+- (Optional not require for completion)
+- [vim-syntastic](https://github.com/vim-syntastic/syntastic) (Only for Linter)
+- [neomake](https://github.com/neomake/neomake) (Only for Linter, Neovim)
 
 ## Installation
 
