@@ -83,6 +83,14 @@ function! terraformcomplete#NeovimRunHandler(job_id, data, event) dict
 	    setlocal readonly
 	    setlocal foldmethod=expr
 	    setlocal foldexpr=terraformcomplete#OutputFold()
+
+        syntax match addedItem '^+ .*'
+        syntax match removedItem '^- .*'
+        syntax match changedItem '^-/+ .*'
+        highlight addedItem guifg=#409900
+        highlight removedItem guifg=#BC4C4C
+        highlight changedItem guifg=#FFAE19
+
         execute 'normal! GG'
 	    noremap <silent><buffer> q :q<CR>
         unlet g:planOutputFile
@@ -117,6 +125,14 @@ function! terraformcomplete#AsyncRunHandler(channel)
 	    setlocal readonly
 	    setlocal foldmethod=expr
 	    setlocal foldexpr=terraformcomplete#OutputFold()
+
+        syntax match addedItem '^+ .*'
+        syntax match removedItem '^- .*'
+        syntax match changedItem '^-/+ .*'
+        highlight addedItem guifg=#409900
+        highlight removedItem guifg=#BC4C4C
+        highlight changedItem guifg=#FFAE19
+
         execute 'normal! GG'
 	    noremap <silent><buffer> q :q<CR>
         unlet g:planOutputFile
@@ -149,6 +165,14 @@ fun! terraformcomplete#Run()
     silent execute ':r!terraform plan -no-color -input=false'
     setlocal foldmethod=expr
     setlocal foldexpr=terraformcomplete#OutputFold()
+
+    syntax match addedItem '^+ .*'
+    syntax match removedItem '^- .*'
+    syntax match changedItem '^-/+ .*'
+    highlight addedItem guifg=#409900
+    highlight removedItem guifg=#BC4C4C
+    highlight changedItem guifg=#FFAE19
+
     noremap <silent><buffer> q :q<CR>
 endfunc
 
