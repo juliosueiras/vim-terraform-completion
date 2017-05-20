@@ -1,5 +1,11 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-20
+### Improvement
+- Plan have color now
+
+![color_plan](./pics/color_plan.png)
+
 ## 2017-05-18
 ### New Feature
 - Run(`<leader>rr`) and Fold Output
