@@ -135,6 +135,7 @@ let g:tagbar_type_terraform = {
 ```
 
 ## General Todo
+- [ ] (WIP) Refactoring Regex for linter and completion, and Trying out on api based(so it can integrade with other editor) solution
 - [x] Support for Neomake(Require further testing)
 - [X] Run terraform plan and output to a new window(`<leader>rr`) 
 - [X] Async Run support(For Neovim/Vim 8) 
