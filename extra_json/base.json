@@ -19,14 +19,16 @@
         "kind": "Set(B)",
         "subblock": [
             {
-                "word": "create_before_destroy "
+                "word": "create_before_destroy",
+                "kind": "Bool"
             },
             {
-                "word": "prevent_destroy"
-
+                "word": "prevent_destroy",
+                "kind": "Bool"
             },
             {
-                "word": "ignore_changes"
+                "word": "ignore_changes",
+                "kind": "List"
             }
         ]
     },
@@ -42,7 +44,7 @@
         "word": "connection",
         "kind": "Map(B)",
         "subblock": [
-            { "word": "type"},
+          { "word": "type"},
             {"word":"user"},
             {"word":"password"},
             {"word":"host"},
