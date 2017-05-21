@@ -1,6 +1,13 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
 ## 2017-05-20
+### New Feature
+- Lookup Attribute Data
+- If you have terraform.tfstate in your folder, then using `<leader>a` can show the data of the attribute
+
+[![asciicast](https://asciinema.org/a/121638.png)](https://asciinema.org/a/121638)
+
+## 2017-05-20
 ### Improvement
 - Plan have color now
 

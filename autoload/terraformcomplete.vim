@@ -87,9 +87,12 @@ function! terraformcomplete#NeovimRunHandler(job_id, data, event) dict
         syntax match addedItem '^+ .*'
         syntax match removedItem '^- .*'
         syntax match changedItem '^-/+ .*'
+        syntax match changed2Item '^\~ .*'
         highlight addedItem guifg=#409900
         highlight removedItem guifg=#BC4C4C
         highlight changedItem guifg=#FFAE19
+        highlight changed2Item guifg=#FFAE19
+
 
         execute 'normal! GG'
 	    noremap <silent><buffer> q :q<CR>
@@ -129,9 +132,11 @@ function! terraformcomplete#AsyncRunHandler(channel)
         syntax match addedItem '^+ .*'
         syntax match removedItem '^- .*'
         syntax match changedItem '^-/+ .*'
+        syntax match changed2Item '^\~ .*'
         highlight addedItem guifg=#409900
         highlight removedItem guifg=#BC4C4C
         highlight changedItem guifg=#FFAE19
+        highlight changed2Item guifg=#FFAE19
 
         execute 'normal! GG'
 	    noremap <silent><buffer> q :q<CR>
@@ -169,9 +174,11 @@ fun! terraformcomplete#Run()
     syntax match addedItem '^+ .*'
     syntax match removedItem '^- .*'
     syntax match changedItem '^-/+ .*'
+    syntax match changed2Item '^~ .*'
     highlight addedItem guifg=#409900
     highlight removedItem guifg=#BC4C4C
     highlight changedItem guifg=#FFAE19
+    highlight changed2Item guifg=#FFAE19
 
     noremap <silent><buffer> q :q<CR>
 endfunc
@@ -204,6 +211,45 @@ function! terraformcomplete#JumpRef()
         end
     catch
     endtry
+endfunction
+
+function! terraformcomplete#LookupAttr()
+    " TODO: Improve capture of interpolation
+    " let a:curr = expand("<cWORD>")
+        " ruby <<EOF
+        " temp = VIM::evaluate('a:curr')
+        " if temp[-1] != '.'
+        "     temp = temp[0..-2]
+        " end
+        " if temp.match(/\${.*[^\w.-](?:(?![^\w.-]))(.*\.)[\)}]/) != nil
+        "     res = temp.match(/\${.*[^\w.-](?:(?![^\w.-]))(.*\.)[\)}]/)[1]
+        " elsif temp.match(/.*\${(.*\.)}/) != nil
+        "     res = temp.match(/.*\${(.*\.)}/)[1]
+        " end
+
+    " VIM::command("let a:temp_attr = '#{res}'")
+" EOF
+try
+    let a:curr_word = expand("<cWORD>")
+
+    if a:curr_word =~ '${.*}'
+        let a:word_array = split(matchlist(a:curr_word, '\v\$\{(.*)\}')[1], '\.')
+        if a:word_array[0] == 'data'
+            let a:look_for = a:word_array[0] . '.' . a:word_array[1] . '.' . a:word_array[2]
+            if len(a:word_array) > 4
+                let a:look_attr = a:word_array[3] . '.' . a:word_array[4]
+            else
+                let a:look_attr = a:word_array[3]
+            endif
+        else
+            let a:look_for = a:word_array[0] . '.' . a:word_array[1]
+            let a:look_attr = a:word_array[2]
+        endif
+
+        echo system(s:path . '/../utils/lookup_attrs ' . expand("%:p:h") . ' ' . a:look_for . ' ' . a:look_attr)
+    endif
+catch
+endtry
 endfunction
 
 function! terraformcomplete#GetDoc()

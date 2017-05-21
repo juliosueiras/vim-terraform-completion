@@ -158,6 +158,7 @@ let g:tagbar_type_terraform = {
 
 ## Todo for Terraform completion
 - (Scrape due to Speed, Storage, and Inconsistency) Version-based Completion
+- [X] (Require more work) Lookup Attributes data using terraform.tfstate
 - [ ] Provider
 - [x] Completion for functions(file,etc) and basic resource arguments(count,lifecyle, etc)
 - [x] Module (Make sure you run `terraform get` beforehand)
