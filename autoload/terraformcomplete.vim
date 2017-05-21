@@ -84,14 +84,14 @@ function! terraformcomplete#NeovimRunHandler(job_id, data, event) dict
 	    setlocal foldmethod=expr
 	    setlocal foldexpr=terraformcomplete#OutputFold()
 
-        syntax match addedItem '^+ .*'
-        syntax match removedItem '^- .*'
-        syntax match changedItem '^-/+ .*'
-        syntax match changed2Item '^\~ .*'
-        highlight addedItem guifg=#409900
-        highlight removedItem guifg=#BC4C4C
-        highlight changedItem guifg=#FFAE19
-        highlight changed2Item guifg=#FFAE19
+      syntax match addedItem '^+ .*'
+      syntax match removedItem '^- .*'
+      syntax match recreateItem '^-/+ .*'
+      syntax match changedItem '^\~ .*'
+      highlight addedItem guifg=#409900
+      highlight removedItem guifg=#BC4C4C
+      highlight recreateItem guifg=#409900
+      highlight changedItem guifg=#FFAE19
 
 
         execute 'normal! GG'
@@ -131,12 +131,12 @@ function! terraformcomplete#AsyncRunHandler(channel)
 
         syntax match addedItem '^+ .*'
         syntax match removedItem '^- .*'
-        syntax match changedItem '^-/+ .*'
-        syntax match changed2Item '^\~ .*'
+        syntax match recreateItem '^-/+ .*'
+        syntax match changedItem '^\~ .*'
         highlight addedItem guifg=#409900
         highlight removedItem guifg=#BC4C4C
+        highlight recreateItem guifg=#409900
         highlight changedItem guifg=#FFAE19
-        highlight changed2Item guifg=#FFAE19
 
         execute 'normal! GG'
 	    noremap <silent><buffer> q :q<CR>
@@ -173,12 +173,12 @@ fun! terraformcomplete#Run()
 
     syntax match addedItem '^+ .*'
     syntax match removedItem '^- .*'
-    syntax match changedItem '^-/+ .*'
+    syntax match recreateItem '^-/+ .*'
     syntax match changed2Item '^~ .*'
     highlight addedItem guifg=#409900
     highlight removedItem guifg=#BC4C4C
+    highlight recreateItem guifg=#409900
     highlight changedItem guifg=#FFAE19
-    highlight changed2Item guifg=#FFAE19
 
     noremap <silent><buffer> q :q<CR>
 endfunc
