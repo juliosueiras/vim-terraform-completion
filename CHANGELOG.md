@@ -1,5 +1,11 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+## 2017-05-22 
+### New Feature
+- Deoplete Support
+
+[![asciicast](https://asciinema.org/a/121802.png)](https://asciinema.org/a/121802)
+
 ## 2017-05-20
 ### New Feature
 - Lookup Attribute Data
