@@ -56,6 +56,12 @@ function! terraformcomplete#OpenDoc()
     try
         let a:provider = terraformcomplete#GetProvider()
         let a:resource = terraformcomplete#GetResource()
+        let a:arg = matchlist(getline("."), '\s*\([^ ]*\)\s*=\?', '')
+        if len(a:arg) >= 2
+            let a:arg = a:arg[1]
+        else
+            let a:arg = ''
+        endif
 
         let a:link = 'https://www.terraform.io/docs/providers/' . a:provider
 
@@ -65,10 +71,10 @@ function! terraformcomplete#OpenDoc()
             let a:link .= '/d'
         endif
 
-        let a:link .= '/' . a:resource . '.html'
+        let a:link .= '/' . a:resource . '.html\#' . a:arg
 
         "(Windows) cmd /c start filename_or_URL
-        if system('uname -s') == "Darwin"
+        if system('uname -s') == 'Darwin'
             silent! execute ':!open ' . a:link
         else
             silent! execute ':!xdg-open ' . a:link
