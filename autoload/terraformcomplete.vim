@@ -68,7 +68,11 @@ function! terraformcomplete#OpenDoc()
         let a:link .= '/' . a:resource . '.html'
 
         "(Windows) cmd /c start filename_or_URL
-        silent! execute ':!xdg-open ' . a:link
+        if system('uname -s') == "Darwin"
+            silent! execute ':!open ' . a:link
+        else
+            silent! execute ':!xdg-open ' . a:link
+        endif
     catch
     endtry
 endfunction
