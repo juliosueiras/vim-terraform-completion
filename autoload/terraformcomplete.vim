@@ -13,7 +13,6 @@ else
 endif
 
 if exists('g:loaded_neomake')
-
     if !exists('g:neomake_terraform_tffilter_plan') 
         let g:neomake_terraform_tffilter_plan = 0
     endif
@@ -51,10 +50,25 @@ if exists('g:loaded_neomake')
     let g:neomake_terraform_enabled_makers = ['terraform_validate', 'tflint', 'tffilter']
 endif
 
-
-
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
+function! terraformcomplete#OpenDoc()
+    let a:provider = terraformcomplete#GetProvider()
+    let a:resource = terraformcomplete#GetResource()
+
+    let a:link = 'https://www.terraform.io/docs/providers/' . a:provider
+
+    if terraformcomplete#GetType() ==? 'resource'
+        let a:link .= '/r'
+    else
+        let a:link .= '/d'
+    endif
+
+    let a:link .= '/' . a:resource . '.html'
+
+    "(Windows) cmd /c start filename_or_URL
+    silent! execute ':!xdg-open ' . a:link
+endfunction
 
 function! terraformcomplete#OutputFold()
     let curr_line = getline(v:lnum)
@@ -311,6 +325,23 @@ fun! terraformcomplete#GetResource()
     call setpos('.', s:curr_pos)
     unlet s:curr_pos
     return a:resource
+endfun
+
+fun! terraformcomplete#GetType()
+    let s:curr_pos = getpos('.')
+    if getline(".") !~# '^\s*\(resource\|data\)\s*"'
+        execute '?\s*\(resource\|data\)\s*"'
+    endif
+
+    if getline(".") =~? "resource"
+        let a:res = "resource"
+    else
+        let a:res = "data"
+    endif
+
+    call setpos(".", s:curr_pos)
+    unlet s:curr_pos
+	return a:res
 endfun
 
 fun! terraformcomplete#GetProvider()
