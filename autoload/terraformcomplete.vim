@@ -53,21 +53,24 @@ endif
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 function! terraformcomplete#OpenDoc()
-    let a:provider = terraformcomplete#GetProvider()
-    let a:resource = terraformcomplete#GetResource()
+    try
+        let a:provider = terraformcomplete#GetProvider()
+        let a:resource = terraformcomplete#GetResource()
 
-    let a:link = 'https://www.terraform.io/docs/providers/' . a:provider
+        let a:link = 'https://www.terraform.io/docs/providers/' . a:provider
 
-    if terraformcomplete#GetType() ==? 'resource'
-        let a:link .= '/r'
-    else
-        let a:link .= '/d'
-    endif
+        if terraformcomplete#GetType() ==? 'resource'
+            let a:link .= '/r'
+        else
+            let a:link .= '/d'
+        endif
 
-    let a:link .= '/' . a:resource . '.html'
+        let a:link .= '/' . a:resource . '.html'
 
-    "(Windows) cmd /c start filename_or_URL
-    silent! execute ':!xdg-open ' . a:link
+        "(Windows) cmd /c start filename_or_URL
+        silent! execute ':!xdg-open ' . a:link
+    catch
+    endtry
 endfunction
 
 function! terraformcomplete#OutputFold()
