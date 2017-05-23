@@ -1,0 +1,8 @@
+{
+  "name": "vim-terraform-completion",
+  "description": "A (Neo)Vim AutoCompletion Plugin for HashiCorp's Terraform",
+  "author": "juliosueiras",
+  "dependencies": {
+    "vim-terraform": {"type": "git", "url": "git://github.com/hashivim/vim-terraform"}
+  }
+}

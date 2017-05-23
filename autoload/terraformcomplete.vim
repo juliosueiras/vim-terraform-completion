@@ -50,8 +50,11 @@ if exists('g:loaded_neomake')
     let g:neomake_terraform_enabled_makers = ['terraform_validate', 'tflint', 'tffilter']
 endif
 
+
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
+""
+" Function to open the doc in browser
 function! terraformcomplete#OpenDoc()
     try
         let a:provider = terraformcomplete#GetProvider()

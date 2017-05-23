@@ -1,0 +1,49 @@
+*vim-terraform-completion.txt*	A (Neo)Vim AutoCompletion Plugin for HashiCorp's Terraform
+juliosueiras                                        *vim-terraform-completion*
+
+==============================================================================
+CONTENTS                                   *vim-terraform-completion-contents*
+  1. Introduction......................|vim-terraform-completion-introduction|
+  2. Configuration....................|vim-terraform-completion-configuration|
+  3. Features..............................|vim-terraform-completion-features|
+  4. Mappings..............................|vim-terraform-completion-mappings|
+
+==============================================================================
+INTRODUCTION                           *vim-terraform-completion-introduction*
+
+This plugin allow autocompletion for terraform, and it require "+ruby", check
+using |if_ruby|
+
+==============================================================================
+CONFIGURATION                         *vim-terraform-completion-configuration*
+
+let g:syntastic_terraform_tffilter_plan = 0
+
+Enable tffilter linter to use validate(0) or plan(1)
+
+==============================================================================
+FEATURES                                   *vim-terraform-completion-features*
+
+  1. Resource Completion
+  2. Data Completion
+  3. Block Completion
+  4. Attribute Completion
+  5. Variable Completion
+  6. Module Completion
+
+==============================================================================
+MAPPINGS                                   *vim-terraform-completion-mappings*
+
+"<C-K>" (Ctrl-K) will show doc of the current attribute/argument in vim
+
+"<C-L>" (Ctrl-L) will jump to declaration of the resource/data/variable
+
+"<leader>a" will look up the current attribute data given that there is
+terraform.tfstate
+
+"<leader>o" will open the current resource/data on a browser
+
+"<leader>rr" to run terraform plan(async for neovim/vim 8, non-async for vim)
+
+
+vim:tw=78:ts=8:ft=help:norl:

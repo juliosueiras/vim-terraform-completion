@@ -16,6 +16,10 @@ if exists('g:loaded_syntastic_terraform_tffilter_checker')
 endif
 
 if !exists('g:syntastic_terraform_tffilter_plan')
+""
+" @setting g:syntastic_terraform_tffilter_plan
+" @public
+" Enable tffilter linter to use validate(0) or plan(1)
   let g:syntastic_terraform_tffilter_plan = 0
 endif
 
