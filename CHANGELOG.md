@@ -6,6 +6,8 @@
 
 [![asciicast](https://asciinema.org/a/121802.png)](https://asciinema.org/a/121802)
 
+- Open Doc in a browser(need to make sure windows and mac work), key is `<leader>o`
+
 ## 2017-05-20
 ### New Feature
 - Lookup Attribute Data
