@@ -13,7 +13,7 @@ Dir.glob("./provider_json/*.json").each do |o|
           item = { 'word': i[0], 'kind': "#{i[1][0]['value'].match(/Type(.*)/).captures[0]}" }
           if i[1][-1]['value'].class == Hash
             item[:kind] += "(B)"
-            item[:subblock] = parse_items(i[1][-1]['value'])
+            item[:subblock] = parse_items_attr(i[1][-1]['value'])
           end
           resources.push(item)
       end
@@ -70,14 +70,14 @@ Dir.glob("./provider_json/*.json").each do |o|
         key = key[1..-1]
       end
 
-      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['resources']["#{provider}_#{key}"]))
+      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['resources']["#{provider}_#{key}"])).compact
     else
       value["arguments"] = []
       if key == 'vroute_entry'
         key = key[1..-1]
       end
 
-      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['resources']["#{provider}_#{key}"]))
+      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['resources']["#{provider}_#{key}"])).compact
     end
 
     if value['attributes'] != nil and not value["attributes"].all? {|i| i == nil }
@@ -85,14 +85,14 @@ Dir.glob("./provider_json/*.json").each do |o|
         key = key[1..-1]
       end
 
-      value['attributes'] = parse_arrays(value['attributes'],parse_items_attr(schema_json['resources']["#{provider}_#{key}"]))
+      value['attributes'] = parse_arrays(value['attributes'],parse_items_attr(schema_json['resources']["#{provider}_#{key}"])).compact
     else
       value["attributes"] = []
       if key == 'vroute_entry'
         key = key[1..-1]
       end
 
-      value['attributes'] = parse_arrays(value['attributes'],parse_items_attr(schema_json['resources']["#{provider}_#{key}"]))
+      value['attributes'] = parse_arrays(value['attributes'],parse_items_attr(schema_json['resources']["#{provider}_#{key}"])).compact
     end
 
     schema_json['resources'].delete("#{provider}_#{key}")
@@ -107,8 +107,7 @@ Dir.glob("./provider_json/*.json").each do |o|
           original_json['resources'] = {}
         end
 
-        original_json['resources'][key.split("#{provider}_")[1]] = { 'arguments': parse_items(value) }
-        puts key
+        original_json['resources'][key.split("#{provider}_")[1]] = { 'arguments': parse_items(value).compact ,'attributes': parse_items_attr(value).compact }
       end
     end
   end
@@ -119,14 +118,14 @@ Dir.glob("./provider_json/*.json").each do |o|
         key = key[1..-1]
       end
 
-      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['data-sources']["#{provider}_#{key}"]))
+      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['data-sources']["#{provider}_#{key}"])).compact
     else
       value["arguments"] = []
       if key == 'vroute_entry'
         key = key[1..-1]
       end
 
-      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['data-sources']["#{provider}_#{key}"]))
+      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['data-sources']["#{provider}_#{key}"])).compact
     end
 
     if value['attributes'] != nil and not value["attributes"].all? {|i| i == nil }
@@ -134,14 +133,17 @@ Dir.glob("./provider_json/*.json").each do |o|
         key = key[1..-1]
       end
 
-      value['attributes'] = parse_arrays(value['attributes'],parse_items_attr(schema_json['data-sources']["#{provider}_#{key}"]))
+      value['attributes'] = parse_arrays(value['attributes'],parse_items_attr(schema_json['data-sources']["#{provider}_#{key}"])).compact
     else
       value["attributes"] = []
       if key == 'vroute_entry'
         key = key[1..-1]
       end
 
-      value['attributes'] = parse_arrays(value['attributes'],parse_items_attr(schema_json['data-sources']["#{provider}_#{key}"]))
+      value['attributes'] = parse_arrays(value['attributes'],parse_items_attr(schema_json['data-sources']["#{provider}_#{key}"])).compact
+      if provider == 'digitalocean' and key == 'application'
+        binding.pry
+      end
     end
 
     schema_json['data-sources'].delete("#{provider}_#{key}")
@@ -156,7 +158,7 @@ Dir.glob("./provider_json/*.json").each do |o|
           original_json['datas'] = {}
         end
 
-        original_json['datas'][key.split("#{provider}_")[1]] = { 'arguments': parse_items(value) }
+        original_json['datas'][key.split("#{provider}_")[1]] = { 'arguments': parse_items(value) , 'attributes': parse_items_attr(value).compact }
       end
     end
   end
