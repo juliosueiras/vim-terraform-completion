@@ -135,6 +135,9 @@ let g:tagbar_type_terraform = {
 ```
 
 ## General Todo
+<details>
+<summary>Todolist</summary>
+
 - [ ] (WIP) Refactoring Regex for linter and completion, and Trying out on api based(so it can integrade with other editor) solution
 - [x] Support for Neomake(Require further testing)
 - [X] Run terraform plan and output to a new window(`<leader>rr`) 
@@ -149,6 +152,7 @@ let g:tagbar_type_terraform = {
 - [x] Added a custom linter for providing a better error
 - [ ] (WIP) Better linter
 - [ ] (WIP) Full Snippets
+</details>
 
 **NOTE:** enabling deep check for tflint can be a bit slow
 
@@ -157,6 +161,9 @@ let g:tagbar_type_terraform = {
 [Demo of the linter](https://asciinema.org/a/118441)
 
 ## Todo for Terraform completion
+<details>
+<summary>Todolist</summary>
+
 - (Scrape due to Speed, Storage, and Inconsistency) Version-based Completion
 - [X] (Require more work) Lookup Attributes data using terraform.tfstate
 - [ ] Provider
@@ -172,6 +179,7 @@ let g:tagbar_type_terraform = {
 - [x] local/offline
 - [ ] Add completion tags, ingress, and other subblock
 - [ ] Further seperate data source from resource
+</details>
 
 ## Todo for HCL
 - [ ] Add Completion for hcl
