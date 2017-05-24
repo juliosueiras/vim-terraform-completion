@@ -3,7 +3,8 @@ require 'pry'
 
 Dir.glob("./provider_json/*.json").each do |o| 
   original_json = JSON.parse(File.read(o))
-  schema_json = JSON.parse(File.read("./schema_json/#{o.split('/')[-1]}"))
+  provider = o.split('/')[-1].split('.json')[0]
+  schema_json = JSON.parse(File.read("./schema_json/#{provider}.json"))
 
   def parse_items(items)
     resources = []
@@ -44,25 +45,72 @@ Dir.glob("./provider_json/*.json").each do |o|
   end
 
   original_json['resources'].map do |key, value|
-    if value["arguments"][0] != nil
+    if not value["arguments"].all? {|i| i == nil }
       if key == 'vroute_entry'
-        value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['resources']["#{value['provider']}_#{key[1..-1]}"]))
-      else
-        value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['resources']["#{value['provider']}_#{key}"]))
+        key = key[1..-1]
+      end
+
+      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['resources']["#{provider}_#{key}"]))
+    else
+      value["arguments"] = []
+      if key == 'vroute_entry'
+        key = key[1..-1]
+      end
+
+      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['resources']["#{provider}_#{key}"]))
+    end
+
+    schema_json['resources'].delete("#{provider}_#{key}")
+
+  end
+
+  if schema_json['resources'].length != 0
+    schema_json['resources'].each do |key, value|
+      if key != 'external' # TODO: Fix external data sources
+
+        if original_json['resources'] == nil
+          original_json['resources'] = {}
+        end
+
+        original_json['resources'][key.split("#{provider}_")[1]] = { 'arguments': parse_items(value) }
+        puts key
       end
     end
   end
 
   original_json['datas'].each do |key, value|
-    if value["arguments"][0] != nil
+    if not value["arguments"].all? {|i| i == nil }
       if key == 'vroute_entry'
-        value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['data-sources']["#{value['provider']}_#{key[1..-1]}"]))
-      else
-        value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['data-sources']["#{value['provider']}_#{key}"]))
+        key = key[1..-1]
+      end
+
+      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['data-sources']["#{provider}_#{key}"]))
+    else
+      value["arguments"] = []
+      if key == 'vroute_entry'
+        key = key[1..-1]
+      end
+
+      value['arguments'] = parse_arrays(value['arguments'],parse_items(schema_json['data-sources']["#{provider}_#{key}"]))
+    end
+
+    schema_json['data-sources'].delete("#{provider}_#{key}")
+
+  end
+
+  if schema_json['data-sources'].length != 0
+    schema_json['data-sources'].each do |key, value|
+      if key != 'external' # TODO: Fix external data sources
+
+        if original_json['datas'] == nil
+          original_json['datas'] = {}
+        end
+
+        original_json['datas'][key.split("#{provider}_")[1]] = { 'arguments': parse_items(value) }
+        puts key
       end
     end
   end
 
   File.write(o,JSON.generate(original_json))
-
 end

@@ -1,1 +1,1 @@
-{"provider_arguments":[],"resources":{"resource": { "arguments":[{ "word": "triggers", "kind": "Map(O)", "info": "A mapping of values which should trigger a rerun of this set of provisioners. Values are meant to be interpolated references to variables or attributes of other resources." }] }},"datas":{},"unknowns":{}}
+{"provider_arguments":[],"resources":{"resource":{"arguments":[{"word":"triggers","kind":"Map(O)"}]}},"datas":{"data_source":{"arguments":[{"word":"has_computed_default","kind":"String(O)"},{"word":"inputs","kind":"Map(O)"}]}},"unknowns":{}}
