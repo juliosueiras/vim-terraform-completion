@@ -1,0 +1,9 @@
+--langdef=terraform
+--langmap=terraform:.tf.tfvars
+--regex-terraform=/^\s*resource\s*"([^"]*)"\s*"([^"]*)"/\1.\2/r,Resource/
+--regex-terraform=/^\s*data\s*"([^"]*)"\s*"([^"]*)"/\1.\2/d,Data/
+--regex-terraform=/^\s*variable\s*"([^"]*)"/\1/v,Variable/
+--regex-terraform=/^\s*provider\s*"([^"]*)"/\1/p,Provider/
+--regex-terraform=/^\s*module\s*"([^"]*)"/\1/m,Module/
+--regex-terraform=/^\s*output\s*"([^"]*)"/\1/o,Output/
+--regex-terraform=/^([a-z0-9_]+)\s*=/\1/f,TFVar/
