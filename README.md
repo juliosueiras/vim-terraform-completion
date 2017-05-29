@@ -19,8 +19,6 @@
     + [NeoBundle](#neobundle)
     + [Vim-Plug](#vim-plug)
     + [Minimal Configuration](#minimal-configuration)
-  * [Extra](#extra)
-    + [Tagbar Config for Terraform](#tagbar-config-for-terraform)
   * [General Todo](#general-todo)
   * [Todo for Terraform completion](#todo-for-terraform-completion)
   * [Todo for HCL](#todo-for-hcl)
@@ -38,9 +36,10 @@
 ## Dependencies
 
 - [vim-terraform](https://github.com/hashivim/vim-terraform) (For FileType)
-- (Optional not require for completion)
+  (Optional not require for completion)
 - [vim-syntastic](https://github.com/vim-syntastic/syntastic) (Only for Linter)
 - [neomake](https://github.com/neomake/neomake) (Only for Linter, Neovim)
+- Ctags & [tagbar](https://github.com/majutsushi/tagbar) (Optional for Tag Sidebar)
 
 ## Installation
 
@@ -69,7 +68,7 @@ filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
 
-" (Optinal for Tag Sidebar
+" (Optinal) for Tag Sidebar
 " Plug 'majutsushi/tagbar'
 
 Plug 'hashivim/vim-terraform'
@@ -97,41 +96,6 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " (Optional) Enable terraform plan to be include in filter
 let g:syntastic_terraform_tffilter_plan = 1
 
-```
-
-## Extra
-### Tagbar Config for Terraform
-
-[![asciicast](https://asciinema.org/a/32w8wselqmrwk1ce8mj5k2rut.png)](https://asciinema.org/a/32w8wselqmrwk1ce8mj5k2rut)
-
-This should inside `~/.ctags`
-```
---langdef=terraform
---langmap=terraform:.tf.tfvars
---regex-terraform=/^\s*resource\s*"([^"]*)"\s*"([^"]*)"/\1.\2/r,Resource/
---regex-terraform=/^\s*data\s*"([^"]*)"\s*"([^"]*)"/\1.\2/d,Data/
---regex-terraform=/^\s*variable\s*"([^"]*)"/\1/v,Variable/
---regex-terraform=/^\s*provider\s*"([^"]*)"/\1/p,Provider/
---regex-terraform=/^\s*module\s*"([^"]*)"/\1/m,Module/
---regex-terraform=/^\s*output\s*"([^"]*)"/\1/o,Output/
---regex-terraform=/^([a-z0-9_]+)\s*=/\1/f,TFVar/
-```
-
-This config go inside `~/.vimrc`
-```vim
-let g:tagbar_type_terraform = {
-	\ 'ctagstype' : 'terraform',
-	\ 'kinds' : [
-		\ 'r:Resources',
-		\ 'd:Datas',
-		\ 'v:Variables',
-		\ 'p:Providers',
-		\ 'o:Outputs',
-		\ 'm:Modules',
-		\ 'f:TFVars'
-	\ ],
-	\ 'sort' : 1
-\ }
 ```
 
 ## General Todo
