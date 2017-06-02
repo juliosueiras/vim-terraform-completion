@@ -103,6 +103,7 @@ let g:syntastic_terraform_tffilter_plan = 1
 <summary>Todolist</summary>
 
 - [ ] (WIP) Refactoring Regex for linter and completion, and Trying out on api based(so it can integrade with other editor) solution
+- [ ] (WIP) More test cases, and update to 0.9.6
 - [x] Support for Neomake(Require further testing)
 - [X] Run terraform plan and output to a new window(`<leader>rr`) 
 - [X] Async Run support(For Neovim/Vim 8) 
