@@ -102,6 +102,7 @@ let g:syntastic_terraform_tffilter_plan = 1
 <details>
 <summary>Todolist</summary>
 
+- [ ] (WIP) Adapt to Upcoming terraform 0.10
 - [ ] (WIP) Refactoring Regex for linter and completion, and Trying out on api based(so it can integrade with other editor) solution
 - [ ] (WIP) More test cases, and update to 0.9.6
 - [x] Support for Neomake(Require further testing)
