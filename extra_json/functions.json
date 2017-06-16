@@ -1,5 +1,11 @@
 [
     {
+        "word": "bcrypt"
+    },
+    {
+        "word": "pow"
+    },
+    {
         "word": "basename"
     },
     {
