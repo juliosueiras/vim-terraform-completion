@@ -5,3 +5,5 @@
 
 - [davewongillies](https://github.com/davewongillies)
     - Integrated Ctags into the plugin
+
+- [mtchavez](https://github.com/mtchavez)
