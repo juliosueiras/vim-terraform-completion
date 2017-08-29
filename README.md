@@ -1,5 +1,7 @@
 # (Neo)Vim Terraform Completion with Linter - [Demos](./DEMO.md)
 
+## Note: 0.10 WIP
+
 ## [Changelog](./CHANGELOG.md)
 
 [![neovim build](https://badges.herokuapp.com/travis/juliosueiras/vim-terraform-completion?env=VIM_TYPE=nvim&label=Neovim%20Build)](https://travis-ci.org/juliosueiras/vim-terraform-completion)
