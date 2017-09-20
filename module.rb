@@ -3,14 +3,15 @@ require 'json'
 require 'open-uri'
 require "net/http"
 require 'digest'
+require 'pry'
 
 module ModuleUtils
   def parse_link(name, source)
-    source_raw = source.match(/"(.*)"/).captures()[0]
+	  source_raw = source.match(/"(.*)"/).captures()[0]
     if source_raw.start_with?"./"
       link = source_raw
     else
-      hash_module = Digest::MD5.hexdigest "root.#{name}-#{source_raw}"
+      hash_module = Digest::MD5.hexdigest "module.#{name}-#{source_raw}"
       if source_raw.split("/").length >= 4
         link = "./.terraform/modules/#{hash_module}"
         source_raw.split('/')[3..-1].each do |i| 

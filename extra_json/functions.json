@@ -6,10 +6,19 @@
         "word": "pow"
     },
     {
+        "word": "urlencode"
+    },
+    {
+        "word": "flatten"
+    },
+    {
         "word": "basename"
     },
     {
         "word": "base64decode"
+    },
+    {
+        "word": "base64gzip"
     },
     {
         "word": "base64encode"

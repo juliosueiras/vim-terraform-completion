@@ -10,12 +10,17 @@ Dir.glob("./provider_json/*.json").each do |o|
     resources = []
     if items != nil
       items.each do |i|
-          item = { 'word': i[0], 'kind': "#{i[1][0]['value'].match(/Type(.*)/).captures[0]}" }
-          if i[1][-1]['value'].class == Hash
-            item[:kind] += "(B)"
-            item[:subblock] = parse_items_attr(i[1][-1]['value'])
-          end
-          resources.push(item)
+	      if i[1]["Required"].nil? and i[1]["Optional"].nil? and not i[1]["Computed"].nil? then 
+		  item = { 'word': i[0], 'kind': "#{i[1]['Type'].match(/Type(.*)/).captures[0]}" }
+		  if not i[1]["Description"].nil? then
+			  item[:info] = i[1]["Description"]
+		  end
+		  if not i[1]['Elem'].empty? and i[1]['Elem']['type'] == 'SchemaInfo'
+			  item[:kind] += "(B)"
+			  item[:subblock] = parse_items_attr(i[1]['Elem']['info'])
+		  end
+		  resources.push(item)
+	  end
       end
     end
 
@@ -30,11 +35,20 @@ Dir.glob("./provider_json/*.json").each do |o|
     resources = []
     if items != nil
       items.each do |i|
-        if (i[1].select {|x| x['name'] == 'Required' or x['name'] == 'Optional' }).length != 0
-          item = { 'word': i[0], 'kind': "#{i[1][0]['value'].match(/Type(.*)/).captures[0]}(#{i[1][1]['name'][0]})" }
-          if i[1][-1]['value'].class == Hash
+	if not i[1]["Required"].nil? or not i[1]["Optional"].nil? then
+		if not i[1]["Required"].nil? then
+			o_or_r = "R"
+		elsif not i[1]["Optional"].nil? then
+			o_or_r = "O"
+		end
+          item = { 'word': i[0], 'kind': "#{i[1]['Type'].match(/Type(.*)/).captures[0]}(#{o_or_r})" }
+	  if not i[1]["Description"].nil? then
+		  item[:info] = i[1]["Description"]
+	  end
+
+          if not i[1]['Elem'].empty? and i[1]['Elem']['type'] == 'SchemaInfo'
             item[:kind] += "(B)"
-            item[:subblock] = parse_items(i[1][-1]['value'])
+            item[:subblock] = parse_items(i[1]['Elem']['info'])
           end
           resources.push(item)
         end
