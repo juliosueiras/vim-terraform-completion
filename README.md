@@ -154,6 +154,7 @@ let g:syntastic_terraform_tffilter_plan = 1
 - [X] Completion for Sublock(Indicate by `Type(B)` )
 ## Todo for Improvement
 - [X] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
+- [ ] Look into the new module registry
 
 ## Credits
 - Completion data is from Terraform Official Documentation and Model data from [Intellij-HCL](https://github.com/VladRassokhin/intellij-hcl/)
