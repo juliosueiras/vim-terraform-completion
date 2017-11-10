@@ -15,9 +15,9 @@ Dir.glob("./provider_json/*.json").each do |o|
 		  if not i[1]["Description"].nil? then
 			  item[:info] = i[1]["Description"]
 		  end
-		  if not i[1]['Elem'].empty? and i[1]['Elem']['type'] == 'SchemaInfo'
+		  if not i[1]['Elem'].empty? and i[1]['Elem']['Type'] == 'SchemaInfo'
 			  item[:kind] += "(B)"
-			  item[:subblock] = parse_items_attr(i[1]['Elem']['info'])
+			  item[:subblock] = parse_items_attr(i[1]['Elem']['Info'])
 		  end
 		  resources.push(item)
 	  end
@@ -46,9 +46,9 @@ Dir.glob("./provider_json/*.json").each do |o|
 		  item[:info] = i[1]["Description"]
 	  end
 
-          if not i[1]['Elem'].empty? and i[1]['Elem']['type'] == 'SchemaInfo'
+          if not i[1]['Elem'].empty? and i[1]['Elem']['Type'] == 'SchemaInfo'
             item[:kind] += "(B)"
-            item[:subblock] = parse_items(i[1]['Elem']['info'])
+            item[:subblock] = parse_items(i[1]['Elem']['Info'])
           end
           resources.push(item)
         end
