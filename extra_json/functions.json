@@ -163,5 +163,17 @@
     },
     {
         "word": "zipmap"
+    },
+    {
+        "word": "chunklist"
+    },
+    {
+        "word": "abs"
+    },
+    {
+        "word": "transpose"
+    },
+    {
+        "word": "indent"
     }
 ]

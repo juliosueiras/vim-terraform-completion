@@ -1,12 +1,10 @@
 # (Neo)Vim Terraform Completion with Linter - [Demos](./DEMO.md)
 
-**Working on 0.10+ providers change**
-
 ## [Changelog](./CHANGELOG.md)
 
 [![neovim build](https://badges.herokuapp.com/travis/juliosueiras/vim-terraform-completion?env=VIM_TYPE=nvim&label=Neovim%20Build)](https://travis-ci.org/juliosueiras/vim-terraform-completion)
 [![vim build](https://badges.herokuapp.com/travis/juliosueiras/vim-terraform-completion?env=VIM_TYPE=vim&label=Vim%20Build)](https://travis-ci.org/juliosueiras/vim-terraform-completion)
-![terraform version](https://img.shields.io/badge/terraform-0.10.3-blue.svg)
+![terraform version](https://img.shields.io/badge/terraform-0.11.0-blue.svg)
 [![Join the chat at https://gitter.im/juliosueiras/vim-terraform-completion](https://badges.gitter.im/juliosueiras/vim-terraform-completion.svg)](https://gitter.im/juliosueiras/vim-terraform-completion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
