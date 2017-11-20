@@ -7,6 +7,8 @@
 ![terraform version](https://img.shields.io/badge/terraform-0.11.0-blue.svg)
 [![Join the chat at https://gitter.im/juliosueiras/vim-terraform-completion](https://badges.gitter.im/juliosueiras/vim-terraform-completion.svg)](https://gitter.im/juliosueiras/vim-terraform-completion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+**Terraform Module is supported(though there might be bugs)**
+
 
 ## Overview
 

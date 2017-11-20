@@ -1,5 +1,11 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
+
+## 2017-05-22 
+- Terraform Module Registry support
+
+[![asciicast](https://asciinema.org/a/UMLMCyYmd3sY4uwEhzTKG2L1m.png)](https://asciinema.org/a/UMLMCyYmd3sY4uwEhzTKG2L1m)
+
 ## 2017-05-22 
 ### New Feature
 - Deoplete Support

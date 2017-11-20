@@ -11,15 +11,12 @@ module ModuleUtils
     if source_raw.start_with?"./"
       link = source_raw
     else
-      hash_module = Digest::MD5.hexdigest "module.#{name}-#{source_raw}"
-      if source_raw.split("/").length >= 4
-        link = "./.terraform/modules/#{hash_module}"
-        source_raw.split('/')[3..-1].each do |i| 
-          link += "/#{i}"
-        end
-      else
-        link = "./.terraform/modules/#{hash_module}"
-      end
+			modules = JSON.parse(File.read("./.terraform/modules/modules.json"))
+			modules["Modules"].each do |m|
+				if m["Source"] == source_raw
+					link = "#{m["Dir"]}/#{m["Root"]}"
+				end
+			end
     end
     return link
   end
@@ -31,9 +28,10 @@ module ModuleUtils
     variables = ''
     result = []
 
-    ['main.tf', 'inputs.tf', 'variables.tf'].each do |i|
+		['main.tf', 'config.tf', 'inputs.tf', 'variables.tf', 'vars.tf'].each do |i|
       if File.exist? "#{path}/#{link}/#{i}"
-        variables = open("#{path}/#{link}/#{i}").read.split("\n").select { |x| x[/variable/]}
+				puts "#{path}/#{link}/#{i}"
+        variables = open("#{path}/#{link}/#{i}").read.split("\n").select { |x| x[/^variable/]}
         variables.each do |x|
           result.push({ "word": x.match(/"(.*)"/).captures()[0] })
         end
@@ -51,7 +49,7 @@ module ModuleUtils
 
     ['main.tf', 'outputs.tf'].each do |i|
       if File.exist?"#{path}/#{link}/#{i}"
-        variables = open("#{path}/#{link}/#{i}").read.split("\n").select { |x| x[/output/]}
+        variables = open("#{path}/#{link}/#{i}").read.split("\n").select { |x| x[/^output/]}
         variables.each do |x|
           result.push({ "word": x.match(/"(.*)"/).captures()[0] })
         end
