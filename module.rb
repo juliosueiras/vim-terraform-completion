@@ -33,7 +33,7 @@ module ModuleUtils
 				puts "#{path}/#{link}/#{i}"
         variables = open("#{path}/#{link}/#{i}").read.split("\n").select { |x| x[/^variable/]}
         variables.each do |x|
-          result.push({ "word": x.match(/"(.*)"/).captures()[0] })
+          result.push({ "word": x.match(/variable\s*"?([A-Za-z0-9_-]*)"?\s*{/).captures()[0] })
         end
       end
     end
@@ -51,7 +51,7 @@ module ModuleUtils
       if File.exist?"#{path}/#{link}/#{i}"
         variables = open("#{path}/#{link}/#{i}").read.split("\n").select { |x| x[/^output/]}
         variables.each do |x|
-          result.push({ "word": x.match(/"(.*)"/).captures()[0] })
+          result.push({ "word": x.match(/output\s*"?([A-Za-z0-9_-]*)"?\s*{/).captures()[0] })
         end
       end
     end

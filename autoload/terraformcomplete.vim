@@ -462,6 +462,15 @@ fun! terraformcomplete#Complete(findstart, base)
     return start
   else
     let res = []
+    let a:res = []
+		if getline(".") =~ '\s*source\s*=\s*"'
+			for m in terraformcomplete#GetAllRegistryModules()
+				if m.word =~ '^' . a:base
+					call add(a:res, m)
+				endif
+			endfor
+			return a:res
+		endif
     try
       let a:provider = terraformcomplete#GetProvider()
     catch
@@ -738,6 +747,27 @@ fun! terraformcomplete#GetAllModule() abort
   endwhile
   call setpos('.', a:old_pos)
   return [a:list, a:source_list]
+endfunc
+
+fun! terraformcomplete#GetAllRegistryModules() abort
+	let res = []
+	ruby <<EOF
+	require 'json'
+	require 'open-uri'
+	modules = []
+	offset = 0
+	loop do
+		d = JSON.parse(open("https://registry.terraform.io/v1/modules?limit=10000&offset=#{offset}").read);
+		modules.push(* d["modules"])
+		break if d["meta"]["next_offset"].nil?
+		offset = d["meta"]["next_offset"]
+	end
+	puts modules.count
+	data = modules.map {|m| { "word": m["id"].split("/")[0..-2].join("/") }}
+	Vim::command("let res = #{JSON.generate(data)}")
+
+EOF
+	return res
 endfunc
 
 fun! terraformcomplete#GetAll(data_or_resource) abort
