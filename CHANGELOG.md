@@ -1,7 +1,12 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
 
-## 2017-05-22 
+## 2017-11-23 
+- Terraform Module Registry Name Completion
+
+[![asciicast](https://asciinema.org/a/azFU126p6SCkrOtuNWnSynyR0.png)](https://asciinema.org/a/azFU126p6SCkrOtuNWnSynyR0)
+
+## 2017-11-22 
 - Terraform Module Registry support
 
 [![asciicast](https://asciinema.org/a/UMLMCyYmd3sY4uwEhzTKG2L1m.png)](https://asciinema.org/a/UMLMCyYmd3sY4uwEhzTKG2L1m)
