@@ -1,6 +1,11 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
 
+## 2017-12-06
+- Nested Block Completion
+
+[![asciicast](https://asciinema.org/a/151238.png)](https://asciinema.org/a/151238)
+
 ## 2017-11-23 
 - Terraform Module Registry Name Completion
 

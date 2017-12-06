@@ -488,7 +488,8 @@ fun! terraformcomplete#Complete(findstart, base)
         execute 'normal! [{'
         let a:test_line = getline(".")
         execute 'normal! [{'
-        let a:data_or_resource = matchlist(getline("."), '\s*\([^" ]*\)\s*.*', '')[1]
+				call search('^\s*\(resource\|data\|module\)\s*"', 'b')
+        let a:data_or_resource = matchlist(getline("."), '\s*\([^" ]*\)\s*.*', '')[1] 
         call setpos(".",a:old_pos)
         let a:test_name = matchlist(a:test_line, '\s*\([^ ]*\)\s*{', '')[1]
         ruby <<EOF
@@ -513,6 +514,22 @@ fun! terraformcomplete#Complete(findstart, base)
                     parsed_data = JSON.generate(i['subblock'])
                     break
                 end
+								if not i['subblock'].nil?
+									i['subblock'].each do |e|
+										if e['word'] == test
+												parsed_data = JSON.generate(e['subblock'])
+												break
+										end
+										if not e['subblock'].nil?
+											e['subblock'].each do |o|
+												if o['word'] == test
+														parsed_data = JSON.generate(o['subblock'])
+														break
+												end
+											end
+										end
+									end
+								end
             end
             VIM::command("let a:res = #{parsed_data}")
 EOF
