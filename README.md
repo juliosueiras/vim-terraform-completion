@@ -2,6 +2,8 @@
 
 ## [Changelog](./CHANGELOG.md)
 
+## [Provider Versions](./PROVIDER_VERSOINS.md)
+
 [![neovim build](https://badges.herokuapp.com/travis/juliosueiras/vim-terraform-completion?env=VIM_TYPE=nvim&label=Neovim%20Build)](https://travis-ci.org/juliosueiras/vim-terraform-completion)
 [![vim build](https://badges.herokuapp.com/travis/juliosueiras/vim-terraform-completion?env=VIM_TYPE=vim&label=Vim%20Build)](https://travis-ci.org/juliosueiras/vim-terraform-completion)
 ![terraform version](https://img.shields.io/badge/terraform-0.11.0-blue.svg)
