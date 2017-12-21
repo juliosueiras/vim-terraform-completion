@@ -7,7 +7,7 @@ tags_urls = File.read("tags_urls.txt").split.map {|i| i.gsub('"','') }
 
 result = []
 tags_urls.each do |tags_url|
-	tags = JSON.parse(RestClient.get("#{tags_url}?access_token=***REMOVED***"))
+	tags = JSON.parse(RestClient.get("#{tags_url}?access_token=#{ENV['GITHUB_TOKEN']}"))
 	if not tags.empty?
 		version = tags[0]["name"]
 		provider = tags[0]["zipball_url"].split("/")[5].match(/terraform-provider-(.*)/)[1]
@@ -15,7 +15,7 @@ tags_urls.each do |tags_url|
 	end
 end
 
-final = "|---|---|---|---|---|"
+final = "||||||\n|---|---|---|---|---|"
 result.each_slice(5) do |i|
 	result = "\n|"
 	i.each do |c|
