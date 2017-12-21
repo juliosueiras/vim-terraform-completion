@@ -373,7 +373,7 @@ fun! terraformcomplete#GetProvider()
 	return a:provider
 endfun
 
-function! terraformcomplete#rubyComplete(ins, provider, resource, attribute, data_or_resource)
+function! terraformcomplete#rubyComplete(ins, provider, resource, attribute, data_or_resource, block_word)
     let s:curr_pos = getpos('.')
     let a:res = []
     let a:resource_line = getline(s:curr_pos[1]) =~ "^[ ]*resource"
@@ -395,9 +395,19 @@ def terraform_complete(provider, resource)
             end
 
             parsed_data = JSON.parse(data)
+						block_word = VIM::evaluate('a:block_word')
             if VIM::evaluate('a:attribute') == "true" then
               if VIM::evaluate('a:data_or_resource') == 0 then
-                result = parsed_data['datas'][resource]["attributes"]
+								if block_word == "" then
+									result = parsed_data['datas'][resource]["attributes"]
+								else
+									result = parsed_data['datas'][resource]["attributes"]
+									for r in result
+										if r["word"] == block_word
+											result = r["subblock"]
+										end
+									end
+								end
               else
                 result = parsed_data['resources'][resource]["attributes"]
               end
@@ -640,7 +650,7 @@ EOF
                       let a:resource = split(a:attr[0], a:provider . "_")[0]
                       let a:data_or_resource = 1
 
-                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource)
+                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, "")
                         if m.word =~ '^' . a:base
                           call add(res, m)
                         endif
@@ -654,7 +664,7 @@ EOF
 
                         let a:resource = split(a:attr[1], a:provider . "_")[0]
                         let a:data_or_resource = 0
-                        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource)
+                        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, "")
                             if m.word =~ '^' . a:base
                                 call add(a:res, m)
                             endif
@@ -666,7 +676,33 @@ EOF
                       let a:resource = split(a:attr[0], a:provider . "_")[0]
                       let a:data_or_resource = 1
 
-                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource)
+                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, "")
+                        if m.word =~ '^' . a:base
+                          call add(res, m)
+                        endif
+                      endfor
+                      return res
+                    endif
+                elseif len(a:attr) == 5
+                    if a:attr[0] == "data"
+                        let a:res = []
+                        let a:provider = split(a:attr[1], "_")[0]
+
+                        let a:resource = split(a:attr[1], a:provider . "_")[0]
+                        let a:data_or_resource = 0
+                        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr[3])
+                            if m.word =~ '^' . a:base
+                                call add(a:res, m)
+                            endif
+                        endfor
+                        return a:res
+                    else
+                      let a:provider = split(a:attr[0], "_")[0]
+
+                      let a:resource = split(a:attr[0], a:provider . "_")[0]
+                      let a:data_or_resource = 1
+
+                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr[2])
                         if m.word =~ '^' . a:base
                           call add(res, m)
                         endif
@@ -710,7 +746,7 @@ EOF
             endif
 
             call setpos('.', s:curr_pos)
-            for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'false', a:data_or_resource)
+            for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'false', a:data_or_resource, "")
               if m.word =~ '^' . a:base
                 call add(res, m)
               endif
