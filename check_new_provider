@@ -1,2 +1,3 @@
 #!/bin/bash
-curl -s https://api.github.com/orgs/terraform-providers/repos?per_page=200  | jq .[].tags_url > tags_urls.txt
+curl -s https://api.github.com/orgs/terraform-providers/repos?per_page=200  | jq .[].name | sort > temp.txt
+sed -e 's;"\(.*\)";"https://api.github.com/repos/terraform-providers/\1/tags";' temp.txt > tags_urls.txt && rm temp.txt
