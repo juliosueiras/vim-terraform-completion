@@ -67,6 +67,11 @@ def main()
         captures = x.match(/\* ([^.]*).([^:]*): (.*)/).captures
         errors_res.push({:location=> [captures[0], captures[1]], :variable=>"\"#{captures[0]}\" \"#{captures[1]}\"", :errormsg=> "#{captures[2]}" })
       end
+
+      if x.match(/Error: ([^.]*).([^:]*): (.*)/) != nil
+        captures = x.match(/Error: ([^.]*).([^:]*): (.*)/).captures
+        errors_res.push({:location=> [captures[0], captures[1]], :variable=>"\"#{captures[0]}\" \"#{captures[1]}\"", :errormsg=> "#{captures[2]}" })
+      end
     }
     
     res = []
