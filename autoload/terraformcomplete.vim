@@ -498,7 +498,8 @@ fun! terraformcomplete#Complete(findstart, base)
         execute 'normal! [{'
         let a:test_line = getline(".")
         execute 'normal! [{'
-				call search('^\s*\(resource\|data\|module\)\s*"', 'b')
+	let a:nested = match(getline("."), '^\s*\(resource\|data\|module\)\s*"')
+	call search('^\s*\(resource\|data\|module\)\s*"', 'b')
         let a:data_or_resource = matchlist(getline("."), '\s*\([^" ]*\)\s*.*', '')[1] 
         call setpos(".",a:old_pos)
         let a:test_name = matchlist(a:test_line, '\s*\([^ ]*\)\s*{', '')[1]
@@ -514,33 +515,35 @@ fun! terraformcomplete#Complete(findstart, base)
             base_data = JSON.parse(File.read("#{VIM::evaluate('s:path')}/../extra_json/base.json"))
 
             test = VIM::evaluate("a:test_name")
+            nested = VIM::evaluate("a:nested")
             parsed_data = ''
             result = JSON.parse(data)["#{VIM::evaluate('a:data_or_resource')}s"][VIM::evaluate("a:resource")]['arguments']
 
             result.concat(base_data)
 
             result.each do |i| 
-                if i['word'] == test
+                if i['word'] == test and nested == 0
                     parsed_data = JSON.generate(i['subblock'])
                     break
                 end
-								if not i['subblock'].nil?
-									i['subblock'].each do |e|
-										if e['word'] == test
-												parsed_data = JSON.generate(e['subblock'])
-												break
-										end
-										if not e['subblock'].nil?
-											e['subblock'].each do |o|
-												if o['word'] == test
-														parsed_data = JSON.generate(o['subblock'])
-														break
-												end
-											end
-										end
-									end
-								end
-            end
+
+		if not i['subblock'].nil?
+			i['subblock'].each do |e|
+			if e['word'] == test
+				parsed_data = JSON.generate(e['subblock'])
+				break
+			end
+			if not e['subblock'].nil?
+				e['subblock'].each do |o|
+				if o['word'] == test
+					parsed_data = JSON.generate(o['subblock'])
+					break
+				end
+			end
+		end
+	end
+end
+	    end
             VIM::command("let a:res = #{parsed_data}")
 EOF
         return a:res
