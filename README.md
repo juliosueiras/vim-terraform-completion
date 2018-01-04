@@ -159,6 +159,7 @@ let g:syntastic_terraform_tffilter_plan = 1
 - [X] Look into the new module registry (Now support module name completion)
 
 ## Credits
+- Provider Model Extraction script adapted from [Intellij-hcl](https://github.com/VladRassokhin/intellij-hcl)
 - Completion data is from Terraform Official Documentation and Model data from [Intellij-HCL](https://github.com/VladRassokhin/intellij-hcl/)
 - Folding adapted from [vim-terraform](https://github.com/hashivim/vim-terraform)
 
