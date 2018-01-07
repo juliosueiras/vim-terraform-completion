@@ -3,7 +3,6 @@ require 'json'
 require 'open-uri'
 require "net/http"
 require 'digest'
-require 'pry'
 
 module ModuleUtils
   def parse_link(name, source)

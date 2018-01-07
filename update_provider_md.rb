@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'rest-client'
-require 'pry'
 require 'json'
 
 tags_urls = File.read("tags_urls.txt").split.map {|i| i.gsub('"','') }

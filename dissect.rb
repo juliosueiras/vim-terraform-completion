@@ -1,5 +1,4 @@
 require 'json'
-require 'pry'
 
 Dir.glob("./provider_json/*.json").each do |o| 
   original_json = JSON.parse(File.read(o))
