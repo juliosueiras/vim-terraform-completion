@@ -19,4 +19,4 @@ then
 fi
 
 # run container
-docker run --rm -it $IMAGE:$TAG -c  "export ~/.bashrc && $VIM_TYPE -u tests.vimrc -c 'Vader! tests/*' > /dev/null\n"
+docker run --rm -it $IMAGE:$TAG -c  "PATH=$PATH:/root/.gem/ruby/2.5.0/bin $VIM_TYPE -u tests.vimrc -c 'Vader! tests/*' > /dev/null\n"
