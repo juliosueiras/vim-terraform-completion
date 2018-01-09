@@ -7,3 +7,6 @@
     - Integrated Ctags into the plugin
 
 - [mtchavez](https://github.com/mtchavez)
+
+- [barlik](https://github.com/barlik)
+
