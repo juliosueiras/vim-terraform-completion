@@ -26,6 +26,12 @@ if !exists('g:syntastic_terraform_checkers')
     let g:syntastic_terraform_checkers = ['tffilter', 'terraform_validate', 'tflint']
 endif
 
+if !exists('g:terraform_completion_keys')
+    let g:terraform_completion_keys = 0
+endif
+
+if g:terraform_completion_keys
+
 ""
 " @section Mappings,mappings
 " "<C-K>" (Ctrl-K) will show doc of the current attribute/argument in vim
@@ -39,20 +45,19 @@ endif
 "
 " "<leader>rr" to run terraform plan(async for neovim/vim 8, non-async for
 " vim)
+	augroup TerraformCompleteKeys
+		noremap <buffer><silent> <C-K> :call terraformcomplete#GetDoc()<CR>
+		noremap <buffer> <C-L> :call terraformcomplete#JumpRef()<CR>
+		noremap <buffer><silent> <Leader>a :call terraformcomplete#LookupAttr()<CR>
+		noremap <buffer><silent> <Leader>o :call terraformcomplete#OpenDoc()<CR>
+	augroup END
 
-augroup TerraformCompleteKeys
-    autocmd FileType terraform noremap <buffer><silent> <C-K> :call terraformcomplete#GetDoc()<CR>
-    autocmd FileType terraform noremap <buffer> <C-L> :call terraformcomplete#JumpRef()<CR>
-    autocmd FileType terraform noremap <buffer><silent> <leader>a :call terraformcomplete#LookupAttr()<CR>
-    autocmd FileType terraform noremap <buffer><silent> <leader>o :call terraformcomplete#OpenDoc()<CR>
-augroup END
+	if has('nvim')
+		silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#NeovimRun()<CR>
+	elseif v:version >= 800
+		silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#AsyncRun()<CR>
+	else
+		silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#Run()<CR>
+	end
 
-
-if has('nvim')
-    silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#NeovimRun()<CR>
-elseif v:version >= 800
-    silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#AsyncRun()<CR>
-else
-    silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#Run()<CR>
-end
-
+endif
