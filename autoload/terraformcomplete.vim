@@ -380,82 +380,10 @@ function! terraformcomplete#rubyComplete(ins, provider, resource, attribute, dat
     let a:data_line = getline(s:curr_pos[1]) =~ "^[ ]*data"
     let a:provider_line = (strpart(getline("."),0, getpos(".")[2]) =~ '^[ ]*\(resource\|data\)[ ]*"\%["]$' || getline(s:curr_pos[1]) =~ "provider")
     
+		let completion_string = "'" . a:resource_line . "','" . a:data_line . "','" . a:provider_line . "','" . s:path . "','" .  a:provider . "','" . a:resource . "','" . a:data_or_resource . "','" . a:block_word . "','" . a:attribute . "'"
 
-  ruby << EOF
-require 'json'
+		let a:res = json_decode(system("ruby utils/get_completion.rb '".  completion_string . "'" ))
 
-def terraform_complete(provider, resource)
-    begin
-        data = ''
-        if VIM::evaluate('a:provider_line') == 0 then
-            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}.json", "r") do |f|
-              f.each_line do |line|
-                data = line
-              end
-            end
-
-            parsed_data = JSON.parse(data)
-						block_word = VIM::evaluate('a:block_word')
-            if VIM::evaluate('a:attribute') == "true" then
-              if VIM::evaluate('a:data_or_resource') == 0 then
-								if block_word == "" then
-									result = parsed_data['datas'][resource]["attributes"]
-								else
-									result = parsed_data['datas'][resource]["attributes"]
-									for r in result
-										if r["word"] == block_word
-											result = r["subblock"]
-										end
-									end
-								end
-              else
-                result = parsed_data['resources'][resource]["attributes"]
-              end
-            elsif VIM::evaluate('a:data_line') == 1 then
-                temp = parsed_data['datas'].keys
-                temp.delete("provider_arguments")
-                result = temp.map { |x|
-                    { "word" => x }
-                }
-            elsif VIM::evaluate('a:resource_line') == 1 then
-                temp = parsed_data['resources'].keys
-                temp.delete("provider_arguments")
-                result = temp.map { |x|
-                    { "word" => x }
-                }
-            else
-              if VIM::evaluate('a:data_or_resource') == 0 then
-                result = parsed_data['datas'][resource]["arguments"]
-              else
-                result = parsed_data['resources'][resource]["arguments"]
-              end
-              result.concat(JSON.parse(File.read("#{VIM::evaluate('s:path')}/../extra_json/base.json")))
-            end
-        elsif VIM::evaluate('a:provider_line') == 1 then
-            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/*.json").map { |x|
-              { "word" => x.split("../provider_json/")[1].split('.json')[0] }
-            }
-        end
-
-        return JSON.generate(result)
-    rescue
-        return []
-    end
-end
-
-
-class TerraformComplete
-  def initialize()
-    @buffer = Vim::Buffer.current
-   
-    print Vim::evaluate('a:ins')
-
-    result = terraform_complete(VIM::evaluate('a:provider'), VIM::evaluate('a:resource'))
-    Vim::command("let a:res = #{result}")
-  end
-end
-gem = TerraformComplete.new()
-EOF
 let a:resource_line = 0
 let a:provider_line = 0
 return a:res
