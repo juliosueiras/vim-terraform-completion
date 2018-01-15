@@ -175,5 +175,11 @@
     },
     {
         "word": "indent"
-    }
+    },
+		{
+				"word": "rsadecrypt"
+		},
+		{
+				"word": "timeadd"
+		}
 ]
