@@ -160,6 +160,7 @@ let g:terraform_completion_keys = 1
 ## Todo for Improvement
 - [X] Add Travis-CI for testing, and ensuring the completion is outputing the right completion
 - [X] Look into the new module registry (Now support module name completion)
+- [ ] Add config for allowing multiple version for providers
 
 ## Credits
 - Provider Model Extraction script adapted from [Intellij-hcl](https://github.com/VladRassokhin/intellij-hcl)
