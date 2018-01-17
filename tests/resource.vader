@@ -24,7 +24,7 @@ Do (Autocompletion for Argument Test):
 
 Expect (get aws_vpn_gateway_attachment):
   resource "docker_container" "sd" {
-  name
+  capabilities
   }
 
 Given terraform (Block Argument Completion Test):
@@ -60,6 +60,6 @@ Expect (get docker_container):
   }
 
   resource "docker_container" "sd2" {
-  name = "${docker_container.sd.ip_address}"
-  name = "${docker_container.sd2.ip_address}"
+  name = "${docker_container.sd.bridge}"
+  name = "${docker_container.sd2.bridge}"
   }
