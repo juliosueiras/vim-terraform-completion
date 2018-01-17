@@ -1,5 +1,7 @@
 # (Neo)Vim Terraform Completion with Linter - [Demos](./DEMO.md)
 
+**IMPORTANT: This plugin now allow version based competion**
+
 ## [Changelog](./CHANGELOG.md)
 
 ## [Provider Versions](./PROVIDER_VERSOINS.md)
@@ -104,6 +106,15 @@ let g:syntastic_terraform_tffilter_plan = 1
 let g:terraform_completion_keys = 1
 
 ```
+
+## Version config file
+by default , all providers uses the latest version, but you can add a file call `.tfcompleterc` under working directory, and content can be this:
+```
+vsphere=1.0.3
+aws=0.1.0
+```
+
+using the syatax of <provider>=<version>
 
 ## General Todo
 <details>

@@ -1,0 +1,1 @@
+{"provider_arguments":[],"resources":{"record":{"arguments":[{"word":"name","kind":"String(R)"},{"word":"records","kind":"Set(R)"},{"word":"ttl","kind":"Int(R)"},{"word":"type","kind":"String(R)"},{"word":"zone","kind":"String(R)"}],"attributes":[{"word":"id","kind":"String"}]}},"datas":{},"unknowns":{}}

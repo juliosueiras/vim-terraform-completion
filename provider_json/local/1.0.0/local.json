@@ -1,0 +1,1 @@
+{"provider_arguments":[],"resources":{"file":{"arguments":[{"word":"content","kind":"String(R)"},{"word":"filename","kind":"String(R)","info":"Path to the output file"}],"attributes":[{"word":"id","kind":"String"}]}},"datas":{},"unknowns":{}}
