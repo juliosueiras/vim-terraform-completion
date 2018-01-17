@@ -508,7 +508,7 @@ fun! terraformcomplete#Complete(findstart, base)
         ruby <<EOF
             require 'json'
             data = ''
-            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}/#{VIM::evaluate("g:terraform_versions_config")[provider]}/#{VIM::evaluate('a:provider')}.json", "r") do |f|
+            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('a:provider')}/#{VIM::evaluate("g:terraform_versions_config")[VIM::evaluate('a:provider')]}/#{VIM::evaluate('a:provider')}.json", "r") do |f|
               f.each_line do |line|
                 data = line
               end
