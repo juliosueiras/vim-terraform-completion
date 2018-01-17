@@ -6,6 +6,7 @@ if exists('loaded_deoplete')
     let deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
 endif
 
+
 if exists('g:syntastic_extra_filetypes')
     call add(g:syntastic_extra_filetypes, 'terraform')
 else
@@ -374,21 +375,22 @@ fun! terraformcomplete#GetProvider()
 endfun
 
 function! terraformcomplete#rubyComplete(ins, provider, resource, attribute, data_or_resource, block_word)
+
     let s:curr_pos = getpos('.')
     let a:res = []
     let a:resource_line = getline(s:curr_pos[1]) =~ "^[ ]*resource"
     let a:data_line = getline(s:curr_pos[1]) =~ "^[ ]*data"
     let a:provider_line = (strpart(getline("."),0, getpos(".")[2]) =~ '^[ ]*\(resource\|data\)[ ]*"\%["]$' || getline(s:curr_pos[1]) =~ "provider")
-    
 
   ruby << EOF
 require 'json'
 
 def terraform_complete(provider, resource)
     begin
+				puts "#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate("g:terraform_versions_config")[provider]}/#{provider}.json"
         data = ''
         if VIM::evaluate('a:provider_line') == 0 then
-            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}.json", "r") do |f|
+            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}/#{VIM::evaluate("g:terraform_versions_config")[provider]}/#{provider}.json", "r") do |f|
               f.each_line do |line|
                 data = line
               end
@@ -432,8 +434,8 @@ def terraform_complete(provider, resource)
               result.concat(JSON.parse(File.read("#{VIM::evaluate('s:path')}/../extra_json/base.json")))
             end
         elsif VIM::evaluate('a:provider_line') == 1 then
-            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/*.json").map { |x|
-              { "word" => x.split("../provider_json/")[1].split('.json')[0] }
+            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/*").map { |x|
+              { "word" => x.split("../provider_json/")[1] }
             }
         end
 
@@ -506,7 +508,7 @@ fun! terraformcomplete#Complete(findstart, base)
         ruby <<EOF
             require 'json'
             data = ''
-            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('a:provider')}.json", "r") do |f|
+            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}/#{VIM::evaluate("g:terraform_versions_config")[provider]}/#{VIM::evaluate('a:provider')}.json", "r") do |f|
               f.each_line do |line|
                 data = line
               end

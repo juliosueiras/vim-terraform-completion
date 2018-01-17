@@ -1,8 +1,11 @@
 require 'json'
 
-Dir.glob("./provider_json/*.json").each do |o| 
-  original_json = JSON.parse(File.read(o))
-  provider = o.split('/')[-1].split('.json')[0]
+provider_list = File.read("./providers_list.txt").split
+
+provider_list.each do |o| 
+  original_json = {"provider_arguments":[],"resources":{},"datas":{},"unknowns":{}}
+
+  provider = o
   schema_json = JSON.parse(File.read("./schema_json/#{provider}.json"))
 
   def parse_items_attr(items)
@@ -77,7 +80,7 @@ Dir.glob("./provider_json/*.json").each do |o|
     return ar1
   end
 
-  original_json['resources'].map do |key, value|
+  original_json[:resources].map do |key, value|
     if not value["arguments"].all? {|i| i == nil }
       if key == 'vroute_entry'
         key = key[1..-1]
@@ -116,16 +119,16 @@ Dir.glob("./provider_json/*.json").each do |o|
     schema_json['resources'].each do |key, value|
       if key != 'external' # TODO: Fix external data sources
 
-        if original_json['resources'] == nil
-          original_json['resources'] = {}
+        if original_json[:resources] == nil
+          original_json[:resources] = {}
         end
 
-        original_json['resources'][key.split("#{provider}_")[1]] = { 'arguments': parse_items(value).compact ,'attributes': parse_items_attr(value).compact }
+        original_json[:resources][key.split("#{provider}_")[1]] = { 'arguments': parse_items(value).compact ,'attributes': parse_items_attr(value).compact }
       end
     end
   end
 
-  original_json['datas'].each do |key, value|
+  original_json[:datas].each do |key, value|
     if not value["arguments"].all? {|i| i == nil }
       if key == 'vroute_entry'
         key = key[1..-1]
@@ -167,14 +170,14 @@ Dir.glob("./provider_json/*.json").each do |o|
     schema_json['data-sources'].each do |key, value|
       if key != 'external' # TODO: Fix external data sources
 
-        if original_json['datas'] == nil
-          original_json['datas'] = {}
+        if original_json[:datas] == nil
+          original_json[:datas] = {}
         end
 
-        original_json['datas'][key.split("#{provider}_")[1]] = { 'arguments': parse_items(value) , 'attributes': parse_items_attr(value).compact }
+        original_json[:datas][key.split("#{provider}_")[1]] = { 'arguments': parse_items(value) , 'attributes': parse_items_attr(value).compact }
       end
     end
   end
 
-  File.write(o,JSON.generate(original_json))
+	File.write("./provider_json/#{o}.json",JSON.generate(original_json))
 end

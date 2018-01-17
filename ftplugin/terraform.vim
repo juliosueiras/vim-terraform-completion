@@ -30,6 +30,23 @@ if !exists('g:terraform_completion_keys')
     let g:terraform_completion_keys = 0
 endif
 
+if !exists('g:terraform_versions_config')
+	let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+	let res = {}
+	for i in readfile(s:path . "/../.tfcompleterc")
+		let res[split(i, "=")[0]] = split(i, "=")[1]
+	endfor
+
+	if filereadable(".tfcompleterc")
+		for i in readfile(".tfcompleterc")
+			let res[split(i, "=")[0]] = split(i, "=")[1]
+		endfor
+	endif
+
+	let g:terraform_versions_config = res
+end
+
+
 if g:terraform_completion_keys
 
 ""
