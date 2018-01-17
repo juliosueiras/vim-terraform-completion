@@ -115,7 +115,7 @@ vsphere=1.0.3
 aws=0.1.0
 ```
 
-using the syatax of <provider>=<version>
+using the syatax of `<provider>=<version>`
 
 ## General Todo
 <details>
