@@ -25,6 +25,7 @@
     + [NeoBundle](#neobundle)
     + [Vim-Plug](#vim-plug)
     + [Minimal Configuration](#minimal-configuration)
+    + [Version config](#version-config-file)
   * [General Todo](#general-todo)
   * [Todo for Terraform completion](#todo-for-terraform-completion)
   * [Todo for HCL](#todo-for-hcl)
