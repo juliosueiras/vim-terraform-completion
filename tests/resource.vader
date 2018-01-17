@@ -6,8 +6,8 @@ Given terraform (Resource Completion Test):
 Do (Autocompletion for resource first test):
   iresource "aws_\<C-X>\<C-O>
 
-Expect (get aws_api_gateway_account):
-  resource "aws_api_gateway_account
+Expect (get aws_alb):
+  resource "aws_alb
 
 Do (Autocompletion for resource second docker test):
   iresource "docker_\<C-X>\<C-O>
@@ -22,7 +22,7 @@ Given terraform (Argument Completion Test):
 Do (Autocompletion for Argument Test):
   o\<C-X>\<C-O>
 
-Expect (get aws_vpn_gateway_attachment):
+Expect (get capabilities):
   resource "docker_container" "sd" {
   capabilities
   }
