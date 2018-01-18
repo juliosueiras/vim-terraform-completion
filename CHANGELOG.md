@@ -1,6 +1,11 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
 
+## 2018-01-18
+- Added version based completion
+- Added Bots for auto update for provider(daily check)
+- Fix several bugs relating to attribute subcompletion
+
 ## 2017-12-06
 - Nested Block Completion
 
