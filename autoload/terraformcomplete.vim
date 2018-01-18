@@ -6,7 +6,6 @@ if exists('loaded_deoplete')
     let deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
 endif
 
-
 if exists('g:syntastic_extra_filetypes')
     call add(g:syntastic_extra_filetypes, 'terraform')
 else
@@ -387,7 +386,6 @@ require 'json'
 
 def terraform_complete(provider, resource)
     begin
-				puts "#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate("g:terraform_versions_config")[provider]}/#{provider}.json"
         data = ''
         if VIM::evaluate('a:provider_line') == 0 then
             File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}/#{VIM::evaluate("g:terraform_versions_config")[provider]}/#{provider}.json", "r") do |f|
@@ -411,7 +409,16 @@ def terraform_complete(provider, resource)
 									end
 								end
               else
-                result = parsed_data['resources'][resource]["attributes"]
+								if block_word == "" then
+									result = parsed_data['resources'][resource]["attributes"]
+								else
+									result = parsed_data['resources'][resource]["attributes"]
+									for r in result
+										if r["word"] == block_word
+											result = r["subblock"]
+										end
+									end
+								end
               end
             elsif VIM::evaluate('a:data_line') == 1 then
                 temp = parsed_data['datas'].keys
@@ -688,7 +695,33 @@ EOF
                       endfor
                       return res
                     endif
-                elseif len(a:attr) == 5
+                elseif len(a:attr) == 4 
+                    if a:attr[0] == "data"
+                        let a:res = []
+                        let a:provider = split(a:attr[1], "_")[0]
+
+                        let a:resource = split(a:attr[1], a:provider . "_")[0]
+                        let a:data_or_resource = 0
+                        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr[3])
+                            if m.word =~ '^' . a:base
+                                call add(a:res, m)
+                            endif
+                        endfor
+                        return a:res
+                    else
+                      let a:provider = split(a:attr[0], "_")[0]
+
+                      let a:resource = split(a:attr[0], a:provider . "_")[0]
+                      let a:data_or_resource = 1
+
+                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr[2])
+                        if m.word =~ '^' . a:base
+                          call add(res, m)
+                        endif
+                      endfor
+                      return res
+                    endif
+                elseif len(a:attr) == 5 
                     if a:attr[0] == "data"
                         let a:res = []
                         let a:provider = split(a:attr[1], "_")[0]
