@@ -171,7 +171,7 @@ using the syatax of `<provider>=<version>`
 - [x] Variable
 - [ ] Cleaner code
 - [x] local/offline
-- [ ] Add completion tags, ingress, and other subblock
+- [x] Add completion tags, ingress, and other subblock
 - [ ] Further seperate data source from resource
 </details>
 
