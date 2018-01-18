@@ -16,6 +16,11 @@ tags_urls.each do |tags_url|
 		#end
 		version = tags[0]["name"]
 		provider = tags[0]["zipball_url"].split("/")[5].match(/terraform-provider-(.*)/)[1]
+
+		if provider == "azure-classic"
+			provider = "azure"
+		end
+
 		puts "#{provider}=#{version.match("[vV](.*)")[1]}"
 	end
 end
