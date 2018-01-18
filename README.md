@@ -131,8 +131,9 @@ using the syatax of `<provider>=<version>`
 <summary>Todolist</summary>
 
 - [X] Adapt to Upcoming terraform 0.10
+- [X] Added a bot for auto pushing of new provider version 
 - [ ] (WIP) Refactoring Regex for linter and completion, and Trying out on api based(so it can integrade with other editor) solution
-- [ ] (WIP) More test cases, and update to 0.9.6
+- [ ] (WIP) More test cases
 - [x] Support for Neomake(Require further testing)
 - [X] Run terraform plan and output to a new window(`<leader>rr`) 
 - [X] Async Run support(For Neovim/Vim 8) 
