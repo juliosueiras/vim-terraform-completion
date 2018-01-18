@@ -47,6 +47,7 @@
   (Optional not require for completion)
 - [vim-syntastic](https://github.com/vim-syntastic/syntastic) (Only for Linter)
 - [neomake](https://github.com/neomake/neomake) (Only for Linter, Neovim)
+- [Deoplete](https://github.com/Shougo/deoplete.nvim) (Neovim only, for completion)
 - Ctags & [tagbar](https://github.com/majutsushi/tagbar) (Optional for Tag Sidebar)
 
 ## Installation
@@ -127,6 +128,9 @@ aws=0.1.0
 ```
 
 using the syatax of `<provider>=<version>`
+
+*Demo:*
+[![asciicast](https://asciinema.org/a/157636.png)](https://asciinema.org/a/157636)
 
 ## General Todo
 <details>
