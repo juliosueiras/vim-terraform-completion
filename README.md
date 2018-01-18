@@ -112,6 +112,8 @@ let g:terraform_completion_keys = 1
 ## Deoplete config
 put this in your init.vim
 ```vim
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
 let g:deoplete#enable_at_startup = 1
 call deoplete#initialize()
 ```
