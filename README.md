@@ -158,7 +158,6 @@ using the syatax of `<provider>=<version>`
 <details>
 <summary>Todolist</summary>
 
-- (Scrape due to Speed, Storage, and Inconsistency) Version-based Completion
 - [X] (Require more work) Lookup Attributes data using terraform.tfstate
 - [ ] Provider
 - [x] Completion for functions(file,etc) and basic resource arguments(count,lifecyle, etc)
