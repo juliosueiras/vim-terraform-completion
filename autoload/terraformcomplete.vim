@@ -483,12 +483,14 @@ fun! terraformcomplete#Complete(findstart, base)
     let res = []
     let a:res = []
 		if getline(".") =~ '\s*source\s*=\s*"'
-			for m in terraformcomplete#GetAllRegistryModules()
-				if m.word =~ '^' . a:base
-					call add(a:res, m)
-				endif
-			endfor
-			return a:res
+			if g:terraform_registry_module_completion
+				for m in terraformcomplete#GetAllRegistryModules()
+					if m.word =~ '^' . a:base
+						call add(a:res, m)
+					endif
+				endfor
+				return a:res
+			endif
 		endif
     try
       let a:provider = terraformcomplete#GetProvider()

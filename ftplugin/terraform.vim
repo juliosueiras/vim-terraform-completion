@@ -30,6 +30,10 @@ if !exists('g:terraform_completion_keys')
     let g:terraform_completion_keys = 0
 endif
 
+if !exists('g:terraform_registry_module_completion')
+		let g:terraform_registry_module_completion = 1
+endif
+
 if !exists('g:terraform_versions_config')
 	let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 	let res = {}
