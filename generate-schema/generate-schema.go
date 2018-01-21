@@ -1,3 +1,5 @@
+// Code from https://github.com/VladRassokhin/intellij-hcl/blob/master/schemas-extractor/template/generate-schema.go
+
 package main
 
 import (
