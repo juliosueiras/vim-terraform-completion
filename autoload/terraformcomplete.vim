@@ -508,6 +508,19 @@ fun! terraformcomplete#Complete(findstart, base)
     try
         execute 'normal! [{'
         let a:test_line = getline(".")
+        call setpos(".",a:old_pos)
+				let a:all_line = []
+
+				while 1
+					execute 'normal! [{'
+					let a:curr_line = match(getline("."), '^\s*\(resource\|data\|module\)\s*"')
+					if a:curr_line != 0
+						call add(a:all_line,matchlist(getline("."), '\s*\([^ ]*\)\s*{', '')[1])
+					else
+						break
+					endif
+				endw
+        call setpos(".",a:old_pos)
         execute 'normal! [{'
 	let a:nested = match(getline("."), '^\s*\(resource\|data\|module\)\s*"')
 	call search('^\s*\(resource\|data\|module\)\s*"', 'b')
@@ -532,28 +545,13 @@ fun! terraformcomplete#Complete(findstart, base)
 
             result.concat(base_data)
 
+						all_words = VIM::evaluate("a:all_line")
+						result_subblock = result 
+						all_words.reverse.each do |word|
+							result_subblock = result_subblock.find {|i| i["word"] == word }["subblock"]
+						end
+						parsed_data = JSON.generate(result_subblock)
             result.each do |i| 
-                if i['word'] == test and nested == 0
-                    parsed_data = JSON.generate(i['subblock'])
-                    break
-                end
-
-		if not i['subblock'].nil?
-			i['subblock'].each do |e|
-			if e['word'] == test
-				parsed_data = JSON.generate(e['subblock'])
-				break
-			end
-			if not e['subblock'].nil?
-				e['subblock'].each do |o|
-				if o['word'] == test
-					parsed_data = JSON.generate(o['subblock'])
-					break
-				end
-			end
-		end
-	end
-end
 	    end
             VIM::command("let a:res = #{parsed_data}")
 EOF
