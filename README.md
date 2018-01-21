@@ -27,6 +27,7 @@
     + [Minimal Configuration](#minimal-configuration)
     + [Deoplete config](#deoplete-config)
     + [Version config](#version-config-file)
+    + [Custom Provider](./CUSTOM_PROVIDER.md)
   * [General Todo](#general-todo)
   * [Todo for Terraform completion](#todo-for-terraform-completion)
   * [Todo for HCL](#todo-for-hcl)
