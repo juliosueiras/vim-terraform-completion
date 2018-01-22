@@ -513,7 +513,7 @@ fun! terraformcomplete#Complete(findstart, base)
 
 				while 1
 					execute 'normal! [{'
-					let a:curr_line = match(getline("."), '^\s*\(resource\|data\|module\)\s*"')
+					let a:curr_line = match(getline("."), '^\s*\(resource\|data\|module\|variable\|outputs\|locals\)\s*"')
 					if a:curr_line != 0
 						call add(a:all_line,matchlist(getline("."), '\s*\([^ ]*\)\s*{', '')[1])
 					else
@@ -522,8 +522,10 @@ fun! terraformcomplete#Complete(findstart, base)
 				endw
         call setpos(".",a:old_pos)
         execute 'normal! [{'
-	let a:nested = match(getline("."), '^\s*\(resource\|data\|module\)\s*"')
-	call search('^\s*\(resource\|data\|module\)\s*"', 'b')
+
+				let a:nested = match(getline("."), '^\s*\(resource\|data\|module\)\s*"')
+				call search('^\s*\(resource\|data\|module\)\s*"', 'b')
+
         let a:data_or_resource = matchlist(getline("."), '\s*\([^" ]*\)\s*.*', '')[1] 
         call setpos(".",a:old_pos)
         let a:test_name = matchlist(a:test_line, '\s*\([^ ]*\)\s*{', '')[1]
