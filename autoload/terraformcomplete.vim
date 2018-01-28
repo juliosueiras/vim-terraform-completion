@@ -513,7 +513,7 @@ fun! terraformcomplete#Complete(findstart, base)
 
 				while 1
 					execute 'normal! [{'
-					let a:curr_line = match(getline("."), '^\s*\(resource\|data\|module\|variable\|output\|locals\)\s*"')
+					let a:curr_line = match(getline("."), '^\s*\(resource\|data\|module\|variable\|output\|locals\|provider\)\s*"')
 					if a:curr_line != 0
 						call add(a:all_line,matchlist(getline("."), '\s*\([^ ]*\)\s*{', '')[1])
 					else
