@@ -510,8 +510,9 @@ fun! terraformcomplete#Complete(findstart, base)
         let a:test_line = getline(".")
         call setpos(".",a:old_pos)
 				let a:all_line = []
-
-				while 1
+				let counter = 0
+				while counter <= 40
+					let counter += 1
 					execute 'normal! [{'
 					let a:curr_line = match(getline("."), '^\s*\(resource\|data\|module\|variable\|output\|locals\|provider\)\s*"')
 					if a:curr_line != 0
