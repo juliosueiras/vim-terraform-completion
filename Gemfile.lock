@@ -4,12 +4,14 @@ GEM
     mini_portile2 (2.1.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
+    rdoc (6.0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   nokogiri
+  rdoc
 
 BUNDLED WITH
-   1.14.4
+   1.15.4
