@@ -51,6 +51,7 @@ opsgenie=0.1.0
 ovh=0.2.0
 packet=1.2.0
 pagerduty=0.1.3
+panos=1.0.0
 postgresql=0.1.1
 powerdns=0.1.0
 profitbricks=1.1.0
