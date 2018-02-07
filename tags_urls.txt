@@ -51,6 +51,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-ovh/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-packet/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-pagerduty/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-panos/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-postgresql/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-powerdns/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-profitbricks/tags"

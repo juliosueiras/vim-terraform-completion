@@ -870,7 +870,7 @@ fun! terraformcomplete#GetAll(data_or_resource) abort
   let a:search_continue = 1
   let a:list = []
   let a:type_list = {}
-  if getline(".") =~ a:data_or_resource . '\s*"\w*"\s*"[^"]*"' 
+  if getline(".") =~ '^\s*' . a:data_or_resource . '\s*"\w*"\s*"[^"]*"' 
       let temp = substitute(split(split(getline(a:search_continue),a:data_or_resource . ' ')[0], ' ')[0], '"','','g')
       call add(a:list, { 'word': temp })
 
@@ -882,7 +882,7 @@ fun! terraformcomplete#GetAll(data_or_resource) abort
   endif
   while a:search_continue != 0
 
-    let a:search_continue = search(a:data_or_resource . '\s*"\w*"\s*"[^"]*"', 'W')
+    let a:search_continue = search('^\s*' . a:data_or_resource . '\s*"\w*"\s*"[^"]*"', 'W')
 
     if a:search_continue != 0 
       let temp = substitute(split(split(getline(a:search_continue),a:data_or_resource . ' ')[0], ' ')[0], '"','','g')

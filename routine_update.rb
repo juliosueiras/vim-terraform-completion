@@ -3,6 +3,9 @@ require 'rest-client'
 require 'json'
 require 'pry'
 
+puts "Start check new provider"
+`./check_new_provider`
+puts "Finish check new provider"
 tags_urls = File.read("tags_urls.txt").split.map {|i| i.gsub('"','') }
 new_version_avail = false
 
