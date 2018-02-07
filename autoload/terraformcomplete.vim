@@ -333,7 +333,7 @@ endfunction
 fun! terraformcomplete#GetResource()
     let s:curr_pos = getpos('.')
     if getline(".") !~# '^\s*\(resource\|data\)\s*"'
-        execute '?\s*\(resource\|data\)\s*"'
+        execute '?^\s*\(resource\|data\)\s*"'
     endif
     let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
 
@@ -363,7 +363,7 @@ endfun
 fun! terraformcomplete#GetProvider()
     let s:curr_pos = getpos('.')
     if getline(".") !~# '^\s*\(resource\|data\)\s*"'
-        execute '?\s*\(resource\|data\)\s*"'
+        execute '?^\s*\(resource\|data\)\s*"'
     endif
 
     let a:provider = split(split(substitute(getline("."),'"', '', ''))[1], "_")[0]
@@ -497,7 +497,7 @@ fun! terraformcomplete#Complete(findstart, base)
     catch
       let a:provider = ''
     endtry
-
+	
     try
       let a:resource = terraformcomplete#GetResource()
     catch
