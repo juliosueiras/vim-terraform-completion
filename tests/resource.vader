@@ -6,8 +6,8 @@ Given terraform (Resource Completion Test):
 Do (Autocompletion for resource first test):
   iresource "aws_\<C-X>\<C-O>
 
-Expect (get aws_alb):
-  resource "aws_alb
+Expect (get aws_acm_certificate):
+  resource "aws_acm_certificate
 
 Do (Autocompletion for resource second docker test):
   iresource "docker_\<C-X>\<C-O>

@@ -12,5 +12,4 @@ ADD tests/ tests/
 COPY tests.vimrc tests.vimrc
 ADD vader.vim/ vader.vim/
 ADD . vim-terraform-completion/
-RUN echo "aws=1.8.0" > tests/.tfcompleterc
 ENTRYPOINT ["/usr/sbin/bash"]
