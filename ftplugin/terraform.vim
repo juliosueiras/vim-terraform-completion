@@ -71,14 +71,14 @@ if g:terraform_completion_keys
 		noremap <buffer> <Leader>l :call terraformcomplete#JumpRef()<CR>
 		noremap <buffer><silent> <Leader>a :call terraformcomplete#LookupAttr()<CR>
 		noremap <buffer><silent> <Leader>o :call terraformcomplete#OpenDoc()<CR>
-	augroup END
 
-	if has('nvim')
-		silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#NeovimRun()<CR>
-	elseif v:version >= 800
-		silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#AsyncRun()<CR>
-	else
-		silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#Run()<CR>
-	end
+		if has('nvim')
+			silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#NeovimRun()<CR>
+		elseif v:version >= 800
+			silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#AsyncRun()<CR>
+		else
+			silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#Run()<CR>
+		end
+	augroup END
 
 endif
