@@ -55,9 +55,9 @@ if g:terraform_completion_keys
 
 ""
 " @section Mappings,mappings
-" "<C-K>" (Ctrl-K) will show doc of the current attribute/argument in vim
+" "<leader>k" will show doc of the current attribute/argument in vim
 "
-" "<C-L>" (Ctrl-L) will jump to declaration of the resource/data/variable
+" "<leader>l" will jump to declaration of the resource/data/variable
 "
 " "<leader>a" will look up the current attribute data given that there is
 " terraform.tfstate
@@ -67,8 +67,8 @@ if g:terraform_completion_keys
 " "<leader>rr" to run terraform plan(async for neovim/vim 8, non-async for
 " vim)
 	augroup TerraformCompleteKeys
-		noremap <buffer><silent> <C-K> :call terraformcomplete#GetDoc()<CR>
-		noremap <buffer> <C-L> :call terraformcomplete#JumpRef()<CR>
+		noremap <buffer><silent> <Leader>k :call terraformcomplete#GetDoc()<CR>
+		noremap <buffer> <Leader>l :call terraformcomplete#JumpRef()<CR>
 		noremap <buffer><silent> <Leader>a :call terraformcomplete#LookupAttr()<CR>
 		noremap <buffer><silent> <Leader>o :call terraformcomplete#OpenDoc()<CR>
 	augroup END

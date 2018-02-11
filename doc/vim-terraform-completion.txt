@@ -34,9 +34,9 @@ FEATURES                                   *vim-terraform-completion-features*
 ==============================================================================
 MAPPINGS                                   *vim-terraform-completion-mappings*
 
-"<C-K>" (Ctrl-K) will show doc of the current attribute/argument in vim
+"<leader>k" will show doc of the current attribute/argument in vim
 
-"<C-L>" (Ctrl-L) will jump to declaration of the resource/data/variable
+"<leader>l" will jump to declaration of the resource/data/variable
 
 "<leader>a" will look up the current attribute data given that there is
 terraform.tfstate
