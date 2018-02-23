@@ -52,6 +52,7 @@ Given terraform (Resource Interpolation Completion Test):
   }
 
 Do (Autocompletion for interpolation):
+	:!rm test.tf
   3joname = "${\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"\<ESC>
   oname = "${\<C-X>\<C-O>.\<C-X>\<C-O>\<C-N>.\<C-X>\<C-O>}"\<ESC>
 

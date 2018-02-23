@@ -89,8 +89,3 @@ Expect (get output test):
   resource "aws_db_instance" "test" {
   name = "${module.test.output_var}"
   }
-
-After:
-  :!rm test.tf
-
-
