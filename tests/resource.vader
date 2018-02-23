@@ -52,7 +52,7 @@ Given terraform (Resource Interpolation Completion Test):
   }
 
 Execute (to make sure test.tf is removed):
-  :!rm test.tf
+  :!rm test.tf\<CR>
 
 Do (Autocompletion for interpolation):
   3joname = "${\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"\<ESC>
