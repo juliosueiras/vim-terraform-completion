@@ -90,7 +90,7 @@ Expect (get output test):
   name = "${module.test.output_var}"
   }
 
-After
+After:
   :!rm test.tf
 
 
