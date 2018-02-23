@@ -594,11 +594,21 @@ EOF
                 if temp[-1] != '.'
                     temp = temp[0..-2]
                 end
-                if temp.match(/\${.*[^\w.-](?:(?![^\w.-]))(.*\.)$/) != nil
-                    res = temp.match(/\${.*[^\w.-](?:(?![^\w.-]))(.*\.)$/)[1]
+
+								#puts temp.match(/\${.*[^\w*.-](?:(?![^\w*.-]))(.*\.)$/)
+                if temp.match(/\${.*[^\w*.-](?:(?![^\w*.-]))(.*\.)$/) != nil
+                    res = temp.match(/\${.*[^\w*.-](?:(?![^\w*.-]))(.*\.)$/)[1]
                 elsif temp.match(/.*\${(.*\.)$/) != nil
                     res = temp.match(/.*\${(.*\.)$/)[1]
                 end
+								#res_ar = res.split "."
+
+								#puts res_ar
+								#if res_ar[0] == "data" and res_ar[3] == '*'
+								#	res_ar.delete_at 3
+								#elsif res_ar[2] == "*"
+								#	res_ar.delete_at 2
+								#end
 
                 VIM::command("let a:temp_attr = '#{res}'")
 EOF
@@ -705,7 +715,15 @@ EOF
 
                         let a:resource = split(a:attr[1], a:provider . "_")[0]
                         let a:data_or_resource = 0
-                        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr[3])
+
+												"if match(a:attr[3], "^[0-9*]*$") == 0
+												"	let a:attr_block_word = a:attr[4]
+												"else
+												"	let a:attr_block_word = a:attr[3]
+												"endif
+												"echo a:attr_block_word
+
+                        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, "")
                             if m.word =~ '^' . a:base
                                 call add(a:res, m)
                             endif
@@ -717,7 +735,13 @@ EOF
                       let a:resource = split(a:attr[0], a:provider . "_")[0]
                       let a:data_or_resource = 1
 
-                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr[2])
+											if match(a:attr[2], "^[0-9*]*$") == 0
+												let a:attr_block_word = a:attr[3]
+											else
+												let a:attr_block_word = a:attr[2]
+											endif
+
+                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr_block_word)
                         if m.word =~ '^' . a:base
                           call add(res, m)
                         endif
@@ -731,7 +755,14 @@ EOF
 
                         let a:resource = split(a:attr[1], a:provider . "_")[0]
                         let a:data_or_resource = 0
-                        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr[3])
+
+												if match(a:attr[3], "^[0-9*]*$") == 0
+													let a:attr_block_word = a:attr[4]
+												else
+													let a:attr_block_word = a:attr[3]
+												endif
+
+                        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr_block_word)
                             if m.word =~ '^' . a:base
                                 call add(a:res, m)
                             endif
@@ -743,12 +774,39 @@ EOF
                       let a:resource = split(a:attr[0], a:provider . "_")[0]
                       let a:data_or_resource = 1
 
-                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr[2])
+											if match(a:attr[2], "^[0-9*]*$") == 0
+												let a:attr_block_word = a:attr[3]
+											else
+												let a:attr_block_word = a:attr[2]
+											endif
+
+                      for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr_block_word)
                         if m.word =~ '^' . a:base
                           call add(res, m)
                         endif
                       endfor
                       return res
+                    endif
+                elseif len(a:attr) == 6 
+                    if a:attr[0] == "data"
+                        let a:res = []
+                        let a:provider = split(a:attr[1], "_")[0]
+
+                        let a:resource = split(a:attr[1], a:provider . "_")[0]
+                        let a:data_or_resource = 0
+
+												if match(a:attr[4], "^[0-9*]*$") == 0
+													let a:attr_block_word = a:attr[5]
+												else
+													let a:attr_block_word = a:attr[4]
+												endif
+
+                        for m in terraformcomplete#rubyComplete(a:base, a:provider, a:resource, 'true', a:data_or_resource, a:attr_block_word)
+                            if m.word =~ '^' . a:base
+                                call add(a:res, m)
+                            endif
+                        endfor
+                        return a:res
                     endif
                 else
                     return a:resource_list
@@ -913,7 +971,6 @@ fun! terraformcomplete#GetAll(data_or_resource) abort
 	end
 
 	sorted_list =  VIM::evaluate("a:list").sort_by { |item| item['word'] }
-	puts VIM::evaluate("a:type_list")
 	sorted_type_list = {}
 
 	VIM::evaluate("a:type_list").map do |itemName, itemList| 
