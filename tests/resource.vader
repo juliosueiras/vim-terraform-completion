@@ -52,9 +52,11 @@ Given terraform (Resource Interpolation Completion Test):
   }
 
 Do (Autocompletion for interpolation):
-	:!rm test.tf
   3joname = "${\<C-X>\<C-O>.\<C-X>\<C-O>.\<C-X>\<C-O>}"\<ESC>
   oname = "${\<C-X>\<C-O>.\<C-X>\<C-O>\<C-N>.\<C-X>\<C-O>}"\<ESC>
+
+Execute (to make sure test.tf is removed):
+  :!rm test.tf
 
 Expect (get docker_container):
   resource "docker_container" "sd" {
