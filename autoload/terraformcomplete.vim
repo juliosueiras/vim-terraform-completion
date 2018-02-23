@@ -896,5 +896,33 @@ fun! terraformcomplete#GetAll(data_or_resource) abort
     endif
   endwhile
   call setpos('.', a:old_pos)
+	ruby <<EOF
+	data_or_resource = VIM::evaluate("a:data_or_resource")
+	Dir.glob('*.tf').each do |file|
+	File.read(file).split("\n").map {|i| i.match(/^\s*#{data_or_resource}\s*"(\w*)"\s*"([^"]*)"/) }.compact.each do |temp|
+		res = VIM::evaluate("has_key(a:type_list, \"#{temp[1]}\")")
+
+		if res == 0
+			VIM::command("let a:type_list[\"#{temp[1]}\"] = []")
+		end
+
+		
+		VIM::command("call add(a:list, { 'word': \"#{temp[1]}\" })")
+		VIM::command("call add(a:type_list[\"#{temp[1]}\"], { 'word': \"#{temp[2]}\"})")
+		end
+	end
+
+	sorted_list =  VIM::evaluate("a:list").sort_by { |item| item['word'] }
+	puts VIM::evaluate("a:type_list")
+	sorted_type_list = {}
+
+	VIM::evaluate("a:type_list").map do |itemName, itemList| 
+    sorted_type_list[itemName] =	itemList.sort_by { |item| item['word'] }
+	end
+
+	VIM::command("let a:list = #{sorted_list.to_json}")
+	VIM::command("let a:type_list = #{sorted_type_list.to_json}")
+
+EOF
   return [a:list, a:type_list]
 endfunc

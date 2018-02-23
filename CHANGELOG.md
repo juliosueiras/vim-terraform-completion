@@ -1,6 +1,11 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
 
+## 2018-02-23
+- Added Resource/Data interpolation from other files
+
+[![asciicast](https://asciinema.org/a/S6x9eVEht2ppT5fMcS9IvLJiz.png)](https://asciinema.org/a/S6x9eVEht2ppT5fMcS9IvLJiz)
+
 ## 2018-01-18
 - Added version based completion
 - Added Bots for auto update for provider(daily check)
