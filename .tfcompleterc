@@ -1,10 +1,10 @@
-alicloud=1.7.2
+alicloud=1.8.0
 archive=1.0.0
 arukas=0.1.0
 atlas=0.1.1
 aws=1.10.0
 azure=0.1.1
-azurerm=1.1.2
+azurerm=1.2.0
 bitbucket=1.0.0
 chef=0.1.0
 circonus=0.1.0
