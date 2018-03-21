@@ -28,13 +28,13 @@ def main()
       end
       
 
-      if x.match(/\* resource '([^']*)' [^:]*: ([^:']*):? '([^']*)'/) != nil
-        captures = x.match(/\* resource '([^']*)' [^:]*: ([^:']*):? '([^']*)'/).captures
+      if x.match(/(Error:|\*) resource '([^']*)' [^:]*: ([^:']*):? '([^']*)'/) != nil
+        captures = x.match(/(Error:|\*) resource '([^']*)' [^:]*: ([^:']*):? '([^']*)'/).captures
 
-        if captures[1] != "unknown variable referenced"
-          errors_res.push({:location=> captures[0].split("."), :variable=> captures[2], :errormsg=> captures[1] })
+        if captures[2] != "unknown variable referenced"
+          errors_res.push({:location=> captures[1].split("."), :variable=> captures[3], :errormsg=> captures[2] })
         elsif
-          errors_res.push({:location=> captures[0].split("."), :variable=> "var.#{captures[2]}", :errormsg=> captures[1] })
+          errors_res.push({:location=> captures[1].split("."), :variable=> "var.#{captures[3]}", :errormsg=> captures[2] })
         end
       end
 
@@ -72,6 +72,12 @@ def main()
         captures = x.match(/Error: ([^.]*).([^:]*): (.*)/).captures
         errors_res.push({:location=> [captures[0], captures[1]], :variable=>"\"#{captures[0]}\" \"#{captures[1]}\"", :errormsg=> "#{captures[2]}" })
       end
+
+			if x.match(/(Error:|\*) resource '([^']*)' config: (unknown resource '([^']*)') referenced in variable (.*)/) != nil
+				captures = x.match(/(Error:|\*) resource '([^']*)' config: (unknown resource '([^']*)') referenced in variable (.*)/).captures
+
+				errors_res.push({:location=> captures[3].split("."), :variable=> captures[4], :errormsg=> captures[2] })
+			end
     }
     
     res = []
