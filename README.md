@@ -53,7 +53,7 @@
 
 ## Installation
 
-**Require `+ruby` or `+ruby/dyn` for vim**
+**Require `+ruby` or `+ruby/dyn` for vim & json gem for ruby as well**
 
 ### NeoBundle
 ```vim
