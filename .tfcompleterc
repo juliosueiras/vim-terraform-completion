@@ -1,5 +1,5 @@
 alicloud=1.9.0
-archive=1.0.2
+archive=1.0.3
 arukas=0.1.0
 atlas=0.1.1
 aws=1.11.0
@@ -32,7 +32,7 @@ http=1.0.1
 icinga2=0.1.1
 ignition=1.0.0
 influxdb=1.0.0
-kubernetes=1.0.1
+kubernetes=1.1.0
 librato=0.1.0
 local=1.1.0
 logentries=0.1.0
