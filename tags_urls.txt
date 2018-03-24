@@ -48,6 +48,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-openstack/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-opentelekomcloud/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-opsgenie/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-oraclepaas/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-ovh/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-packet/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-pagerduty/tags"
