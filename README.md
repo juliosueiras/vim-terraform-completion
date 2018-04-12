@@ -10,6 +10,7 @@
 [![vim build](https://badges.herokuapp.com/travis/juliosueiras/vim-terraform-completion?env=VIM_TYPE=vim&label=Vim%20Build)](https://travis-ci.org/juliosueiras/vim-terraform-completion)
 ![terraform version](https://img.shields.io/badge/terraform-0.11.5-blue.svg)
 [![Join the chat at https://gitter.im/juliosueiras/vim-terraform-completion](https://badges.gitter.im/juliosueiras/vim-terraform-completion.svg)](https://gitter.im/juliosueiras/vim-terraform-completion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjuliosueiras%2Fvim-terraform-completion.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjuliosueiras%2Fvim-terraform-completion?ref=badge_shield)
 
 **Terraform Module is supported(though there might be bugs)**
 
@@ -199,3 +200,7 @@ using the syatax of `<provider>=<version>`
 - Folding adapted from [vim-terraform](https://github.com/hashivim/vim-terraform)
 
 ## [Contributors](./CONTRIBUTORS.md)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjuliosueiras%2Fvim-terraform-completion.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjuliosueiras%2Fvim-terraform-completion?ref=badge_large)
