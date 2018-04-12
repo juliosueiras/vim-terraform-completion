@@ -42,6 +42,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-newrelic/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-nomad/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-ns1/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-nsxt/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-null/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-oneandone/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-opc/tags"
