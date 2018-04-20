@@ -71,6 +71,7 @@ if g:terraform_completion_keys
 		noremap <buffer> <Leader>l :call terraformcomplete#JumpRef()<CR>
 		noremap <buffer><silent> <Leader>a :call terraformcomplete#LookupAttr()<CR>
 		noremap <buffer><silent> <Leader>o :call terraformcomplete#OpenDoc()<CR>
+		noremap <buffer><silent> <Leader>e :call terraformcomplete#EvalInter()<CR>
 
 		if has('nvim')
 			silent! map <unique> <buffer> <Leader>rr :call terraformcomplete#NeovimRun()<CR>

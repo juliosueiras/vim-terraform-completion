@@ -54,6 +54,41 @@ endif
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 ""
+" Function to eval interpolation
+function! terraformcomplete#EvalInter()
+
+
+	let old_pos = getpos(".")
+	execute 'normal! t}'
+	if strpart(getline(".") , 0 , getpos(".")[2]) =~ ".*{"
+		let a:curr = strpart(getline("."),0, getpos(".")[2])
+		let a:pair_text = split(a:curr, "${")[-1]
+		call setpos('.', old_pos)
+		botright new
+		setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+
+	ruby <<EOF
+	require 'tempfile'
+
+	result = `terraform console <<EOE 2>&1
+#{Vim::evaluate("a:pair_text")}
+EOE
+`
+
+	file = Tempfile.new('tfconsole')
+	begin
+	  file.write(result)
+  ensure
+		file.close
+		Vim::command("read #{file.path}")
+		file.unlink   # deletes the temp file
+  end
+EOF
+	setlocal nomodifiable
+endif
+endfunc
+
+""
 " Function to open the doc in browser
 function! terraformcomplete#OpenDoc()
     try
