@@ -1,6 +1,10 @@
 # Changelog
 ## **Disclamier:** Have to mostly use asciinema due to my laptop take foerever to do gifs
 
+## 2018-04-20
+- Added Evaluation of Interpolation
+[![asciicast](https://asciinema.org/a/177322.png)](https://asciinema.org/a/177322)
+
 ## 2018-02-23
 - Added Resource/Data interpolation from other files
 

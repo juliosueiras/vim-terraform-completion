@@ -45,5 +45,7 @@ terraform.tfstate
 
 "<leader>rr" to run terraform plan(async for neovim/vim 8, non-async for vim)
 
+"<leader>e" to evaluate the interpolation under the cursor
+
 
 vim:tw=78:ts=8:ft=help:norl:
