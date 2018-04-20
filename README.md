@@ -170,6 +170,7 @@ using the syatax of `<provider>=<version>`
 <summary>Todolist</summary>
 
 - [X] (Require more work) Lookup Attributes data using terraform.tfstate
+- [X] Evaluate Interpolation
 - [ ] (WIP) Custom Provider completion, might do Rest API style due to unstable custom provider
 - [ ] Provider
 - [x] Completion for functions(file,etc) and basic resource arguments(count,lifecyle, etc)
