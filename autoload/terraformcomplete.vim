@@ -114,8 +114,10 @@ function! terraformcomplete#OpenDoc()
         "(Windows) cmd /c start filename_or_URL
         if system('uname -s') == 'Darwin'
             silent! execute ':!open ' . a:link
+            silent! execute ':redraw!'
         else
             silent! execute ':!xdg-open ' . a:link
+            silent! execute ':redraw!'
         endif
     catch
     endtry
