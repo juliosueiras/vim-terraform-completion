@@ -6,7 +6,7 @@ community = JSON.parse(File.read("community/community.json"))
 
 result = []
 community.each do |item|
-	if item["versions"].count != 0
+	if item["versions"].count != 1
 		version = item["versions"][1]
 	else
 		version = "master"
