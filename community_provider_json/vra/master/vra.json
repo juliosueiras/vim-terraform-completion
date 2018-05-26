@@ -1,0 +1,1 @@
+{"provider_arguments":[],"resources":{"execute_blueprint":{"arguments":[{"word":"blueprint_name","kind":"String(R)"},{"word":"input_file_name","kind":"String(R)"},{"word":"time_out","kind":"Int(O)"}],"attributes":[{"word":"id","kind":"String"}]}},"datas":{},"unknowns":{}}

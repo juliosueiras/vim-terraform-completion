@@ -1,0 +1,1 @@
+{"provider_arguments":[],"resources":{"computer":{"arguments":[{"word":"computer_name","kind":"String(R)"},{"word":"domain","kind":"String(R)"}],"attributes":[{"word":"id","kind":"String"}]}},"datas":{},"unknowns":{}}

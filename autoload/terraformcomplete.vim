@@ -423,11 +423,19 @@ def terraform_complete(provider, resource)
     begin
         data = ''
         if VIM::evaluate('a:provider_line') == 0 then
-            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}/#{VIM::evaluate("g:terraform_versions_config")[provider]}/#{provider}.json", "r") do |f|
-              f.each_line do |line|
-                data = line
-              end
-            end
+						if File.exists? "#{VIM::evaluate('s:path')}/../provider_json/#{provider}/#{VIM::evaluate("g:terraform_versions_config")[provider]}/#{provider}.json" 
+							File.open("#{VIM::evaluate('s:path')}/../provider_json/#{provider}/#{VIM::evaluate("g:terraform_versions_config")[provider]}/#{provider}.json", "r") do |f|
+								f.each_line do |line|
+									data = line
+								end
+							end
+						else
+							File.open("#{VIM::evaluate('s:path')}/../community_provider_json/#{provider}/#{VIM::evaluate("g:terraform_versions_config")[provider]}/#{provider}.json", "r") do |f|
+								f.each_line do |line|
+									data = line
+								end
+							end
+						end
 
             parsed_data = JSON.parse(data)
 						block_word = VIM::evaluate('a:block_word')
@@ -476,9 +484,9 @@ def terraform_complete(provider, resource)
               result.concat(JSON.parse(File.read("#{VIM::evaluate('s:path')}/../extra_json/base.json")))
             end
         elsif VIM::evaluate('a:provider_line') == 1 then
-            result = Dir.glob("#{VIM::evaluate('s:path')}/../provider_json/*").map { |x|
-              { "word" => x.split("../provider_json/")[1] }
-            }
+						result = VIM::evaluate('g:terraform_versions_config').keys.sort.map	do |value|
+							{ "word" => value }
+						end
         end
 
         return JSON.generate(result)
@@ -568,11 +576,19 @@ fun! terraformcomplete#Complete(findstart, base)
         ruby <<EOF
             require 'json'
             data = ''
-            File.open("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('a:provider')}/#{VIM::evaluate("g:terraform_versions_config")[VIM::evaluate('a:provider')]}/#{VIM::evaluate('a:provider')}.json", "r") do |f|
-              f.each_line do |line|
-                data = line
-              end
-            end
+						if File.exists? "#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('a:provider')}/#{VIM::evaluate("g:terraform_versions_config")[VIM::evaluate('a:provider')]}/#{VIM::evaluate('a:provider')}.json" 
+							File.open("#{VIM::evaluate('s:path')}/../provider_json/#{VIM::evaluate('a:provider')}/#{VIM::evaluate("g:terraform_versions_config")[VIM::evaluate('a:provider')]}/#{VIM::evaluate('a:provider')}.json", "r") do |f|
+								f.each_line do |line|
+									data = line
+								end
+							end
+						else
+							File.open("#{VIM::evaluate('s:path')}/../community_provider_json/#{VIM::evaluate('a:provider')}/#{VIM::evaluate("g:terraform_versions_config")[VIM::evaluate('a:provider')]}/#{VIM::evaluate('a:provider')}.json", "r") do |f|
+								f.each_line do |line|
+									data = line
+								end
+							end
+						end
 
             base_data = JSON.parse(File.read("#{VIM::evaluate('s:path')}/../extra_json/base.json"))
 

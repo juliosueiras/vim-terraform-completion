@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Category for community-built providers.">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon-13180a24.png">
+    <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-32x32-62171ffd.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-16x16-2821bcc8.png" sizes="16x16">
+    <link rel="manifest" href="/android-manifest.json">
+    <link rel="mask-icon" href="/assets/images/favicons/safari-pinned-tab-bab846e1.svg" color="#5C4EE5">
+    <meta name="msapplication-config" content="/microsoft-tile.xml" />
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@HashiCorp" />
+    <meta name="twitter:creator" content="@HashiCorp" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.terraform.io/docs/providers/type/community-index.html" />
+    <meta property="og:title" content="Community Providers - Terraform by HashiCorp" />
+    <meta property="og:site_name" content="Terraform by HashiCorp"/>
+    <meta property="og:image" content="https://www.terraform.io/assets/images/og-image-f5bbc98c.png"/>
+    <meta property="og:image:width" content="100"/>
+    <meta property="og:image:height" content="100"/>
+    <meta property="og:description" content="Category for community-built providers." />
+
+    <title>Community Providers - Terraform by HashiCorp</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://use.typekit.net/wxf7mfi.css">
+    <link href="/assets/stylesheets/application-b19bad99.css" rel="stylesheet" />
+
+    <!-- Site scripts -->
+    <!--[if lt IE 9]><script src="/assets/javascripts/ie-compat-c141a02d.js" defer="defer"></script><![endif]-->
+    <script src="/assets/javascripts/application-e080fe63.js" defer="defer"></script>
+
+    <!-- Analytics scrpts -->
+    <script defer>
+      !function(){var e=window.analytics=window.analytics||[];if(!e.initialize)if(e.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{e.invoked=!0,e.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"],e.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),e.push(a),e}};for(var t=0;t<e.methods.length;t++){var a=e.methods[t];e[a]=e.factory(a)}e.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+e+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(t,a)},e.SNIPPET_VERSION="4.0.0",e.load("EnEETDWhfxp1rp09jVvJr66LdvwI6KVP")}}();var om597a24292a958,om597a24292a958_poll=function(){var e=0;return function(t,a){clearInterval(e),e=setInterval(t,a)}}();!function(e,t,a){if(e.getElementById(a))om597a24292a958_poll(function(){if(window.om_loaded&&!om597a24292a958)return(om597a24292a958=new OptinMonsterApp).init({s:"35109.597a24292a958",staging:0,dev:0,beta:0})},25);else{var n=!1,o=e.createElement("script");o.id=a,o.src="//a.optnmstr.com/app/js/api.min.js",o.async=!0,o.onload=o.onreadystatechange=function(){if(!(n||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState))try{n=om_loaded=!0,(om597a24292a958=new OptinMonsterApp).init({s:"35109.597a24292a958",staging:0,dev:0,beta:0}),o.onload=o.onreadystatechange=null}catch(e){}},(document.getElementsByTagName("head")[0]||document.documentElement).appendChild(o)}}(document,0,"omapi-script");
+    </script>
+
+    
+  </head>
+
+  <body id="page-docs-providers-community" class="layout-docs page-community-providers">
+
+    <svg class="hidden-print" aria-hidden="true" style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <symbol id="mega-nav-icon-angle" viewBox="0 0 13 7">
+      <polygon points="6.5,6.5 0.7,1.6 1.3,0.8 6.5,5.2 11.7,0.8 12.3,1.6 "/>
+    </symbol>
+    <symbol id="mega-nav-icon-close" viewBox="0 0 13 15">
+      <path vector-effect="non-scaling-stroke" d="M1.1 14L11.9 1M11.9 14L1.1 1"/>
+    </symbol>
+  </defs>
+</svg>
+<div class="hidden-print mega-nav-sandbox">
+  <div class="mega-nav-banner">
+    <div class="container">
+      <div class="mega-nav-banner-item">
+        <a class="mega-nav-banner-logo" href="https://www.hashicorp.com"><img src="/assets/images/mega-nav/logo-hashicorp-wordmark-bbed0e8a.svg" alt="HashiCorp Logo" /></a>
+      </div>
+      <div class="mega-nav-banner-item">
+        <p class="mega-nav-tagline"><span class="visible-xs text-muted">Learn the</span><span class="hidden-xs text-muted">Learn how Terraform fits into the</span></p>
+        <div id="#mega-nav" class="mega-nav">
+          <button type="button" id="mega-nav-ctrl" class="mega-nav-ctrl">
+            <div class="mega-nav-ctrl-items">
+              <img src="/assets/images/mega-nav/logo-hashicorp-a66fda95.svg" alt="HashiCorp Logo" />
+              <strong>HashiCorp Suite</strong>
+              <span class="mega-nav-icon-outline">
+                <svg class="mega-nav-icon mega-nav-icon-angle-right" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-angle"></use></svg><span class="visuallyhidden">Open</span>
+              </span>
+            </div>
+          </button>
+          <div id="mega-nav-body-ct" class="mega-nav-body-ct" aria-labelledby="mega-nav-ctrl">
+            <div class="mega-nav-body">
+              <button type="button" id="mega-nav-close" class="mega-nav-close"><svg class="mega-nav-icon mega-nav-icon-close" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-close"></use></svg><span class="visuallyhidden">Close</span></button>
+              <div class="mega-nav-body-header">
+                <div class="mega-nav-body-header-item">
+                  <h2 class="mega-nav-h1">Provision, Secure, Connect, and&nbsp;Run</h2>
+                  <p class="mega-nav-h2">Any infrastructure for any&nbsp;application</p>
+                </div>
+                <div class="mega-nav-body-header-item">
+                  <a href="https://www.hashicorp.com/" class="mega-nav-btn"><img src="/assets/images/mega-nav/logo-hashicorp-a66fda95.svg" alt="HashiCorp Logo" /> Learn the HashiCorp Enterprise&nbsp;Suite <svg class="mega-nav-icon mega-nav-icon-angle-right" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-angle"></use></svg></a>
+                </div>
+              </div>
+              <div class="mega-nav-body-grid">
+                <div class="mega-nav-body-grid-item">
+                  <h3 class="mega-nav-h3">Provision</h3>
+                  <ul class="mega-nav-grid">
+                    <li>
+                      <a href="https://www.vagrantup.com" class="mega-nav-grid-item mega-nav-grid-item-vagrant">
+                        <div class="mega-nav-grid-item-img">
+                          <img src="/assets/images/mega-nav/logo-vagrant-a7ab5898.svg" alt="Vagrant Logo" />
+                        </div>
+                        <b>Vagrant</b>
+                        <ul>
+                          <li><span class="mega-nav-tag">Build</span></li>
+                          <li><span class="mega-nav-tag">Test</span></li>
+                        </ul>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.packer.io" class="mega-nav-grid-item mega-nav-grid-item-packer">
+                        <div class="mega-nav-grid-item-img">
+                          <img src="/assets/images/mega-nav/logo-packer-cb3b9b94.svg" alt="Packer Logo" />
+                        </div>
+                        <b>Packer</b>
+                        <ul>
+                          <li><span class="mega-nav-tag">Package</span></li>
+                        </ul>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.terraform.io" class="mega-nav-grid-item mega-nav-grid-item-terraform">
+                        <div class="mega-nav-grid-item-img">
+                          <img src="/assets/images/mega-nav/logo-terraform-ff69eaae.svg" alt="Terraform Logo" />
+                        </div>
+                        <b>Terraform</b>
+                        <ul>
+                          <li><span class="mega-nav-tag">Provision</span></li>
+                        </ul>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-nav-body-grid-item">
+                  <h3 class="mega-nav-h3">Secure</h3>
+                  <ul class="mega-nav-grid">
+                    <li>
+                      <a href="https://www.vaultproject.io" class="mega-nav-grid-item mega-nav-grid-item-vault">
+                        <div class="mega-nav-grid-item-img">
+                          <img src="/assets/images/mega-nav/logo-vault-0f83e3d2.svg" alt="Vault Logo" />
+                        </div>
+                        <b>Vault</b>
+                        <ul>
+                          <li><span class="mega-nav-tag">Secure</span></li>
+                        </ul>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-nav-body-grid-item">
+                  <h3 class="mega-nav-h3">Connect</h3>
+                  <ul class="mega-nav-grid">
+                    <li>
+                      <a href="https://www.consul.io" class="mega-nav-grid-item mega-nav-grid-item-consul">
+                        <div class="mega-nav-grid-item-img">
+                          <img src="/assets/images/mega-nav/logo-consul-c77f6844.svg" alt="Consul Logo" />
+                        </div>
+                        <b>Consul</b>
+                        <ul>
+                          <li><span class="mega-nav-tag">Connect</span></li>
+                        </ul>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-nav-body-grid-item">
+                  <h3 class="mega-nav-h3">Run</h3>
+                  <ul class="mega-nav-grid">
+                    <li>
+                      <a href="https://www.nomadproject.io" class="mega-nav-grid-item mega-nav-grid-item-nomad">
+                        <div class="mega-nav-grid-item-img">
+                          <img src="/assets/images/mega-nav/logo-nomad-c4c148be.svg" alt="Nomad Logo" />
+                        </div>
+                        <b>Nomad</b>
+                        <ul>
+                          <li><span class="mega-nav-tag">Run</span></li>
+                        </ul>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-nav-body-footer">
+                <p>Seven elements of the modern Application Lifecycle</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div id="header" class="navigation navbar-static-top hidden-print">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="navbar-header">
+              <div class="navbar-brand">
+                <a href="/">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 251 61" class="logo" height="50">
+  <path class="text" fill="#000" fill-rule="nonzero" d="M81.78 19.54h-8.89v-5.31H96.7v5.31h-8.9v26.53h-6"></path>
+  <path class="text" fill="#000" fill-rule="nonzero" d="M102.19 41.77c2.415-.012 4.814-.383 7.12-1.1l.91 4.4c-2.745.99-5.642 1.49-8.56 1.48-7.31 0-9.85-3.39-9.85-9V31.4c0-4.92 2.2-9.08 9.66-9.08s9.13 4.35 9.13 9.37v5h-13v1.2c.05 2.78 1.05 3.88 4.59 3.88zM97.65 32h7.41v-1.18c0-2.2-.67-3.73-3.54-3.73s-3.87 1.53-3.87 3.73V32zm28.54-4.33c-2.148.97-4.217 2.102-6.19 3.39v15h-5.83V22.79h4.92l.38 2.58c1.897-1.284 3.955-2.313 6.12-3.06l.6 5.36zm14.24 0c-2.14.97-4.204 2.103-6.17 3.39v15h-5.83V22.79h4.92l.38 2.58c1.897-1.284 3.955-2.313 6.12-3.06l.58 5.36zm19.51 18.4h-4.78l-.43-1.58c-2.062 1.342-4.47 2.058-6.93 2.06-4.25 0-6.07-2.92-6.07-6.93 0-4.73 2.06-6.55 6.79-6.55h5.59v-2.44c0-2.58-.72-3.49-4.45-3.49-2.17.024-4.33.266-6.45.72l-.72-4.45c2.606-.72 5.296-1.09 8-1.1 7.31 0 9.47 2.58 9.47 8.41l-.02 15.35zm-5.83-8.8h-4.3c-1.91 0-2.44.53-2.44 2.29s.53 2.34 2.34 2.34c1.544-.024 3.058-.436 4.4-1.2v-3.43zm23.75-19.79c-1.1-.237-2.224-.364-3.35-.38-2.29 0-2.63 1-2.63 2.77v2.92h5.93l-.33 4.64h-5.59v18.64h-5.83V27.43h-3.73v-4.64h3.73v-3.25c0-4.83 2.25-7.22 7.41-7.22 1.69-.006 3.372.22 5 .67l-.61 4.49zm11.38 29.07c-8 0-10.13-4.4-10.13-9.18v-5.88c0-4.78 2.15-9.18 10.13-9.18s10.13 4.4 10.13 9.18v5.88c.01 4.78-2.15 9.18-10.13 9.18zm0-19.27c-3.11 0-4.3 1.39-4.3 4v6.26c0 2.63 1.2 4 4.3 4 3.1 0 4.3-1.39 4.3-4V31.3c0-2.63-1.19-4.02-4.3-4.02zm25.14.39c-2.14.97-4.204 2.103-6.17 3.39v15h-5.83V22.79h4.92l.38 2.58c1.897-1.284 3.954-2.313 6.12-3.06l.58 5.36zm16.02 18.4V29.82c0-1.24-.53-1.86-1.86-1.86-2.137.254-4.2.934-6.07 2v16.11h-5.83V22.79h4.45l.57 2c2.906-1.47 6.088-2.315 9.34-2.48 1.843-.174 3.6.82 4.4 2.49 2.91-1.49 6.104-2.34 9.37-2.49 3.87 0 5.26 2.72 5.26 6.88v16.88h-5.83V29.82c0-1.24-.53-1.86-1.86-1.86-2.14.236-4.208.917-6.07 2v16.11h-5.87z"></path>
+  <path class="rect-dark" fill="#4040B2" d="M36.4 39.13l16.4-9.46V10.72L36.4 20.2"></path>
+  <path class="rect-light" fill="#5C4EE5" d="M18.2 10.72l16.4 9.48v18.93l-16.4-9.47"></path>
+  <path class="rect-light" fill="#5C4EE5" d="M0 19.09l16.4 9.47V9.62L0 .15m18.2 50.53l16.4 9.47V41.21l-16.4-9.47"></path>
+</svg>
+
+                </a>
+              </div>
+              <button class="navbar-toggle" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="buttons hidden-xs">
+              <nav class="navigation-links" role="navigation">
+                <ul class="main-links nav navbar-nav navbar-right">
+                  <li><a href="/intro/index.html">Intro</a></li>
+                  <li><a href="/docs/index.html">Docs</a></li>
+                  <li><a href="/guides/index.html">Guides</a></li>
+                  <li><a href="/docs/extend/index.html">Extend</a></li>
+                  <li><a href="https://www.hashicorp.com/products/terraform/?utm_source=oss&utm_medium=header-nav&utm_campaign=terraform">Enterprise</a></li>
+                  <li>
+                    <a href="/downloads.html">
+                      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewbox="0 0 28 28" enable-background="new 0 0 28 28" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+  <path d="M28 0H0v28h28V0zM13.8 22.9L7 17.3l2-2.4 3.2 2.6V7h3.2v10.5l3.2-2.6 2 2.4L13.8 22.9z"></path>
+</svg>
+ Download
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/hashicorp/terraform">
+                      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewbox="0 0 28 28" enable-background="new 0 0 28 28" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+  <path d="M28 0H0v28h11.4c0 0 0-1.3 0-2.4C7.7 26.4 7 23.9 7 23.9 6.4 22.4 5.5 22 5.5 22c-1.2-0.8 0.1-0.8 0.1-0.8 1.3 0.1 2 1.4 2 1.4 1.2 2 3 1.4 3.8 1.1 0.1-0.8 0.5-1.4 0.9-1.8 -2.9-0.3-6-1.5-6-6.5 0-1.4 0.5-2.6 1.3-3.5C7.5 11.5 7 10.2 7.8 8.4c0 0 1.1-0.4 3.6 1.3 1-0.3 2.2-0.4 3.3-0.4 1.1 0 2.2 0.2 3.3 0.4 2.5-1.7 3.6-1.3 3.6-1.3 0.7 1.8 0.3 3.1 0.1 3.5 0.8 0.9 1.3 2.1 1.3 3.5 0 5-3.1 6.1-6 6.5 0.5 0.4 0.9 1.2 0.9 2.4 0 1.8 0 3.7 0 3.7H28V0z"></path>
+</svg>
+ GitHub
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-overlay"></div>
+
+<aside class="sidebar" role="navigation">
+  <div class="sidebar-header">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 251 61" class="logo" height="42">
+  <path class="text" fill="#000" fill-rule="nonzero" d="M81.78 19.54h-8.89v-5.31H96.7v5.31h-8.9v26.53h-6"></path>
+  <path class="text" fill="#000" fill-rule="nonzero" d="M102.19 41.77c2.415-.012 4.814-.383 7.12-1.1l.91 4.4c-2.745.99-5.642 1.49-8.56 1.48-7.31 0-9.85-3.39-9.85-9V31.4c0-4.92 2.2-9.08 9.66-9.08s9.13 4.35 9.13 9.37v5h-13v1.2c.05 2.78 1.05 3.88 4.59 3.88zM97.65 32h7.41v-1.18c0-2.2-.67-3.73-3.54-3.73s-3.87 1.53-3.87 3.73V32zm28.54-4.33c-2.148.97-4.217 2.102-6.19 3.39v15h-5.83V22.79h4.92l.38 2.58c1.897-1.284 3.955-2.313 6.12-3.06l.6 5.36zm14.24 0c-2.14.97-4.204 2.103-6.17 3.39v15h-5.83V22.79h4.92l.38 2.58c1.897-1.284 3.955-2.313 6.12-3.06l.58 5.36zm19.51 18.4h-4.78l-.43-1.58c-2.062 1.342-4.47 2.058-6.93 2.06-4.25 0-6.07-2.92-6.07-6.93 0-4.73 2.06-6.55 6.79-6.55h5.59v-2.44c0-2.58-.72-3.49-4.45-3.49-2.17.024-4.33.266-6.45.72l-.72-4.45c2.606-.72 5.296-1.09 8-1.1 7.31 0 9.47 2.58 9.47 8.41l-.02 15.35zm-5.83-8.8h-4.3c-1.91 0-2.44.53-2.44 2.29s.53 2.34 2.34 2.34c1.544-.024 3.058-.436 4.4-1.2v-3.43zm23.75-19.79c-1.1-.237-2.224-.364-3.35-.38-2.29 0-2.63 1-2.63 2.77v2.92h5.93l-.33 4.64h-5.59v18.64h-5.83V27.43h-3.73v-4.64h3.73v-3.25c0-4.83 2.25-7.22 7.41-7.22 1.69-.006 3.372.22 5 .67l-.61 4.49zm11.38 29.07c-8 0-10.13-4.4-10.13-9.18v-5.88c0-4.78 2.15-9.18 10.13-9.18s10.13 4.4 10.13 9.18v5.88c.01 4.78-2.15 9.18-10.13 9.18zm0-19.27c-3.11 0-4.3 1.39-4.3 4v6.26c0 2.63 1.2 4 4.3 4 3.1 0 4.3-1.39 4.3-4V31.3c0-2.63-1.19-4.02-4.3-4.02zm25.14.39c-2.14.97-4.204 2.103-6.17 3.39v15h-5.83V22.79h4.92l.38 2.58c1.897-1.284 3.954-2.313 6.12-3.06l.58 5.36zm16.02 18.4V29.82c0-1.24-.53-1.86-1.86-1.86-2.137.254-4.2.934-6.07 2v16.11h-5.83V22.79h4.45l.57 2c2.906-1.47 6.088-2.315 9.34-2.48 1.843-.174 3.6.82 4.4 2.49 2.91-1.49 6.104-2.34 9.37-2.49 3.87 0 5.26 2.72 5.26 6.88v16.88h-5.83V29.82c0-1.24-.53-1.86-1.86-1.86-2.14.236-4.208.917-6.07 2v16.11h-5.87z"></path>
+  <path class="rect-dark" fill="#4040B2" d="M36.4 39.13l16.4-9.46V10.72L36.4 20.2"></path>
+  <path class="rect-light" fill="#5C4EE5" d="M18.2 10.72l16.4 9.48v18.93l-16.4-9.47"></path>
+  <path class="rect-light" fill="#5C4EE5" d="M0 19.09l16.4 9.47V9.62L0 .15m18.2 50.53l16.4 9.47V41.21l-16.4-9.47"></path>
+</svg>
+
+  </div>
+
+  <ul class="nav sidebar-nav">
+    <li><a href="/intro/index.html">Intro</a></li>
+    <li><a href="/docs/index.html">Docs</a></li>
+    <li><a href="/guides/index.html">Guides</a></li>
+    <li><a href="/docs/extend/index.html">Extend</a></li>
+    <li><a href="https://www.hashicorp.com/products/terraform/?utm_source=oss&utm_medium=header-nav&utm_campaign=terraform">Enterprise</a></li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <ul class="external nav sidebar-nav">
+    <li>
+      <a href="/downloads.html">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewbox="0 0 28 28" enable-background="new 0 0 28 28" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+  <path d="M28 0H0v28h28V0zM13.8 22.9L7 17.3l2-2.4 3.2 2.6V7h3.2v10.5l3.2-2.6 2 2.4L13.8 22.9z"></path>
+</svg>
+ Download
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/hashicorp/terraform">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewbox="0 0 28 28" enable-background="new 0 0 28 28" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+  <path d="M28 0H0v28h11.4c0 0 0-1.3 0-2.4C7.7 26.4 7 23.9 7 23.9 6.4 22.4 5.5 22 5.5 22c-1.2-0.8 0.1-0.8 0.1-0.8 1.3 0.1 2 1.4 2 1.4 1.2 2 3 1.4 3.8 1.1 0.1-0.8 0.5-1.4 0.9-1.8 -2.9-0.3-6-1.5-6-6.5 0-1.4 0.5-2.6 1.3-3.5C7.5 11.5 7 10.2 7.8 8.4c0 0 1.1-0.4 3.6 1.3 1-0.3 2.2-0.4 3.3-0.4 1.1 0 2.2 0.2 3.3 0.4 2.5-1.7 3.6-1.3 3.6-1.3 0.7 1.8 0.3 3.1 0.1 3.5 0.8 0.9 1.3 2.1 1.3 3.5 0 5-3.1 6.1-6 6.5 0.5 0.4 0.9 1.2 0.9 2.4 0 1.8 0 3.7 0 3.7H28V0z"></path>
+</svg>
+ GitHub
+      </a>
+    </li>
+  </ul>
+</aside>
+
+
+    <div class="container">
+  <div class="row">
+    <div id="docs-sidebar" class="col-sm-4 col-md-3 col-xs-12 hidden-print" role="complementary">
+          <ul class="nav docs-sidenav">
+      <li>
+        <a href="/docs/configuration/index.html">Configuration</a>
+        <ul class="nav">
+          <li>
+            <a href="/docs/configuration/load.html">Load Order and Semantics</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/syntax.html">Configuration Syntax</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/interpolation.html">Interpolation Syntax</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/override.html">Overrides</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/resources.html">Resources</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/data-sources.html">Data Sources</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/providers.html">Providers</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/variables.html">Variables</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/outputs.html">Outputs</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/locals.html">Local Values</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/modules.html">Modules</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/terraform.html">Terraform</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/terraform-enterprise.html">Terraform Push (deprecated)</a>
+          </li>
+
+          <li>
+            <a href="/docs/configuration/environment-variables.html">Environment Variables</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/docs/commands/index.html">Commands (CLI)</a>
+        <ul class="nav">
+          <li>
+            <a href="/docs/commands/apply.html">apply</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/console.html">console</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/destroy.html">destroy</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/env.html">env</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/fmt.html">fmt</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/force-unlock.html">force-unlock</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/get.html">get</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/graph.html">graph</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/import.html">import</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/init.html">init</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/output.html">output</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/plan.html">plan</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/providers.html">providers</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/push.html">push</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/refresh.html">refresh</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/show.html">show</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/state/index.html">state</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/taint.html">taint</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/validate.html">validate</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/untaint.html">untaint</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/workspace/index.html">workspace</a>
+          </li>
+
+          <li>
+            <a href="/docs/commands/cli-config.html">CLI Config File</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/docs/import/index.html">Import</a>
+        <ul class="nav">
+          <li>
+            <a href="/docs/import/usage.html">Usage</a>
+          </li>
+
+          <li>
+            <a href="/docs/import/importability.html">Resource Importability</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/docs/state/index.html">State</a>
+        <ul class="nav">
+          <li>
+            <a href="/docs/state/purpose.html">Purpose</a>
+          </li>
+
+          <li>
+            <a href="/docs/state/import.html">Import Existing Resources</a>
+          </li>
+
+          <li>
+            <a href="/docs/state/locking.html">Locking</a>
+          </li>
+
+          <li>
+            <a href="/docs/state/workspaces.html">Workspaces</a>
+          </li>
+
+          <li>
+            <a href="/docs/state/remote.html">Remote State</a>
+          </li>
+
+          <li>
+            <a href="/docs/state/sensitive-data.html">Sensitive Data</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="active">
+        <a href="/docs/providers/index.html">Providers</a>
+        <ul class="nav">
+          <li>
+             <a href="/docs/providers/type/major-index.html">Major Cloud</a>
+          </li>
+
+          <li>
+             <a href="/docs/providers/type/cloud-index.html"> Cloud</a>
+          </li>
+
+          <li>
+             <a href="/docs/providers/type/infra-index.html">Infrastructure Software</a>
+          </li>
+
+          <li>
+             <a href="/docs/providers/type/network-index.html">Network</a>
+          </li>
+
+          <li>
+             <a href="/docs/providers/type/vcs-index.html">VCS</a>
+          </li>
+
+          <li>
+             <a href="/docs/providers/type/monitor-index.html">Monitor & System Management</a>
+          </li>
+
+          <li>
+             <a href="/docs/providers/type/database-index.html">Database</a>
+          </li>
+
+          <li>
+             <a href="/docs/providers/type/misc-index.html">Misc.</a>
+          </li>
+
+          <li class="active">
+             <a href="/docs/providers/type/community-index.html">Community</a>
+          </li>
+
+        </ul>
+      </li>
+
+      <li>
+        <a href="/docs/provisioners/index.html">Provisioners</a>
+        <ul class="nav">
+          <li>
+            <a href="/docs/provisioners/chef.html">chef</a>
+          </li>
+
+          <li>
+            <a href="/docs/provisioners/connection.html">connection</a>
+          </li>
+
+          <li>
+            <a href="/docs/provisioners/file.html">file</a>
+          </li>
+
+          <li>
+            <a href="/docs/provisioners/habitat.html">habitat</a>
+          </li>
+
+          <li>
+            <a href="/docs/provisioners/local-exec.html">local-exec</a>
+          </li>
+
+          <li>
+            <a href="/docs/provisioners/null_resource.html">null_resource</a>
+          </li>
+
+          <li>
+            <a href="/docs/provisioners/remote-exec.html">remote-exec</a>
+          </li>
+
+          <li>
+            <a href="/docs/provisioners/salt-masterless.html">salt-masterless</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/docs/modules/index.html">Modules</a>
+        <ul class="nav">
+          <li>
+            <a href="/docs/modules/usage.html">Usage</a>
+          </li>
+
+          <li>
+            <a href="/docs/modules/sources.html">Sources</a>
+          </li>
+
+          <li>
+            <a href="/docs/registry/index.html">Registry</a>
+          </li>
+
+          <li>
+            <a href="/docs/modules/create.html">Creating Modules</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/docs/backends/index.html">Backends</a>
+        <ul class="nav">
+          <li>
+            <a href="/docs/backends/init.html">Init</a>
+          </li>
+
+          <li>
+            <a href="/docs/backends/config.html">Configuration</a>
+          </li>
+
+          <li>
+            <a href="/docs/backends/state.html">State Storage & Locking</a>
+          </li>
+
+          <li>
+            <a href="/docs/backends/types/index.html">Backend Types</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/docs/plugins/index.html">Plugins</a>
+        <ul class="nav">
+          <li>
+            <a href="/docs/plugins/basics.html">Basics</a>
+          </li>
+
+          <li>
+            <a href="/docs/plugins/provider.html">Provider</a>
+          </li>
+
+          <li>
+            <a href="/docs/internals/internal-plugins.html">Internals</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/docs/internals/index.html">Internals</a>
+        <ul class="nav">
+          <li>
+            <a href="/docs/internals/debugging.html">Debugging Terraform</a>
+          </li>
+
+          <li>
+            <a href="/docs/internals/graph.html">Resource Graph</a>
+          </li>
+
+          <li>
+            <a href="/docs/internals/lifecycle.html">Resource Lifecycle</a>
+          </li>
+
+          <li>
+            <a href="/docs/internals/resource-addressing.html">Resource Addressing</a>
+          </li>
+
+          <li>
+            <a href="/docs/internals/remote-service-discovery.html">Remote Service Discovery</a>
+          </li>
+
+          <li>
+            <a href="/docs/internals/internal-plugins.html">Internal Plugins</a>
+          </li>
+        </ul>
+      </li>
+
+      <hr>
+
+      <li>
+        <a class="back" href="/docs/enterprise/index.html">Terraform Enterprise</a>
+      </li>
+
+      <li>
+        <a class="back" href="/docs/enterprise-legacy/index.html">Terraform Enterprise (legacy)</a>
+      </li>
+
+    </ul>
+
+    </div>
+
+    <div id="inner" class="col-sm-8 col-md-9 col-xs-12" role="main">
+      
+  <h1 id="community-providers">
+  <a name="community-providers" class="anchor" href="#community-providers">&raquo;</a>
+  Community Providers
+</h1>
+<p>The providers listed below have been built by the community of Terraform users
+and vendors. These providers are not tested nor officially maintained by
+HashiCorp, and are listed here in order to help users find them easily.</p>
+<p>If you have built a provider and would like to add it to this community list,
+please fill out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeenG02tGEmz7pntIqMKlp5kY53f8AV5u88wJ_H1pJc2CmvKA/viewform?usp=sf_link#responses">community providers form</a>.</p>
+
+<hr/>
+<table class="table">
+<p><td><a href="https://github.com/vancluever/terraform-provider-acme">ACME/Let&#39;s Encrypt</a></td>
+<td><a href="https://github.com/GSLabDev/terraform-provider-ad">Active Directory</a></td>
+<td><a href="https://github.com/zambien/terraform-provider-apigee">Apigee</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/atlassian/terraform-provider-artifactory">Artifactory</a></td>
+<td><a href="https://github.com/avinetworks/terraform-provider-avi">AVI</a></td>
+<td><a href="https://github.com/AviatrixSystems/terraform-provider-aviatrix">Aviatrix</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/nicolai86/terraform-provider-couchdb">CouchDB</a></td>
+<td><a href="https://github.com/rackn/terraform-provider-drp/">Digital Rebar</a></td>
+<td><a href="https://github.com/gstruct/terraform-provider-dockermachine">Docker Machine</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/tiramiseb/terraform-provider-gandi">Gandi</a></td>
+<td><a href="https://github.com/Mastercard/terraform-provider-restapi">Generic Rest API</a></td>
+<td><a href="https://github.com/MikeSouza/terraform-provider-glue">Glue</a></td>
+</tr>
+<tr><br/>
+<td><a href="https://github.com/drewsonne/terraform-provider-gocd">GoCD</a></td>
+<td><a href="https://github.com/sethvargo/terraform-provider-googlecalendar">Google Calendar</a></td>
+<td><a href="https://github.com/DeviaVir/terraform-provider-gsuite">Google G Suite</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/mcuadros/terraform-provider-helm">Helm</a></td>
+<td><a href="https://github.com/hetznercloud/terraform-provider-hcloud">Hetzner Cloud</a></td>
+<td><a href="https://github.com/GSLabDev/terraform-provider-httpfileupload">HTTP File Upload</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/HewlettPackard/terraform-provider-oneview">HP OneView</a></td>
+<td><a href="https://github.com/sky-uk/terraform-provider-infoblox">Infoblox</a></td>
+<td><a href="https://github.com/anubhavmishra/terraform-provider-jira">Jira</a></td>
+</tr>
+<tr>
+<td><a href-"https://github.com/geekmuse/jumpcloud-terraform-provider">JumpCloud</a></td>
+<td><a href="https://github.com/plmwong/terraform-provider-keboola">Kaboola</a></td>
+<td><a href="https://github.com/Mongey/terraform-provider-kafka">Kafka</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/ewilde/terraform-provider-kibana">Kibana</a></td>
+<td><a href="https://github.com/kevholditch/terraform-provider-kong">Kong</a></td>
+<td><a href="https://github.com/sl1pm4t/terraform-provider-lxd">LXD</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/coreos/terraform-provider-matchbox">Matchbox</a></td>
+<td><a href="https://github.com/akshaykarle/terraform-provider-mongodbatlas">MongoDB Atlas</a></td>
+<td><a href="https://github.com/nutanix/terraform-provider-nutanix">Nutanix</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/GSLabDev/terraform-provider-odl">Open Day Light</a></td>
+<td><a href="https://github.com/camptocamp/terraform-provider-pass">Pass</a></td>
+<td><a href="https://github.com/camptocamp/terraform-provider-puppetca">Puppet CA</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/camptocamp/terraform-provider-puppetdb">PuppetDB</a></td>
+<td><a href="https://github.com/yunify/terraform-provider-qingcloud">QingCloud</a></td>
+<td><a href="https://github.com/frankfarrell/terraform-provider-redshift">Redshift</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/yamamoto-febc/terraform-provider-rke">RKE</a></td>
+<td><a href="https://github.com/ewilde/terraform-provider-runscope">Runscope</a></td>
+<td><a href="https://github.com/sacloud/terraform-provider-sakuracloud">SakuraCloud</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/jianyuan/terraform-provider-sentry">Sentry</a></td>
+<td><a href="https://github.com/Yelp/terraform-provider-signalform">SignalFx</a></td>
+<td><a href="https://github.com/GSLabDev/terraform-provider-scvmm">SCVMM</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/GSLabDev/terraform-provider-vra">vRealize Automation</a></td>
+<td><a></a></td>
+<td><a></a></td>
+</tr></p>
+</table>
+
+    </div>
+  </div>
+</div>
+
+
+    <div id="footer" class="navigation hidden-print">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <ul class="footer-links nav navbar-nav">
+              <li><a href="/intro/index.html">Intro</a></li>
+              <li><a href="/docs/index.html">Docs</a></li>
+              <li><a href="/docs/extend/index.html">Extend</a></li>
+              <li><a href="https://www.hashicorp.com/privacy">Privacy</a></li>
+              <li><a href="/security.html">Security</a></li>
+              <li><a href="/assets/files/press-kit.zip">Press Kit</a></li>
+            </ul>
+            <ul class="footer-links nav navbar-nav navbar-right">
+              <li><a href="https://github.com/hashicorp/terraform/edit/master/website/docs/providers/type/community-index.html.markdown">Edit this page</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Product",
+        "name": "Terraform",
+        "alternateName": "Terraform by HashiCorp",
+        "manufacturer": "HashiCorp",
+        "url": "https://www.terraform.io",
+        "logo": "https://www.terraform.io/assets/images/logo-hashicorp-3f10732f.svg",
+        "sameAs": [
+          "https://github.com/hashicorp/terraform"
+        ]
+      }
+    </script>
+  </body>
+</html>
