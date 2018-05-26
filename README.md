@@ -4,7 +4,7 @@
 
 ## [Changelog](./CHANGELOG.md)
 
-## [Provider Versions](./PROVIDER_VERSOINS.md)
+## [Provider Versions](./PROVIDER_VERSIONS.md)
 
 [![neovim build](https://badges.herokuapp.com/travis/juliosueiras/vim-terraform-completion?env=VIM_TYPE=nvim&label=Neovim%20Build)](https://travis-ci.org/juliosueiras/vim-terraform-completion)
 [![vim build](https://badges.herokuapp.com/travis/juliosueiras/vim-terraform-completion?env=VIM_TYPE=vim&label=Vim%20Build)](https://travis-ci.org/juliosueiras/vim-terraform-completion)
@@ -29,6 +29,7 @@
     + [Deoplete config](#deoplete-config)
     + [Version config](#version-config-file)
     + [Custom Provider](./CUSTOM_PROVIDER.md)
+		- [Community Providers](#community-providers)
   * [General Todo](#general-todo)
   * [Todo for Terraform completion](#todo-for-terraform-completion)
   * [Todo for HCL](#todo-for-hcl)
@@ -135,6 +136,14 @@ using the syatax of `<provider>=<version>`
 
 *Demo:*
 [![asciicast](https://asciinema.org/a/157636.png)](https://asciinema.org/a/157636)
+
+## Community Providers
+
+By default no community providers is enable, to use one, first refer to COMMUNITY_PROVIDER_VERSIONS.md , then add a `.tfcompleterc` to your current working dir , for ex. to use Generic REST Api Provider, the .tfcompleterc would look like
+
+```
+restapi=master
+```
 
 ## General Todo
 <details>
