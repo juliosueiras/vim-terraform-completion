@@ -11,6 +11,7 @@ community = JSON.parse(File.read("community.json"))
 
 new_community = []
 
+hrefs.push("https://github.com/IBM-Cloud/terraform-provider-ibm")
 hrefs.compact.each do |href|
 	names =  href[19..-1].split("/")
 
@@ -24,7 +25,7 @@ hrefs.compact.each do |href|
 
 	tags = tags.collect {|i| i["name"]}
 
-	if community.find {|i| i["name"] == names[1] }.nil?
+	if not community.find {|i| i["name"] == names[1] }.nil?
 		parse_target = community.find {|i| i["name"] == names[1] }["parse_target"]
 	else
 		parse_target = names[1].split("-")[-1]
@@ -43,6 +44,6 @@ hrefs.compact.each do |href|
 end
 
 open("community.json", "w+") do |f|
-	f << community.to_json
+	f << new_community.to_json
 end
 `cat community.json | json_pp > test.json && mv test.json community.json`
