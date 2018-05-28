@@ -37,7 +37,7 @@ end
 if new_version_avail 
 	`ruby version_dissect.rb`
 	`ruby update_versions.rb > .tfcompleterc`
-	`ruby update_provider_md.rb > PROVIDER_VERSOINS.md`
+	`ruby update_provider_md.rb > PROVIDER_VERSIONS.md`
 	`git add provider_json`
 	`git add PROVIDER_VERSOINS.md`
 	`git add .tfcompleterc`
