@@ -15,6 +15,7 @@ community.each do |item|
 	result.push({ version: version, provider: item["name"].split("-")[-1], link: item["link"] })
 end
 
+result = result.sort_by {|i| i[:provider] }
 final = "||||||\n|---|---|---|---|---|"
 result.each_slice(5) do |i|
 	result = "\n|"
