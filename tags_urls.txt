@@ -23,6 +23,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-dyn/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-external/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-fastly/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-flexibleengine/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-github/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-gitlab/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-google/tags"
