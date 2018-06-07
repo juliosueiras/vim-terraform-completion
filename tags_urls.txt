@@ -28,6 +28,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-gitlab/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-google/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-grafana/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-hcloud/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-heroku/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-http/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-icinga2/tags"

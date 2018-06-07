@@ -39,7 +39,7 @@ if new_version_avail
 	`ruby update_versions.rb > .tfcompleterc`
 	`ruby update_provider_md.rb > PROVIDER_VERSIONS.md`
 	`git add provider_json`
-	`git add PROVIDER_VERSOINS.md`
+	`git add PROVIDER_VERSIONS.md`
 	`git add .tfcompleterc`
 	`git commit -m "[Bot] Automatic Provider Update: #{provider_updated}"`
 	`git push`

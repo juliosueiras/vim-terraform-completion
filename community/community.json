@@ -673,5 +673,14 @@
       "name" : "terraform-provider-vra",
       "owner" : "GSLabDev",
       "parse_target" : "vra"
+   },
+   {
+      "link" : "https://github.com/sethvargo/terraform-provider-filesystem",
+      "versions" : [
+         "master"
+      ],
+      "name" : "terraform-provider-filesystem",
+      "owner" : "sethvargo",
+      "parse_target" : "filesystem"
    }
 ]
