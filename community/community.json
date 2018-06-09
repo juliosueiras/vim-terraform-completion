@@ -682,5 +682,14 @@
       "name" : "terraform-provider-filesystem",
       "owner" : "sethvargo",
       "parse_target" : "filesystem"
+   },
+   {
+      "link" : "https://github.com/mitchellh/terraform-provider-netlify",
+      "versions" : [
+         "master"
+      ],
+      "name" : "terraform-provider-netlify",
+      "owner" : "mitchellh",
+      "parse_target" : "netlify"
    }
 ]
