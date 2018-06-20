@@ -8,16 +8,16 @@ community.each do |provider|
 name = provider["name"].split("-")[-1]
 
 `mkdir ~/.go/src/github.com/#{provider["owner"]}/#{provider["name"]}/generate-schema`
-provider["versions"].each do |version|
+version = provider["versions"][0]
 
 puts "Start with #{provider["name"]} version #{version}"
 
 if version != "master" and File.exists? "../schemas-extractor/community_schemas/#{name}-#{version}.json"
-	next
+	exit
 end
 
 if version == "master" and provider["versions"].count != 1
-	next
+	version = provider["versions"][1]
 end
 
 `cd ~/.go/src/github.com/#{provider["owner"]}/#{provider["name"]}/ && git checkout #{version} -f`
@@ -211,6 +211,4 @@ EOF
 		end
 
 		`cd ~/.go/src/github.com/#{provider["owner"]}/#{provider["name"]} && go run generate-schema/generate-schema.go`
-
-	end
 end
