@@ -112,7 +112,7 @@ function! terraformcomplete#OpenDoc()
         let a:link .= '/' . a:resource . '.html\#' . a:arg
 
         "(Windows) cmd /c start filename_or_URL
-        if system('uname -s') == 'Darwin'
+        if system('uname -s') =~ 'Darwin'
             silent! execute ':!open ' . a:link
             silent! execute ':redraw!'
         else
