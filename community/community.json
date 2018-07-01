@@ -1,6 +1,15 @@
 [
    {
       "versions" : [
+				"master"
+      ],
+      "parse_target" : "packer",
+      "name" : "terraform-provider-packer",
+      "owner" : "juliosueiras",
+      "link" : "https://github.com/juliosueiras/terraform-provider-packer"
+   },
+   {
+      "versions" : [
          "master",
          "v1.0.0",
          "v0.6.0",
