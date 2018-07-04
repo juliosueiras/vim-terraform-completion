@@ -13,7 +13,7 @@ Do (Autocompletion for resource second docker test):
   iresource "docker_\<C-X>\<C-O>
 
 Expect (get docker_container):
-  resource "docker_container
+  resource "docker_config
 
 Given terraform (Argument Completion Test):
   resource "docker_container" "sd" {
