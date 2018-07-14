@@ -32,6 +32,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-hcloud/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-heroku/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-http/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-huaweicloud/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-icinga2/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-ignition/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-influxdb/tags"
