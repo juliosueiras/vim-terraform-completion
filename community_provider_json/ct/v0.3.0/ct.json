@@ -1,0 +1,1 @@
+{"provider_arguments":[],"resources":{},"datas":{"config":{"arguments":[{"word":"content","kind":"String(R)"},{"word":"platform","kind":"String(O)"},{"word":"pretty_print","kind":"Bool(O)"},{"word":"snippets","kind":"List(O)"}],"attributes":[{"word":"rendered","kind":"String","info":"rendered ignition configuration"},{"word":"id","kind":"String"}]}},"unknowns":{}}

@@ -9,6 +9,9 @@
       "link" : "https://github.com/juliosueiras/terraform-provider-packer"
    },
    {
+      "parse_target" : "plugin/providers/acme",
+      "name" : "terraform-provider-acme",
+      "owner" : "vancluever",
       "versions" : [
          "master",
          "v1.0.0",
@@ -21,19 +24,16 @@
          "v0.2.0",
          "v0.1.0"
       ],
-      "parse_target" : "plugin/providers/acme",
-      "name" : "terraform-provider-acme",
-      "link" : "https://github.com/vancluever/terraform-provider-acme",
-      "owner" : "vancluever"
+      "link" : "https://github.com/vancluever/terraform-provider-acme"
    },
    {
       "versions" : [
          "master"
       ],
-      "parse_target" : "ad",
-      "name" : "terraform-provider-ad",
       "link" : "https://github.com/GSLabDev/terraform-provider-ad",
-      "owner" : "GSLabDev"
+      "owner" : "GSLabDev",
+      "name" : "terraform-provider-ad",
+      "parse_target" : "ad"
    },
    {
       "versions" : [
@@ -50,8 +50,8 @@
       ],
       "link" : "https://github.com/zambien/terraform-provider-apigee",
       "owner" : "zambien",
-      "name" : "terraform-provider-apigee",
-      "parse_target" : "apigee"
+      "parse_target" : "apigee",
+      "name" : "terraform-provider-apigee"
    },
    {
       "versions" : [
@@ -65,9 +65,9 @@
          "v0.0.2",
          "v0.0.1"
       ],
+      "link" : "https://github.com/atlassian/terraform-provider-artifactory",
       "parse_target" : "pkg/artifactory",
       "name" : "terraform-provider-artifactory",
-      "link" : "https://github.com/atlassian/terraform-provider-artifactory",
       "owner" : "atlassian"
    },
    {
@@ -80,37 +80,90 @@
       ]
    },
    {
-      "owner" : "avinetworks",
-      "link" : "https://github.com/avinetworks/terraform-provider-avi",
       "parse_target" : "avi",
       "name" : "terraform-provider-avi",
+      "owner" : "avinetworks",
       "versions" : [
          "master",
          "17.2.9",
          "17.2.7b1"
-      ]
-   },
-   {
-      "parse_target" : "aviatrix",
-      "name" : "terraform-provider-aviatrix",
-      "link" : "https://github.com/AviatrixSystems/terraform-provider-aviatrix",
-      "owner" : "AviatrixSystems",
-      "versions" : [
-         "master"
-      ]
+      ],
+      "link" : "https://github.com/avinetworks/terraform-provider-avi"
    },
    {
       "versions" : [
          "master"
       ],
+      "link" : "https://github.com/AviatrixSystems/terraform-provider-aviatrix",
+      "name" : "terraform-provider-aviatrix",
+      "parse_target" : "aviatrix",
+      "owner" : "AviatrixSystems"
+   },
+   {
+      "parse_target" : "provider",
+      "name" : "terraform-provider",
+      "owner" : "cloudamqp",
+      "versions" : [
+         "master"
+      ],
+      "link" : "https://github.com/cloudamqp/terraform-provider"
+   },
+   {
+      "link" : "https://github.com/cloudkarafka/terraform-provider",
+      "versions" : [
+         "master"
+      ],
+      "name" : "terraform-provider",
+      "parse_target" : "provider",
+      "owner" : "cloudkarafka"
+   },
+   {
+      "parse_target" : "provider",
+      "name" : "terraform-provider",
+      "owner" : "cloudmqtt",
+      "link" : "https://github.com/cloudmqtt/terraform-provider",
+      "versions" : [
+         "master"
+      ]
+   },
+   {
+      "parse_target" : "consulacl",
+      "name" : "terraform-provider-consulacl",
+      "owner" : "Ashald",
+      "link" : "https://github.com/Ashald/terraform-provider-consulacl",
+      "versions" : [
+         "master",
+         "v1.1.0",
+         "v1.0.0"
+      ]
+   },
+   {
+      "versions" : [
+         "master",
+         "v0.3.0",
+         "v0.2.1",
+         "v0.2.0",
+         "v0.1.0"
+      ],
+      "link" : "https://github.com/coreos/terraform-provider-ct",
+      "owner" : "coreos",
+      "name" : "terraform-provider-ct",
+      "parse_target" : "ct"
+   },
+   {
+      "versions" : [
+         "master"
+      ],
+      "link" : "https://github.com/nicolai86/terraform-provider-couchdb",
       "parse_target" : "couchdb",
       "name" : "terraform-provider-couchdb",
-      "link" : "https://github.com/nicolai86/terraform-provider-couchdb",
       "owner" : "nicolai86"
    },
    {
       "versions" : [
          "master",
+         "v1.1.1",
+         "v1.1.0",
          "v1.0.6",
          "v1.0.5",
          "v1.0.4",
@@ -130,13 +183,14 @@
          "v0.7.1",
          "v0.7.0",
          "v0.0.1",
+         "untagged-ce4bf22f459a74382826",
          "tip",
          "stable"
       ],
-      "name" : "terraform-provider-drp",
+      "link" : "https://github.com/rackn/terraform-provider-drp/",
       "parse_target" : "provider",
-      "owner" : "rackn",
-      "link" : "https://github.com/rackn/terraform-provider-drp/"
+      "name" : "terraform-provider-drp",
+      "owner" : "rackn"
    },
    {
       "versions" : [
@@ -149,51 +203,93 @@
       ],
       "link" : "https://github.com/gstruct/terraform-provider-dockermachine",
       "owner" : "gstruct",
-      "name" : "terraform-provider-dockermachine",
-      "parse_target" : "provider"
+      "parse_target" : "provider",
+      "name" : "terraform-provider-dockermachine"
    },
    {
-      "name" : "terraform-provider-dropbox",
-      "parse_target" : "dropbox",
-      "link" : "https://github.com/callensm/terraform-provider-dropbox",
-      "owner" : "callensm",
+      "link" : "https://github.com/artisanofcode/terraform-provider-drone",
       "versions" : [
-         "master"
-      ]
-   },
-   {
-      "name" : "terraform-provider-gandi",
-      "parse_target" : "gandi",
-      "owner" : "tiramiseb",
-      "link" : "https://github.com/tiramiseb/terraform-provider-gandi",
-      "versions" : [
-         "master"
-      ]
+         "master",
+         "v0.0.2",
+         "v0.0.1"
+      ],
+      "owner" : "artisanofcode",
+      "parse_target" : "drone",
+      "name" : "terraform-provider-drone"
    },
    {
       "versions" : [
          "master",
-         "v0.1.0"
+         "1.0.0"
       ],
-      "parse_target" : "restapi",
-      "name" : "terraform-provider-restapi",
-      "link" : "https://github.com/Mastercard/terraform-provider-restapi",
-      "owner" : "Mastercard"
+      "link" : "https://github.com/callensm/terraform-provider-dropbox",
+      "owner" : "callensm",
+      "parse_target" : "dropbox",
+      "name" : "terraform-provider-dropbox"
    },
    {
-      "parse_target" : "glue",
-      "name" : "terraform-provider-glue",
-      "link" : "https://github.com/MikeSouza/terraform-provider-glue",
-      "owner" : "MikeSouza",
+      "versions" : [
+         "master",
+         "v1.0.3",
+         "v1.0.2",
+         "v1.0.1",
+         "v1.0.0"
+      ],
+      "link" : "https://github.com/alexissavin/terraform-provider-solidserver",
+      "parse_target" : "solidserver",
+      "name" : "terraform-provider-solidserver",
+      "owner" : "alexissavin"
+   },
+   {
+      "link" : "https://github.com/elephantsql/terraform-provider",
+      "versions" : [
+         "master"
+      ],
+      "owner" : "elephantsql",
+      "parse_target" : "provider",
+      "name" : "terraform-provider"
+   },
+   {
+      "owner" : "josenk",
+      "parse_target" : "esxi",
+      "name" : "terraform-provider-esxi",
+      "link" : "https://github.com/josenk/terraform-provider-esxi",
       "versions" : [
          "master"
       ]
    },
    {
-      "link" : "https://github.com/drewsonne/terraform-provider-gocd",
-      "owner" : "drewsonne",
-      "name" : "terraform-provider-gocd",
+      "versions" : [
+         "master"
+      ],
+      "link" : "https://github.com/tiramiseb/terraform-provider-gandi",
+      "parse_target" : "gandi",
+      "name" : "terraform-provider-gandi",
+      "owner" : "tiramiseb"
+   },
+   {
+      "link" : "https://github.com/Mastercard/terraform-provider-restapi",
+      "versions" : [
+         "master",
+         "v0.1.0"
+      ],
+      "owner" : "Mastercard",
+      "parse_target" : "restapi",
+      "name" : "terraform-provider-restapi"
+   },
+   {
+      "link" : "https://github.com/MikeSouza/terraform-provider-glue",
+      "versions" : [
+         "master"
+      ],
+      "owner" : "MikeSouza",
+      "name" : "terraform-provider-glue",
+      "parse_target" : "glue"
+   },
+   {
       "parse_target" : "gocd",
+      "name" : "terraform-provider-gocd",
+      "owner" : "drewsonne",
       "versions" : [
          "master",
          "0.1.21",
@@ -226,32 +322,35 @@
          "0.0.7",
          "0.0.6",
          "0.0.5"
-      ]
+      ],
+      "link" : "https://github.com/drewsonne/terraform-provider-gocd"
    },
    {
+      "link" : "https://github.com/sethvargo/terraform-provider-googlecalendar",
       "versions" : [
          "master",
          "v0.1.0"
       ],
-      "owner" : "sethvargo",
-      "link" : "https://github.com/sethvargo/terraform-provider-googlecalendar",
+      "name" : "terraform-provider-googlecalendar",
       "parse_target" : "googlecalendar",
-      "name" : "terraform-provider-googlecalendar"
+      "owner" : "sethvargo"
    },
    {
+      "owner" : "DeviaVir",
+      "parse_target" : "gsuite",
+      "name" : "terraform-provider-gsuite",
+      "link" : "https://github.com/DeviaVir/terraform-provider-gsuite",
       "versions" : [
          "master",
+         "v0.1.7",
+         "v0.1.6",
          "v0.1.5",
          "v0.1.4",
          "v0.1.3",
          "v0.1.2",
          "v0.1.1",
          "v0.1.0"
-      ],
-      "link" : "https://github.com/DeviaVir/terraform-provider-gsuite",
-      "owner" : "DeviaVir",
-      "name" : "terraform-provider-gsuite",
-      "parse_target" : "gsuite"
+      ]
    },
    {
       "versions" : [
@@ -265,44 +364,73 @@
          "v0.2.0",
          "v0.1.0"
       ],
-      "parse_target" : "helm",
-      "name" : "terraform-provider-helm",
+      "link" : "https://github.com/mcuadros/terraform-provider-helm",
       "owner" : "mcuadros",
-      "link" : "https://github.com/mcuadros/terraform-provider-helm"
+      "parse_target" : "helm",
+      "name" : "terraform-provider-helm"
    },
    {
+      "parse_target" : "hiera",
+      "name" : "terraform-provider-hiera",
+      "owner" : "ribbybibby",
       "versions" : [
          "master",
          "v.0.1.0"
       ],
-      "owner" : "ribbybibby",
-      "link" : "https://github.com/ribbybibby/terraform-provider-hiera",
-      "parse_target" : "hiera",
-      "name" : "terraform-provider-hiera"
+      "link" : "https://github.com/ribbybibby/terraform-provider-hiera"
    },
    {
-      "owner" : "GSLabDev",
       "link" : "https://github.com/GSLabDev/terraform-provider-httpfileupload",
-      "name" : "terraform-provider-httpfileupload",
-      "parse_target" : "httpfileupload",
-      "versions" : [
-         "master"
-      ]
-   },
-   {
       "versions" : [
          "master"
       ],
-      "owner" : "HewlettPackard",
-      "link" : "https://github.com/HewlettPackard/terraform-provider-oneview",
-      "name" : "terraform-provider-oneview",
-      "parse_target" : "oneview"
+      "name" : "terraform-provider-httpfileupload",
+      "parse_target" : "httpfileupload",
+      "owner" : "GSLabDev"
    },
    {
-      "owner" : "sky-uk",
+      "link" : "https://github.com/HewlettPackard/terraform-provider-oneview",
+      "versions" : [
+         "master"
+      ],
+      "name" : "terraform-provider-oneview",
+      "parse_target" : "oneview",
+      "owner" : "HewlettPackard"
+   },
+   {
+      "versions" : [
+         "master",
+         "v0.11.1",
+         "v0.11.0",
+         "v0.10.0",
+         "v0.9.1",
+         "v0.9.0",
+         "v0.8.0",
+         "v0.7.0",
+         "v0.6.0",
+         "v0.5.1",
+         "v0.5.0",
+         "v0.4.0"
+      ],
+      "link" : "https://github.com/IBM-Cloud/terraform-provider-ibm",
+      "name" : "terraform-provider-ibm",
+      "parse_target" : "ibm",
+      "owner" : "IBM-Cloud"
+   },
+   {
+      "versions" : [
+         "master",
+         "v0.3.0",
+         "v0.2.0",
+         "v0.1.0"
+      ],
+      "link" : "https://github.com/iij/terraform-provider-p2pub",
+      "owner" : "iij",
+      "parse_target" : "p2pub",
+      "name" : "terraform-provider-p2pub"
+   },
+   {
       "link" : "https://github.com/sky-uk/terraform-provider-infoblox",
-      "parse_target" : "infoblox",
-      "name" : "terraform-provider-infoblox",
       "versions" : [
          "master",
          "0.1.11",
@@ -330,45 +458,49 @@
          "0.0.3",
          "0.0.2",
          "0.0.1"
-      ]
+      ],
+      "owner" : "sky-uk",
+      "parse_target" : "infoblox",
+      "name" : "terraform-provider-infoblox"
    },
    {
-      "name" : "terraform-provider-jira",
       "parse_target" : "jira",
-      "link" : "https://github.com/anubhavmishra/terraform-provider-jira",
+      "name" : "terraform-provider-jira",
       "owner" : "anubhavmishra",
+      "link" : "https://github.com/anubhavmishra/terraform-provider-jira",
       "versions" : [
          "master",
          "0.1.0"
       ]
    },
    {
-      "parse_target" : "provider",
-      "name" : "jumpcloud-terraform-provider",
-      "owner" : "geekmuse",
-      "link" : "https://github.com/geekmuse/jumpcloud-terraform-provider",
       "versions" : [
          "master",
          "0.0.1"
-      ]
+      ],
+      "link" : "https://github.com/geekmuse/jumpcloud-terraform-provider",
+      "name" : "jumpcloud-terraform-provider",
+      "parse_target" : "provider",
+      "owner" : "geekmuse"
    },
    {
-      "link" : "https://github.com/plmwong/terraform-provider-keboola",
       "owner" : "plmwong",
       "name" : "terraform-provider-keboola",
       "parse_target" : "plugin/providers/keboola",
+      "link" : "https://github.com/plmwong/terraform-provider-keboola",
       "versions" : [
          "master"
       ]
    },
    {
+      "owner" : "Mongey",
+      "parse_target" : "kafka",
+      "name" : "terraform-provider-kafka",
       "versions" : [
          "master",
+         "v0.1.1",
          "v0.1.0"
       ],
-      "name" : "terraform-provider-kafka",
-      "parse_target" : "kafka",
-      "owner" : "Mongey",
       "link" : "https://github.com/Mongey/terraform-provider-kafka"
    },
    {
@@ -385,17 +517,20 @@
          "v0.1.0"
       ],
       "link" : "https://github.com/ewilde/terraform-provider-kibana",
-      "owner" : "ewilde",
+      "parse_target" : "kibana",
       "name" : "terraform-provider-kibana",
-      "parse_target" : "kibana"
+      "owner" : "ewilde"
    },
    {
-      "parse_target" : "kong",
-      "name" : "terraform-provider-kong",
-      "link" : "https://github.com/kevholditch/terraform-provider-kong",
       "owner" : "kevholditch",
+      "name" : "terraform-provider-kong",
+      "parse_target" : "kong",
       "versions" : [
          "master",
+         "v1.5.0",
+         "v1.4.0",
+         "v1.3.0",
+         "v1.2.0",
          "v1.1.0",
          "v1.0.0",
          "v0.14.0",
@@ -412,15 +547,16 @@
          "v0.3.0",
          "v0.2.0",
          "v0.1.0"
-      ]
+      ],
+      "link" : "https://github.com/kevholditch/terraform-provider-kong"
    },
    {
-      "owner" : "sl1pm4t",
-      "link" : "https://github.com/sl1pm4t/terraform-provider-lxd",
       "name" : "terraform-provider-lxd",
       "parse_target" : "lxd",
+      "owner" : "sl1pm4t",
       "versions" : [
          "master",
+         "v1.1.1",
          "v1.1.0",
          "v1.0.0",
          "v0.10.4",
@@ -435,9 +571,11 @@
          "v0.8.1",
          "v0.8.0",
          "v0.8.0-rc3"
-      ]
+      ],
+      "link" : "https://github.com/sl1pm4t/terraform-provider-lxd"
    },
    {
+      "link" : "https://github.com/coreos/terraform-provider-matchbox",
       "versions" : [
          "master",
          "v0.2.2",
@@ -449,12 +587,13 @@
       ],
       "parse_target" : "matchbox",
       "name" : "terraform-provider-matchbox",
-      "owner" : "coreos",
-      "link" : "https://github.com/coreos/terraform-provider-matchbox"
+      "owner" : "coreos"
    },
    {
       "versions" : [
          "master",
+         "v0.6.1",
+         "v0.6.0",
          "v0.5.0",
          "v0.4.6",
          "v0.4.5",
@@ -473,50 +612,65 @@
          "0.3.1",
          "0.3.0"
       ],
-      "owner" : "akshaykarle",
       "link" : "https://github.com/akshaykarle/terraform-provider-mongodbatlas",
       "name" : "terraform-provider-mongodbatlas",
-      "parse_target" : "mongodbatlas"
+      "parse_target" : "mongodbatlas",
+      "owner" : "akshaykarle"
    },
    {
-      "link" : "https://github.com/GSLabDev/terraform-provider-nsxv",
-      "owner" : "GSLabDev",
       "parse_target" : "nsxv",
       "name" : "terraform-provider-nsxv",
+      "owner" : "GSLabDev",
       "versions" : [
          "master"
-      ]
+      ],
+      "link" : "https://github.com/GSLabDev/terraform-provider-nsxv"
    },
    {
-      "link" : "https://github.com/nutanix/terraform-provider-nutanix",
-      "owner" : "nutanix",
       "parse_target" : "nutanix",
       "name" : "terraform-provider-nutanix",
+      "owner" : "nutanix",
       "versions" : [
-         "master"
-      ]
-   },
-   {
-      "parse_target" : "net",
-      "name" : "terraform-provider-online-net",
-      "link" : "https://github.com/src-d/terraform-provider-online-net",
-      "owner" : "src-d",
-      "versions" : [
-         "master"
-      ]
+         "master",
+         "v1.0.0-rc1"
+      ],
+      "link" : "https://github.com/nutanix/terraform-provider-nutanix"
    },
    {
       "versions" : [
          "master"
       ],
-      "name" : "terraform-provider-odl",
-      "parse_target" : "odl",
-      "link" : "https://github.com/GSLabDev/terraform-provider-odl",
-      "owner" : "GSLabDev"
+      "link" : "https://github.com/src-d/terraform-provider-online-net",
+      "owner" : "src-d",
+      "name" : "terraform-provider-online-net",
+      "parse_target" : "net"
    },
    {
+      "name" : "terraform-provider-odl",
+      "parse_target" : "odl",
+      "owner" : "GSLabDev",
+      "link" : "https://github.com/GSLabDev/terraform-provider-odl",
+      "versions" : [
+         "master"
+      ]
+   },
+   {
+      "parse_target" : "openapi",
+      "name" : "terraform-provider-openapi",
+      "owner" : "dikhan",
+      "link" : "https://github.com/dikhan/terraform-provider-openapi",
       "versions" : [
          "master",
+         "v0.1.2",
+         "v0.1.1",
+         "v0.1.0"
+      ]
+   },
+   {
+      "link" : "https://github.com/camptocamp/terraform-provider-pass",
+      "versions" : [
+         "master",
+         "1.1.0",
          "1.0.1",
          "1.0.0",
          "0.1.4",
@@ -525,73 +679,75 @@
          "0.1.1",
          "0.1.0"
       ],
-      "link" : "https://github.com/camptocamp/terraform-provider-pass",
       "owner" : "camptocamp",
       "parse_target" : "pass",
       "name" : "terraform-provider-pass"
    },
    {
-      "owner" : "camptocamp",
-      "link" : "https://github.com/camptocamp/terraform-provider-puppetca",
-      "parse_target" : "puppetca",
-      "name" : "terraform-provider-puppetca",
       "versions" : [
          "master",
          "1.0.1",
          "1.0.0"
-      ]
+      ],
+      "link" : "https://github.com/camptocamp/terraform-provider-puppetca",
+      "parse_target" : "puppetca",
+      "name" : "terraform-provider-puppetca",
+      "owner" : "camptocamp"
    },
    {
-      "owner" : "camptocamp",
       "link" : "https://github.com/camptocamp/terraform-provider-puppetdb",
-      "parse_target" : "puppetdb",
-      "name" : "terraform-provider-puppetdb",
       "versions" : [
          "master",
          "0.1.1",
          "0.1.0"
-      ]
+      ],
+      "name" : "terraform-provider-puppetdb",
+      "parse_target" : "puppetdb",
+      "owner" : "camptocamp"
    },
    {
-      "link" : "https://github.com/yunify/terraform-provider-qingcloud",
-      "owner" : "yunify",
-      "parse_target" : "qingcloud",
       "name" : "terraform-provider-qingcloud",
+      "parse_target" : "qingcloud",
+      "owner" : "yunify",
       "versions" : [
          "master",
+         "v1.2.2",
          "v1.2.1",
          "v1.2.0",
          "v1.1",
          "v1.0.1",
          "v1.0.0"
-      ]
+      ],
+      "link" : "https://github.com/yunify/terraform-provider-qingcloud"
    },
    {
-      "parse_target" : "redshift",
-      "name" : "terraform-provider-redshift",
       "link" : "https://github.com/frankfarrell/terraform-provider-redshift",
-      "owner" : "frankfarrell",
       "versions" : [
          "master"
-      ]
+      ],
+      "owner" : "frankfarrell",
+      "parse_target" : "redshift",
+      "name" : "terraform-provider-redshift"
    },
    {
       "name" : "terraform-provider-rke",
       "parse_target" : "rke",
       "owner" : "yamamoto-febc",
-      "link" : "https://github.com/yamamoto-febc/terraform-provider-rke",
       "versions" : [
          "master",
+         "0.3.4",
+         "0.3.3",
+         "0.3.2",
+         "0.3.1",
+         "0.3.0",
+         "0.2.1",
          "0.2.0",
          "0.1.0",
          "0.0.1"
-      ]
+      ],
+      "link" : "https://github.com/yamamoto-febc/terraform-provider-rke"
    },
    {
-      "name" : "terraform-provider-runscope",
-      "parse_target" : "runscope",
-      "link" : "https://github.com/ewilde/terraform-provider-runscope",
-      "owner" : "ewilde",
       "versions" : [
          "master",
          "v0.5.7",
@@ -609,15 +765,24 @@
          "v0.3.0",
          "v0.2.0",
          "v0.1.0"
-      ]
+      ],
+      "link" : "https://github.com/ewilde/terraform-provider-runscope",
+      "name" : "terraform-provider-runscope",
+      "parse_target" : "runscope",
+      "owner" : "ewilde"
    },
    {
-      "name" : "terraform-provider-sakuracloud",
       "parse_target" : "sakuracloud",
-      "link" : "https://github.com/sacloud/terraform-provider-sakuracloud",
+      "name" : "terraform-provider-sakuracloud",
       "owner" : "sacloud",
+      "link" : "https://github.com/sacloud/terraform-provider-sakuracloud",
       "versions" : [
          "master",
+         "v1.3.2",
+         "v1.3.1",
+         "v1.3.0",
+         "v1.2.0",
+         "v1.1.3",
          "v1.1.2",
          "v1.1.1",
          "v1.1.0",
@@ -642,15 +807,20 @@
          "v0.11.0",
          "v0.10.4",
          "v0.10.3",
-         "v0.10.2",
-         "v0.10.1",
-         "v0.10.0",
-         "v0.9.1",
-         "v0.9.0",
-         "v0.8.1"
+         "v0.10.2"
       ]
    },
    {
+      "link" : "https://github.com/GSLabDev/terraform-provider-scvmm",
+      "versions" : [
+         "master"
+      ],
+      "parse_target" : "scvmm",
+      "name" : "terraform-provider-scvmm",
+      "owner" : "GSLabDev"
+   },
+   {
+      "link" : "https://github.com/jianyuan/terraform-provider-sentry",
       "versions" : [
          "master",
          "v0.4.0",
@@ -661,13 +831,20 @@
       ],
       "name" : "terraform-provider-sentry",
       "parse_target" : "sentry",
-      "owner" : "jianyuan",
-      "link" : "https://github.com/jianyuan/terraform-provider-sentry"
+      "owner" : "jianyuan"
    },
    {
-      "parse_target" : "signalform",
+      "versions" : [
+         "master"
+      ],
+      "link" : "https://github.com/SewanDevs/terraform-provider-sewan",
+      "owner" : "SewanDevs",
+      "name" : "terraform-provider-sewan",
+      "parse_target" : "sewan"
+   },
+   {
       "name" : "terraform-provider-signalform",
-      "link" : "https://github.com/Yelp/terraform-provider-signalform",
+      "parse_target" : "signalform",
       "owner" : "Yelp",
       "versions" : [
          "master",
@@ -701,45 +878,67 @@
          "v1.2",
          "v1.1",
          "v1.0"
-      ]
+      ],
+      "link" : "https://github.com/Yelp/terraform-provider-signalform"
    },
    {
-      "parse_target" : "scvmm",
-      "name" : "terraform-provider-scvmm",
-      "link" : "https://github.com/GSLabDev/terraform-provider-scvmm",
-      "owner" : "GSLabDev",
-      "versions" : [
-         "master"
-      ]
-   },
-   {
+      "parse_target" : "snowflake",
+      "name" : "terraform-provider-snowflake",
+      "owner" : "ShopRunner",
       "versions" : [
          "master"
       ],
-      "link" : "https://github.com/bocodigitalmedia/terraform-provider-transloadit",
-      "owner" : "bocodigitalmedia",
-      "name" : "terraform-provider-transloadit",
-      "parse_target" : "transloadit"
+      "link" : "https://github.com/ShopRunner/terraform-provider-snowflake"
    },
    {
+      "owner" : "Ashald",
+      "parse_target" : "stateful",
+      "name" : "terraform-provider-stateful",
+      "versions" : [
+         "master",
+         "v1.0.0"
+      ],
+      "link" : "https://github.com/Ashald/terraform-provider-stateful"
+   },
+   {
+      "name" : "terraform-provider-transloadit",
+      "parse_target" : "transloadit",
+      "owner" : "bocodigitalmedia",
+      "link" : "https://github.com/bocodigitalmedia/terraform-provider-transloadit",
+      "versions" : [
+         "master"
+      ]
+   },
+   {
+      "link" : "https://github.com/PortOfPortland/terraform-provider-windns",
       "versions" : [
          "master",
          "v0.2.0",
          "v0.1.0"
       ],
-      "parse_target" : "windns",
       "name" : "terraform-provider-windns",
-      "owner" : "PortOfPortland",
-      "link" : "https://github.com/PortOfPortland/terraform-provider-windns"
+      "parse_target" : "windns",
+      "owner" : "PortOfPortland"
    },
    {
+      "parse_target" : "vra",
+      "name" : "terraform-provider-vra",
+      "owner" : "GSLabDev",
       "versions" : [
          "master"
       ],
-      "name" : "terraform-provider-vra",
-      "parse_target" : "vra",
-      "link" : "https://github.com/GSLabDev/terraform-provider-vra",
-      "owner" : "GSLabDev"
+      "link" : "https://github.com/GSLabDev/terraform-provider-vra"
+   },
+   {
+      "versions" : [
+         "master",
+         "v2.0.0",
+         "v1.0.0"
+      ],
+      "link" : "https://github.com/Ashald/terraform-provider-yaml",
+      "name" : "terraform-provider-yaml",
+      "parse_target" : "yaml",
+      "owner" : "Ashald"
    },
    {
       "versions" : [
@@ -748,14 +947,16 @@
          "v0.1.0",
          "v0.0.1"
       ],
+      "link" : "https://github.com/cormacrelf/terraform-provider-zerotier",
       "parse_target" : "zerotier",
       "name" : "terraform-provider-zerotier",
-      "owner" : "cormacrelf",
-      "link" : "https://github.com/cormacrelf/terraform-provider-zerotier"
+      "owner" : "cormacrelf"
    },
    {
       "versions" : [
          "master",
+         "v0.11.1",
+         "v0.11.0",
          "v0.10.0",
          "v0.9.1",
          "v0.9.0",
@@ -766,9 +967,9 @@
          "v0.5.0",
          "v0.4.0"
       ],
+      "link" : "https://github.com/IBM-Cloud/terraform-provider-ibm",
       "parse_target" : "ibm",
       "name" : "terraform-provider-ibm",
-      "owner" : "IBM-Cloud",
-      "link" : "https://github.com/IBM-Cloud/terraform-provider-ibm"
+      "owner" : "IBM-Cloud"
    }
 ]
