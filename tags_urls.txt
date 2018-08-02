@@ -7,6 +7,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-azurerm/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-azurestack/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-bitbucket/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-brightbox/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-chef/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-circonus/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-clc/tags"
