@@ -3,6 +3,33 @@
       "versions" : [
 				"master"
       ],
+      "parse_target" : "akamai",
+      "name" : "terraform-provider-akamai",
+      "owner" : "akamai",
+      "link" : "https://github.com/akamai/terraform-provider-akamai"
+   },
+   {
+      "parse_target" : "plugin/providers/acme",
+      "name" : "terraform-provider-acme",
+      "owner" : "vancluever",
+      "versions" : [
+         "master",
+         "v1.0.0",
+         "v0.6.0",
+         "v0.5.0",
+         "v0.4.0",
+         "v0.3.0",
+         "v0.3.0-beta2",
+         "v0.2.1",
+         "v0.2.0",
+         "v0.1.0"
+      ],
+      "link" : "https://github.com/vancluever/terraform-provider-acme"
+   },
+   {
+      "versions" : [
+				"master"
+      ],
       "parse_target" : "packer",
       "name" : "terraform-provider-packer",
       "owner" : "juliosueiras",
