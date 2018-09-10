@@ -1,6 +1,15 @@
 [
    {
       "versions" : [
+				"develop"
+      ],
+      "parse_target" : "nifi",
+      "name" : "terraform-provider-nifi",
+      "owner" : "Glympse",
+      "link" : "https://github.com/Glympse/terraform-provider-nifi"
+   },
+   {
+      "versions" : [
 				"master"
       ],
       "parse_target" : "akamai",

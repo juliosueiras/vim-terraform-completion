@@ -45,6 +45,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-logicmonitor/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-mailgun/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-mysql/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-netlify/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-newrelic/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-nomad/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-ns1/tags"
