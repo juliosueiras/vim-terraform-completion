@@ -129,10 +129,15 @@ call deoplete#initialize()
 **NOTE: For newer version of deoplete if the above doesn't work**
 
 ```vim
+
+let g:deoplete#omni_patterns = {}
+
 call deoplete#custom#option('omni_patterns', {
 \ 'complete_method': 'omnifunc',
 \ 'terraform': '[^ *\t"{=$]\w*',
 \})
+
+call deoplete#initialize()
 ```
 
 
