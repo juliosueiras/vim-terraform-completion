@@ -126,6 +126,15 @@ let g:deoplete#enable_at_startup = 1
 call deoplete#initialize()
 ```
 
+**NOTE: For newer version of deoplete if the above doesn't work**
+
+```vim
+call deoplete#custom#option('omni_patterns', {
+\ 'complete_method': 'omnifunc',
+\ 'terraform': '[^ *\t"{=$]\w*',
+\})
+```
+
 
 ## Version config file
 by default , all providers uses the latest version, but you can add a file call `.tfcompleterc` under working directory, and content can be this:
