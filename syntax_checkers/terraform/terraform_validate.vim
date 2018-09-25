@@ -22,7 +22,7 @@ function! SyntaxCheckers_terraform_terraform_validate_GetLocList() dict
     let makeprg = self.makeprgBuild({ 'args_after': 'validate -no-color', 'fname': '' })
 
     let errorformat =
-        \ 'Error\ loading\ files\ Error\ parsing %f:\ At\ %l:%c:\ %m'
+        \ 'Error:\ %.%#\ %f:\ At\ %l:%c:\ %m'
 
     let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb' }
 
