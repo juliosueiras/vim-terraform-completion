@@ -1,6 +1,6 @@
 # (Neo)Vim Terraform Completion with Linter - [Demos](./DEMO.md)
 
-**IMPORTANT: This plugin now allow version based competion**
+**IMPORTANT: This plugin now allow version based completion**
 
 ## [Changelog](./CHANGELOG.md)
 
