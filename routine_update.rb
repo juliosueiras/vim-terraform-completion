@@ -21,7 +21,7 @@ tags_urls.each do |tags_url|
 		#end
 		version = tags[0]["name"]
 		provider = tags[0]["zipball_url"].split("/")[5].match(/terraform-provider-(.*)/)[1]
-		if not File.exist? "./schemas-extractor/schemas/#{provider}-#{version.match("[vV](.*)")[1]}.json" and provider != "azure-classic"
+		if not File.exist? "./schemas-extractor/schemas/#{provider}-#{version.match("[vV](.*)")[1]}.json" and provider != "azure-classic" and provider != "oci" and provider != "google-beta" 
 			provider_updated.push provider
 			`echo terraform-provider-#{provider} > schemas-extractor/providers.list.full`
 			`echo #{provider} > schemas-extractor/providers.list`

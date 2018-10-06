@@ -32,6 +32,7 @@
     + [Version config](#version-config-file)
     + [Custom Provider](./CUSTOM_PROVIDER.md)
 		- [Community Providers](#community-providers)
+	- [Specific Providers Config](#specific-providers)
   * [General Todo](#general-todo)
   * [Todo for Terraform completion](#todo-for-terraform-completion)
   * [Todo for HCL](#todo-for-hcl)
@@ -160,6 +161,12 @@ By default no community providers is enable, to use one, first refer to COMMUNIT
 ```
 restapi=master
 ```
+
+## Specific Providers
+
+### Google Beta Provider
+
+To use completion for google beta provider, please use `.tfcompleterc` and put `google=beta_<version>`
 
 ## General Todo
 <details>
