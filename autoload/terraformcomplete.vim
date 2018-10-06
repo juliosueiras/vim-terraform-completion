@@ -515,6 +515,26 @@ let a:provider_line = 0
 return a:res
 endfunction
 
+fun! terraformcomplete#tfcompleterc_Complete(findstart, base)
+	if a:findstart
+		" locate the start of the word
+		let line = getline('.')
+		let start = col('.') - 1
+		while start > 0 && line[start - 1] =~ '\a'
+			let start -= 1
+		endwhile
+		return start
+	else
+    let a:res = []
+		for m in readfile(s:path . "/../dicts/tfcompleterc_dict")
+			if m =~ '^' . a:base
+				call add(a:res, m)
+			endif
+		endfor
+		return a:res
+	endif
+endfunc
+
 fun! terraformcomplete#Complete(findstart, base)
   if a:findstart
     " locate the start of the word
