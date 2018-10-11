@@ -682,6 +682,7 @@ qingcloud=v1.1
 qingcloud=v1.2.0
 qingcloud=v1.2.1
 qingcloud=v1.2.2
+razor=master
 redshift=master
 restapi=master
 restapi=v0.1.0

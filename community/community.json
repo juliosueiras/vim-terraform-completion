@@ -1,6 +1,15 @@
 [
    {
       "versions" : [
+				"master"
+      ],
+      "parse_target" : "razor",
+      "name" : "terraform-provider-razor",
+      "owner" : "juliosueiras",
+      "link" : "https://github.com/juliosueiras/terraform-provider-razor"
+   },
+   {
+      "versions" : [
 				"develop"
       ],
       "parse_target" : "nifi",
