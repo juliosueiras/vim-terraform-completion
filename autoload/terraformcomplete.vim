@@ -2,10 +2,6 @@ if !has("ruby") && !has("ruby/dyn")
     finish
 endif
 
-if exists('loaded_deoplete')
-    let deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
-endif
-
 if exists('g:syntastic_extra_filetypes')
     call add(g:syntastic_extra_filetypes, 'terraform')
 else
