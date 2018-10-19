@@ -43,6 +43,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-influxdb/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-kubernetes/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-librato/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-linode/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-local/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-logentries/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-logicmonitor/tags"
