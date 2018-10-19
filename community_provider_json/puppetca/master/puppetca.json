@@ -1,1 +1,1 @@
-{"provider_arguments":[],"resources":{"certificate":{"arguments":[{"word":"name","kind":"String(R)"}],"attributes":[{"word":"cert","kind":"String"},{"word":"id","kind":"String"}]}},"datas":{},"unknowns":{}}
+{"provider_arguments":[],"resources":{"certificate":{"arguments":[{"word":"name","kind":"String(R)"}],"attributes":[{"word":"id","kind":"String"}]}},"datas":{},"unknowns":{}}
