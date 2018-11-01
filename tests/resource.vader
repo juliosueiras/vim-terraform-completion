@@ -22,9 +22,9 @@ Given terraform (Argument Completion Test):
 Do (Autocompletion for Argument Test):
   o\<C-X>\<C-O>
 
-Expect (get capabilities):
+Expect (get attach):
   resource "docker_container" "sd" {
-  capabilities
+  attach
   }
 
 Given terraform (Block Argument Completion Test):
@@ -60,6 +60,6 @@ Expect (get docker_container):
   }
 
   resource "docker_container" "sd2" {
-  name = "${docker_container.sd.bridge}"
-  name = "${docker_container.sd2.bridge}"
+  name = "${docker_container.sd.attach}"
+  name = "${docker_container.sd2.attach}"
   }
