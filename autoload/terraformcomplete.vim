@@ -97,6 +97,10 @@ function! terraformcomplete#OpenDoc()
             let a:arg = ''
         endif
 
+        if a:provider == "digitalocean"
+          let a:provider = "do"
+        endif
+
         let a:link = 'https://www.terraform.io/docs/providers/' . a:provider
 
         if terraformcomplete#GetType() ==? 'resource'
