@@ -1,5 +1,5 @@
 acme=1.0.1
-alicloud=1.22.0
+alicloud=1.23.0
 archive=1.1.0
 arukas=1.0.0
 atlas=0.1.1
@@ -35,7 +35,7 @@ google-beta=1.19.0
 grafana=1.2.0
 hcloud=1.4.0
 helm=0.6.2
-heroku=1.5.0
+heroku=1.6.0
 http=1.0.1
 huaweicloud=1.2.0
 icinga2=0.1.1
