@@ -1,0 +1,13 @@
+packet
+r_packet_device
+r_packet_ip_attachment
+r_packet_organization
+r_packet_project
+r_packet_reserved_ip_block
+r_packet_spot_market_request
+r_packet_ssh_key
+r_packet_volume
+r_packet_volume_attachment
+d_packet_operating_system
+d_packet_precreated_ip_block
+d_packet_spot_market_price

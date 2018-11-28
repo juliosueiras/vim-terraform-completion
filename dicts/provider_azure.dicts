@@ -1,0 +1,17 @@
+azure
+r_azure_affinity_group
+r_azure_data_disk
+r_azure_dns_server
+r_azure_hosted_service
+r_azure_instance
+r_azure_local_network_connection
+r_azure_security_group
+r_azure_security_group_rule
+r_azure_sql_database_server
+r_azure_sql_database_server_firewall_rule
+r_azure_sql_database_service
+r_azure_storage_blob
+r_azure_storage_container
+r_azure_storage_queue
+r_azure_storage_service
+r_azure_virtual_network

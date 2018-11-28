@@ -1,0 +1,7 @@
+logicmonitor
+r_logicmonitor_collector
+r_logicmonitor_collector_group
+r_logicmonitor_device
+r_logicmonitor_device_group
+d_logicmonitor_collectors
+d_logicmonitor_device_group

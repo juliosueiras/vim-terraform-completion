@@ -1,0 +1,4 @@
+influxdb
+r_influxdb_continuous_query
+r_influxdb_database
+r_influxdb_user

@@ -1,0 +1,12 @@
+hcloud
+r_hcloud_floating_ip
+r_hcloud_floating_ip_assignment
+r_hcloud_rdns
+r_hcloud_server
+r_hcloud_ssh_key
+r_hcloud_volume
+r_hcloud_volume_attachment
+d_hcloud_floating_ip
+d_hcloud_image
+d_hcloud_ssh_key
+d_hcloud_volume

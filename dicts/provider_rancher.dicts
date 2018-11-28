@@ -1,0 +1,13 @@
+rancher
+r_rancher_certificate
+r_rancher_environment
+r_rancher_host
+r_rancher_registration_token
+r_rancher_registry
+r_rancher_registry_credential
+r_rancher_secret
+r_rancher_stack
+r_rancher_volume
+d_rancher_certificate
+d_rancher_environment
+d_rancher_setting

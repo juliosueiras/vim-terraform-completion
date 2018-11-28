@@ -1,0 +1,11 @@
+nutanix
+r_nutanix_category_key
+r_nutanix_category_value
+r_nutanix_image
+r_nutanix_subnet
+r_nutanix_virtual_machine
+d_nutanix_cluster
+d_nutanix_clusters
+d_nutanix_image
+d_nutanix_subnet
+d_nutanix_virtual_machine

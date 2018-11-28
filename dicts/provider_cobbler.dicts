@@ -1,0 +1,7 @@
+cobbler
+r_cobbler_distro
+r_cobbler_kickstart_file
+r_cobbler_profile
+r_cobbler_repo
+r_cobbler_snippet
+r_cobbler_system

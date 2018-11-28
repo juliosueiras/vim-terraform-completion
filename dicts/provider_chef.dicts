@@ -1,0 +1,6 @@
+chef
+r_chef_data_bag
+r_chef_data_bag_item
+r_chef_environment
+r_chef_node
+r_chef_role

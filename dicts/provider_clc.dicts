@@ -1,0 +1,6 @@
+clc
+r_clc_group
+r_clc_load_balancer
+r_clc_load_balancer_pool
+r_clc_public_ip
+r_clc_server

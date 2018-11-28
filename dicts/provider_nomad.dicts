@@ -1,0 +1,8 @@
+nomad
+r_nomad_acl_policy
+r_nomad_acl_token
+r_nomad_job
+r_nomad_namespace
+r_nomad_quota_specification
+r_nomad_sentinel_policy
+d_nomad_regions

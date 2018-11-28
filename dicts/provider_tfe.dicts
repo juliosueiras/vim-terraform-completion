@@ -1,0 +1,13 @@
+tfe
+r_tfe_organization
+r_tfe_organization_token
+r_tfe_policy_set
+r_tfe_sentinel_policy
+r_tfe_ssh_key
+r_tfe_team
+r_tfe_team_access
+r_tfe_team_member
+r_tfe_team_members
+r_tfe_team_token
+r_tfe_variable
+r_tfe_workspace

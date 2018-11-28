@@ -1,0 +1,8 @@
+rabbitmq
+r_rabbitmq_binding
+r_rabbitmq_exchange
+r_rabbitmq_permissions
+r_rabbitmq_policy
+r_rabbitmq_queue
+r_rabbitmq_user
+r_rabbitmq_vhost

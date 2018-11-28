@@ -1,0 +1,6 @@
+template
+r_template_cloudinit_config
+r_template_dir
+r_template_file
+d_template_cloudinit_config
+d_template_file

@@ -1,0 +1,12 @@
+ignition
+d_ignition_config
+d_ignition_directory
+d_ignition_disk
+d_ignition_file
+d_ignition_filesystem
+d_ignition_group
+d_ignition_link
+d_ignition_networkd_unit
+d_ignition_raid
+d_ignition_systemd_unit
+d_ignition_user

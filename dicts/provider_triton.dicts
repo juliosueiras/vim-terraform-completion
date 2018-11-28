@@ -1,0 +1,16 @@
+triton
+r_triton_fabric
+r_triton_firewall_rule
+r_triton_instance_template
+r_triton_key
+r_triton_machine
+r_triton_service_group
+r_triton_snapshot
+r_triton_vlan
+d_triton_account
+d_triton_datacenter
+d_triton_fabric_network
+d_triton_fabric_vlan
+d_triton_image
+d_triton_network
+d_triton_package

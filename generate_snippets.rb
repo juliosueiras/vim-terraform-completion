@@ -22,6 +22,10 @@ def get_snippets(args)
           "\t#{arg} = [1]"
         when "TypeFloat"
           "\t#{arg} = [1.0]"
+        when "TypeMap"
+          snippet_result = "\t#{arg} {\n"
+          snippet_result += "\n\t\t\t}"
+          snippet_result
         else
           require 'pry'; binding.pry
         end
@@ -31,6 +35,7 @@ def get_snippets(args)
           case value["Elem"]["Type"]
           when "SchemaInfo"
             snippet_result += "\t\t\t" + get_snippets(value["Elem"]["Info"]).join("\n\t\t\t")
+          when "schema.ValueType", "SchemaElements"
           else
             require 'pry'; binding.pry
           end
@@ -56,6 +61,12 @@ provider_args = provider_args.map do |i,v|
   case v["Type"]
   when "TypeString"
     "#{i} = \"${#{current}}\""
+  when "TypeInt"
+    "#{i} = ${#{current}}"
+  when "TypeFloat"
+    "#{i} = ${#{current}}"
+  when "TypeBool"
+    "#{i} = ${#{current}:false}"
   else
     require 'pry'; binding.pry
   end
@@ -63,7 +74,7 @@ end
 current = 0
 
 snippets =<<EOF
-snippet aws
+snippet #{ARGV[0]}
 \tprovider "#{ARGV[0]}" {
 \t\t#{provider_args.join("\n\t\t")}
 \t}
@@ -93,6 +104,10 @@ result["resources"].each do |i, v|
           "#{o} = [${#{current}}]"
         when "TypeFloat"
           "#{o} = [${#{current}}]"
+        when "TypeMap"
+          snippet_result = "\t#{o} {\n"
+          snippet_result += "\n\t\t\t}"
+          snippet_result
         else
           require 'pry'; binding.pry
         end
@@ -102,6 +117,7 @@ result["resources"].each do |i, v|
           case p["Elem"]["Type"]
           when "SchemaInfo"
             snippet_result += "\t\t" + get_snippets(p["Elem"]["Info"]).join("\n\t\t")
+          when "schema.ValueType", "SchemaElements"
           else
             require 'pry'; binding.pry
           end
@@ -147,6 +163,10 @@ result["data-sources"].each do |i, v|
           "#{o} = [${#{current}}]"
         when "TypeFloat"
           "#{o} = [${#{current}}]"
+        when "TypeMap"
+          snippet_result = "\t#{o} {\n"
+          snippet_result += "\n\t\t\t}"
+          snippet_result
         else
           require 'pry'; binding.pry
         end
@@ -156,6 +176,7 @@ result["data-sources"].each do |i, v|
           case p["Elem"]["Type"]
           when "SchemaInfo"
             snippet_result += "\t\t\t" + get_snippets(p["Elem"]["Info"]).join("\n\t\t\t")
+          when "schema.ValueType", "SchemaElements"
           else
             require 'pry'; binding.pry
           end

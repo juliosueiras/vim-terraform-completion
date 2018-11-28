@@ -1,0 +1,14 @@
+oneandone
+r_oneandone_baremetal
+r_oneandone_block_storage
+r_oneandone_firewall_policy
+r_oneandone_image
+r_oneandone_loadbalancer
+r_oneandone_monitoring_policy
+r_oneandone_private_network
+r_oneandone_public_ip
+r_oneandone_server
+r_oneandone_shared_storage
+r_oneandone_ssh_key
+r_oneandone_vpn
+d_oneandone_instance_size

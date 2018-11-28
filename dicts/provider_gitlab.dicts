@@ -1,0 +1,7 @@
+gitlab
+r_gitlab_deploy_key
+r_gitlab_group
+r_gitlab_label
+r_gitlab_project
+r_gitlab_project_hook
+r_gitlab_user

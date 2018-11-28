@@ -1,0 +1,13 @@
+newrelic
+r_newrelic_alert_channel
+r_newrelic_alert_condition
+r_newrelic_alert_policy
+r_newrelic_alert_policy_channel
+r_newrelic_dashboard
+r_newrelic_infra_alert_condition
+r_newrelic_nrql_alert_condition
+r_newrelic_synthetics_alert_condition
+d_newrelic_alert_channel
+d_newrelic_application
+d_newrelic_key_transaction
+d_newrelic_synthetics_monitor

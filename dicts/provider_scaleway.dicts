@@ -1,0 +1,16 @@
+scaleway
+r_scaleway_bucket
+r_scaleway_ip
+r_scaleway_ip_reverse_dns
+r_scaleway_security_group
+r_scaleway_security_group_rule
+r_scaleway_server
+r_scaleway_ssh_key
+r_scaleway_token
+r_scaleway_user_data
+r_scaleway_volume
+r_scaleway_volume_attachment
+d_scaleway_bootscript
+d_scaleway_image
+d_scaleway_security_group
+d_scaleway_volume

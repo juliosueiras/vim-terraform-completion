@@ -1,0 +1,12 @@
+brightbox
+r_brightbox_cloudip
+r_brightbox_container
+r_brightbox_database_server
+r_brightbox_firewall_policy
+r_brightbox_firewall_rule
+r_brightbox_load_balancer
+r_brightbox_server
+r_brightbox_server_group
+d_brightbox_database_type
+d_brightbox_image
+d_brightbox_server_group

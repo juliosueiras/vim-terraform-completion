@@ -1,0 +1,10 @@
+circonus
+r_circonus_check
+r_circonus_contact_group
+r_circonus_graph
+r_circonus_metric
+r_circonus_metric_cluster
+r_circonus_rule_set
+r_circonus_worksheet
+d_circonus_account
+d_circonus_collector

@@ -1,0 +1,8 @@
+vcd
+r_vcd_dnat
+r_vcd_edgegateway_vpn
+r_vcd_firewall_rules
+r_vcd_network
+r_vcd_snat
+r_vcd_vapp
+r_vcd_vapp_vm
