@@ -60,6 +60,8 @@
 
 **Require `+ruby` or `+ruby/dyn` for vim & json gem for ruby as well**
 
+Snippets completion is done through `<C-X><C-K>`
+
 ### NeoBundle
 ```vim
 NeoBundle 'hashivim/vim-terraform'
