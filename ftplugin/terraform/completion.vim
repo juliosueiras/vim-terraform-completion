@@ -21,10 +21,11 @@
 
 
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-let s:dict = s:path . "/../../dicts/terraform_snippets_dict"
+let s:main_dict = s:path . "/../../dicts/terraform_snippets_dict"
+let s:provider_dict = split(globpath(s:path .'/../../dicts/', 'provider_*.dicts'), '\n')
+let s:community_dict = split(globpath(s:path .'/../../dicts/', 'community_*.dicts'), '\n')
 
 setlocal omnifunc=terraformcomplete#Complete
-execute 'setlocal dictionary+='.s:dict
 
 if !exists('g:syntastic_terraform_checkers')
     let g:syntastic_terraform_checkers = ['tffilter', 'terraform_validate', 'tflint']
@@ -36,6 +37,22 @@ endif
 
 if !exists('g:terraform_registry_module_completion')
 		let g:terraform_registry_module_completion = 1
+endif
+
+if !exists('g:terraform_community_dicts')
+		let g:terraform_community_dicts = 0
+endif
+
+execute 'setlocal dictionary+='.s:main_dict
+
+for i in s:provider_dict
+  execute 'setlocal dictionary+='.i
+endfor
+
+if g:terraform_community_dicts
+  for i in s:community_dict
+    execute 'setlocal dictionary+='.i
+  endfor
 endif
 
 if !exists('g:terraform_versions_config')
