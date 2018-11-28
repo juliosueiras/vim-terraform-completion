@@ -21,6 +21,10 @@ tags_urls.each do |tags_url|
 			provider = "azure"
 		end
 
+		if provider == "google-beta"
+      next
+		end
+
 		puts "#{provider}=#{version.match("[vV](.*)")[1]}"
 	end
 end
