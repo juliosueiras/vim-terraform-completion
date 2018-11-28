@@ -78,6 +78,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-runscope/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-scaffolding/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-scaleway/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-selvpc/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-softlayer/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-spotinst/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-statuscake/tags"
