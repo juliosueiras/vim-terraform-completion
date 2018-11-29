@@ -3,6 +3,15 @@
       "versions" : [
 				"master"
       ],
+      "parse_target" : "minikube",
+      "name" : "terraform-provider-minikube",
+      "owner" : "jgensler8",
+      "link" : "https://github.com/jgensler8/terraform-provider-minikube"
+   },
+   {
+      "versions" : [
+				"master"
+      ],
       "parse_target" : "razor",
       "name" : "terraform-provider-razor",
       "owner" : "juliosueiras",
