@@ -732,6 +732,7 @@ odl=master
 oneview=master
 packer=0.1.0
 packer=master
+packer=vsphere
 pass=1.0.1
 pass=master
 puppetca=1.0.1
