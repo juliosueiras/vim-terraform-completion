@@ -12,7 +12,6 @@ Dir.glob("./schemas-extractor/schemas/*.json").each do |t|
 		resources = []
 		if items != nil
 			items.each do |i|
-				if subblock == true or not i[1]["Computed"].nil? then 
 					item = { 'word': i[0], 'kind': "#{i[1]['Type'].match(/Type(.*)/).captures[0]}" }
 					if not i[1]["Description"].nil? then
 						item[:info] = i[1]["Description"]
@@ -22,7 +21,6 @@ Dir.glob("./schemas-extractor/schemas/*.json").each do |t|
 						item[:subblock] = parse_items_attr(i[1]['Elem']['Info'], true)
 					end
 					resources.push(item)
-				end
 			end
 		end
 
@@ -195,7 +193,6 @@ Dir.glob("./schemas-extractor/community_schemas/*.json").each do |t|
 		resources = []
 		if items != nil
 			items.each do |i|
-				if subblock == true or not i[1]["Computed"].nil? then 
 					item = { 'word': i[0], 'kind': "#{i[1]['Type'].match(/Type(.*)/).captures[0]}" }
 					if not i[1]["Description"].nil? then
 						item[:info] = i[1]["Description"]
@@ -205,7 +202,6 @@ Dir.glob("./schemas-extractor/community_schemas/*.json").each do |t|
 						item[:subblock] = parse_items_attr(i[1]['Elem']['Info'], true)
 					end
 					resources.push(item)
-				end
 			end
 		end
 
