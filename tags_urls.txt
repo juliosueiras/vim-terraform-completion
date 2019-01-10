@@ -5,6 +5,7 @@
 "https://api.github.com/repos/terraform-providers/terraform-provider-atlas/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-aws/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-azure-classic/tags"
+"https://api.github.com/repos/terraform-providers/terraform-provider-azuread/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-azurerm/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-azurestack/tags"
 "https://api.github.com/repos/terraform-providers/terraform-provider-bigip/tags"
