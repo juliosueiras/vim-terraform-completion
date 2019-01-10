@@ -5,4 +5,7 @@ r_nomad_job
 r_nomad_namespace
 r_nomad_quota_specification
 r_nomad_sentinel_policy
+d_nomad_deployments
+d_nomad_job
+d_nomad_namespaces
 d_nomad_regions

@@ -18,7 +18,9 @@ r_oci_core_drg
 r_oci_core_drg_attachment
 r_oci_core_image
 r_oci_core_instance
+r_oci_core_instance_configuration
 r_oci_core_instance_console_connection
+r_oci_core_instance_pool
 r_oci_core_internet_gateway
 r_oci_core_ipsec
 r_oci_core_listing_resource_version_agreement
@@ -28,6 +30,7 @@ r_oci_core_private_ip
 r_oci_core_public_ip
 r_oci_core_remote_peering_connection
 r_oci_core_route_table
+r_oci_core_route_table_attachment
 r_oci_core_security_list
 r_oci_core_service_gateway
 r_oci_core_subnet
@@ -71,6 +74,7 @@ r_oci_identity_tag
 r_oci_identity_tag_namespace
 r_oci_identity_ui_password
 r_oci_identity_user
+r_oci_identity_user_capabilities_management
 r_oci_identity_user_group_membership
 r_oci_kms_encrypted_data
 r_oci_kms_generated_key
@@ -129,8 +133,13 @@ d_oci_core_fast_connect_provider_service
 d_oci_core_fast_connect_provider_services
 d_oci_core_images
 d_oci_core_instance
+d_oci_core_instance_configuration
+d_oci_core_instance_configurations
 d_oci_core_instance_console_connections
 d_oci_core_instance_credentials
+d_oci_core_instance_pool
+d_oci_core_instance_pool_instances
+d_oci_core_instance_pools
 d_oci_core_instances
 d_oci_core_internet_gateways
 d_oci_core_ipsec_config
@@ -215,6 +224,7 @@ d_oci_identity_customer_secret_keys
 d_oci_identity_dynamic_groups
 d_oci_identity_fault_domains
 d_oci_identity_groups
+d_oci_identity_identity_provider_groups
 d_oci_identity_identity_providers
 d_oci_identity_idp_group_mappings
 d_oci_identity_policies

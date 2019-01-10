@@ -13,6 +13,7 @@ r_kubernetes_resource_quota
 r_kubernetes_secret
 r_kubernetes_service
 r_kubernetes_service_account
+r_kubernetes_stateful_set
 r_kubernetes_storage_class
 d_kubernetes_service
 d_kubernetes_storage_class

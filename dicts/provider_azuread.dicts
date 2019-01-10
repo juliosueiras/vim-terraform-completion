@@ -1,0 +1,6 @@
+azuread
+r_azuread_application
+r_azuread_service_principal
+r_azuread_service_principal_password
+d_azuread_application
+d_azuread_service_principal

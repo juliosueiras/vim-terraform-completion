@@ -1,4 +1,5 @@
 tfe
+r_tfe_oauth_client
 r_tfe_organization
 r_tfe_organization_token
 r_tfe_policy_set
@@ -11,3 +12,8 @@ r_tfe_team_members
 r_tfe_team_token
 r_tfe_variable
 r_tfe_workspace
+d_tfe_ssh_key
+d_tfe_team
+d_tfe_team_access
+d_tfe_workspace
+d_tfe_workspace_ids

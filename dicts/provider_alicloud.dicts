@@ -17,6 +17,7 @@ r_alicloud_common_bandwidth_package_attachment
 r_alicloud_container_cluster
 r_alicloud_cs_application
 r_alicloud_cs_kubernetes
+r_alicloud_cs_managed_kubernetes
 r_alicloud_cs_swarm
 r_alicloud_datahub_project
 r_alicloud_datahub_subscription

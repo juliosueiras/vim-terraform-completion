@@ -1,5 +1,6 @@
 datadog
 r_datadog_downtime
+r_datadog_integration_aws
 r_datadog_integration_gcp
 r_datadog_metric_metadata
 r_datadog_monitor

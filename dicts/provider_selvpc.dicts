@@ -1,4 +1,10 @@
 selvpc
 r_selvpc_resell_floatingip_v2
+r_selvpc_resell_keypair_v2
 r_selvpc_resell_license_v2
 r_selvpc_resell_project_v2
+r_selvpc_resell_role_v2
+r_selvpc_resell_subnet_v2
+r_selvpc_resell_token_v2
+r_selvpc_resell_user_v2
+r_selvpc_resell_vrrp_subnet_v2

@@ -5,6 +5,7 @@ r_heroku_addon_attachment
 r_heroku_app
 r_heroku_app_feature
 r_heroku_app_release
+r_heroku_build
 r_heroku_cert
 r_heroku_domain
 r_heroku_drain

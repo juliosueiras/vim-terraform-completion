@@ -2,9 +2,12 @@ digitalocean
 r_digitalocean_certificate
 r_digitalocean_domain
 r_digitalocean_droplet
+r_digitalocean_droplet_snapshot
 r_digitalocean_firewall
 r_digitalocean_floating_ip
 r_digitalocean_floating_ip_assignment
+r_digitalocean_kubernetes_cluster
+r_digitalocean_kubernetes_node_pool
 r_digitalocean_loadbalancer
 r_digitalocean_record
 r_digitalocean_ssh_key
@@ -15,8 +18,10 @@ r_digitalocean_volume_snapshot
 d_digitalocean_certificate
 d_digitalocean_domain
 d_digitalocean_droplet
+d_digitalocean_droplet_snapshot
 d_digitalocean_floating_ip
 d_digitalocean_image
+d_digitalocean_kubernetes_cluster
 d_digitalocean_loadbalancer
 d_digitalocean_record
 d_digitalocean_ssh_key

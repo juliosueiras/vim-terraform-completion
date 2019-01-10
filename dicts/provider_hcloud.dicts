@@ -6,7 +6,11 @@ r_hcloud_server
 r_hcloud_ssh_key
 r_hcloud_volume
 r_hcloud_volume_attachment
+d_hcloud_datacenter
+d_hcloud_datacenters
 d_hcloud_floating_ip
 d_hcloud_image
+d_hcloud_location
+d_hcloud_locations
 d_hcloud_ssh_key
 d_hcloud_volume

@@ -89,6 +89,8 @@ r_azurerm_logic_app_workflow
 r_azurerm_managed_disk
 r_azurerm_management_group
 r_azurerm_management_lock
+r_azurerm_mariadb_database
+r_azurerm_mariadb_server
 r_azurerm_metric_alertrule
 r_azurerm_monitor_action_group
 r_azurerm_monitor_activity_log_alert
@@ -149,6 +151,7 @@ r_azurerm_servicebus_topic_authorization_rule
 r_azurerm_shared_image
 r_azurerm_shared_image_gallery
 r_azurerm_shared_image_version
+r_azurerm_signalr_service
 r_azurerm_snapshot
 r_azurerm_sql_active_directory_administrator
 r_azurerm_sql_database
@@ -202,6 +205,7 @@ d_azurerm_log_analytics_workspace
 d_azurerm_logic_app_workflow
 d_azurerm_managed_disk
 d_azurerm_management_group
+d_azurerm_monitor_action_group
 d_azurerm_monitor_diagnostic_categories
 d_azurerm_monitor_log_profile
 d_azurerm_network_interface
