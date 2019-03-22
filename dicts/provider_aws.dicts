@@ -133,6 +133,8 @@ r_aws_dms_endpoint
 r_aws_dms_replication_instance
 r_aws_dms_replication_subnet_group
 r_aws_dms_replication_task
+r_aws_docdb_cluster_parameter_group
+r_aws_docdb_subnet_group
 r_aws_dx_bgp_peer
 r_aws_dx_connection
 r_aws_dx_connection_association
@@ -196,6 +198,7 @@ r_aws_gamelift_fleet
 r_aws_gamelift_game_session_queue
 r_aws_glacier_vault
 r_aws_glacier_vault_lock
+r_aws_globalaccelerator_accelerator
 r_aws_glue_catalog_database
 r_aws_glue_catalog_table
 r_aws_glue_classifier
@@ -253,6 +256,7 @@ r_aws_kms_key
 r_aws_lambda_alias
 r_aws_lambda_event_source_mapping
 r_aws_lambda_function
+r_aws_lambda_layer_version
 r_aws_lambda_permission
 r_aws_launch_configuration
 r_aws_launch_template
@@ -277,6 +281,7 @@ r_aws_load_balancer_policy
 r_aws_macie_member_account_association
 r_aws_macie_s3_bucket_association
 r_aws_main_route_table_association
+r_aws_media_package_channel
 r_aws_media_store_container
 r_aws_media_store_container_policy
 r_aws_mq_broker
@@ -327,6 +332,7 @@ r_aws_pinpoint_gcm_channel
 r_aws_pinpoint_sms_channel
 r_aws_placement_group
 r_aws_proxy_protocol_policy
+r_aws_ram_resource_share
 r_aws_rds_cluster
 r_aws_rds_cluster_endpoint
 r_aws_rds_cluster_instance
@@ -338,6 +344,7 @@ r_aws_redshift_parameter_group
 r_aws_redshift_security_group
 r_aws_redshift_snapshot_copy_grant
 r_aws_redshift_subnet_group
+r_aws_resourcegroups_group
 r_aws_route
 r_aws_route53_delegation_set
 r_aws_route53_health_check
@@ -355,6 +362,7 @@ r_aws_s3_bucket_notification
 r_aws_s3_bucket_object
 r_aws_s3_bucket_policy
 r_aws_s3_bucket_public_access_block
+r_aws_sagemaker_notebook_instance
 r_aws_secretsmanager_secret
 r_aws_secretsmanager_secret_version
 r_aws_security_group
@@ -508,6 +516,7 @@ d_aws_efs_file_system
 d_aws_efs_mount_target
 d_aws_eip
 d_aws_eks_cluster
+d_aws_elastic_beanstalk_application
 d_aws_elastic_beanstalk_hosted_zone
 d_aws_elastic_beanstalk_solution_stack
 d_aws_elasticache_cluster

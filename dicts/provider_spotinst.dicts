@@ -1,3 +1,8 @@
 spotinst
 r_spotinst_elastigroup_aws
+r_spotinst_elastigroup_aws_beanstalk
+r_spotinst_elastigroup_azure
+r_spotinst_elastigroup_gcp
+r_spotinst_elastigroup_gke
+r_spotinst_ocean_aws
 r_spotinst_subscription
