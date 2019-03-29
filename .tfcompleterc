@@ -1,9 +1,9 @@
 acme=1.1.1
-alicloud=1.36.0
+alicloud=1.37.0
 archive=1.2.0
 arukas=1.0.0
 atlas=0.1.1
-aws=2.3.0
+aws=2.4.0
 azuread=0.2.0
 azure=0.1.1
 azurerm=1.23.0
