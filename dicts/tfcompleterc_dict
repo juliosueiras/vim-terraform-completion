@@ -457,6 +457,7 @@ nutanix=1.0.0
 dnsimple=0.1.0
 chef=0.1.0
 packet=1.5.0
+packet=1.6.0
 packet=1.2.4
 packet=0.1.0
 packet=1.4.1
