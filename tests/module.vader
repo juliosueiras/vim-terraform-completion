@@ -18,7 +18,6 @@ Expect (get var_name):
 Given terraform (Module Online argument Subpath Completion Test):
   module "consul" {
     source = "git::https://github.com/hashicorp/consul.git//terraform/aws?ref=v1.4.0"
-		
   }
 
 Do (Autocompletion for online module argument Subpath completion):
