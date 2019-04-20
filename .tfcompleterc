@@ -1,5 +1,5 @@
 acme=1.1.1
-alicloud=1.39.0
+alicloud=1.40.0
 archive=1.2.1
 arukas=1.1.0
 atlas=0.1.1
@@ -95,4 +95,4 @@ ultradns=0.1.0
 vault=1.7.0
 vcd=2.1.0
 vsphere=1.10.0
-yandex=0.5.0
+yandex=0.5.1
