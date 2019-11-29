@@ -1,4 +1,7 @@
 if !has("ruby") && !has("ruby/dyn")
+    echohl Error
+    echom "vim-terraform-completion requires Ruby to be installed."
+    echohl None
     finish
 endif
 
