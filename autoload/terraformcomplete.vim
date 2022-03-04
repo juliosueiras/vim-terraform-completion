@@ -109,7 +109,7 @@ function! terraformcomplete#OpenDoc()
             let a_link .= '/d'
         endif
 
-        let a_link .= '/' . a_resource . '.html\#' . a_arg
+        let a_link .= '/' . a_resource . '\#' . a_arg
 
         "(Windows) cmd /c start filename_or_URL
         if system('uname -s') =~ 'Darwin'
